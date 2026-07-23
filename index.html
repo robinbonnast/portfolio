@@ -156,9 +156,9 @@
   .sec-head--quiet .rule{max-width:64px;background:var(--line)}
   /* intro statement */
   #intro{padding-top:clamp(20px,3vw,36px);padding-bottom:clamp(28px,3.4vw,44px)}
-  #werk{padding-top:clamp(72px,9vw,132px)}
+  #werk{padding-top:clamp(56px,7vw,104px)}
   #profiel{padding-top:clamp(40px,5vw,64px);padding-bottom:clamp(40px,5vw,64px)}
-  #contact{padding-top:clamp(84px,10vw,148px)}
+  #contact{padding-top:clamp(64px,8vw,120px)}
   .statement-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(28px,4vw,64px);align-items:start}
   .statement{
     font-family:var(--disp);font-weight:500;
@@ -219,7 +219,7 @@
   .player:hover img{transform:scale(1.03);filter:brightness(.9)}
   .player .play:focus-visible{outline:3px solid var(--white);outline-offset:-6px}
   .player .badge{
-    position:absolute;left:0;bottom:0;background:var(--blue);color:var(--white);
+    position:absolute;left:0;top:0;background:var(--blue);color:var(--white);
     font-weight:600;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;padding:7px 13px;
   }
   /* ---------- contact ---------- */
@@ -240,9 +240,6 @@
   .contact-list .k{font-weight:600;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;opacity:.7}
   footer{padding:30px 0;border-top:1px solid var(--line)}
   footer .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
-  /* reveal */
-  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
-  .reveal.in{opacity:1;transform:none}
   /* responsive */
   @media(max-width:880px){
     .hero-grid,.statement-grid,.proj-grid,.contact-grid{grid-template-columns:1fr}
@@ -262,7 +259,6 @@
   }
   @media(prefers-reduced-motion:reduce){
     *{scroll-behavior:auto}
-    .reveal{opacity:1;transform:none;transition:none}
     .chyron.animate{animation:none;opacity:1;transform:none}
   }
 </style>
@@ -301,7 +297,7 @@
             <a class="btn ghost" href="#contact">Contact</a>
           </div>
         </div>
-        <div class="portrait reveal">
+        <div class="portrait">
           <figure>
             <img src="images/robin.jpg" alt="Portretfoto van Robin Bonnast">
             <figcaption class="cap">Robin Bonnast — Redacteur</figcaption>
@@ -313,8 +309,8 @@
   <!-- INTRO -->
   <section id="intro" aria-labelledby="introtitel">
     <div class="wrap statement-grid">
-      <h2 class="statement reveal" id="introtitel">Mijn werk vertrekt vanuit <em>nieuwsgierigheid</em> en maatschappelijke relevantie.</h2>
-      <div class="statement-body reveal">
+      <h2 class="statement" id="introtitel">Mijn werk vertrekt vanuit <em>nieuwsgierigheid</em> en maatschappelijke relevantie.</h2>
+      <div class="statement-body">
         <p>Ik ben student Toegepaste Audiovisuele Communicatie (non-fictie) met een brede interesse in maatschappelijke thema's. Ik combineer research, interviews en visuele storytelling om verhalen te brengen die informeren én aanzetten tot nadenken.</p>
         <p>Ik sta open voor uiteenlopende onderwerpen, zolang ze een duidelijke maatschappelijke waarde hebben en relevant zijn voor het dagelijkse leven van mensen.</p>
       </div>
@@ -323,7 +319,7 @@
   <!-- WERK -->
   <section id="werk" aria-labelledby="werktitel">
     <div class="wrap">
-      <div class="sec-head reveal">
+      <div class="sec-head">
         <h2 id="werktitel">Geselecteerd werk</h2>
         <span class="rule" aria-hidden="true"></span>
       </div>
@@ -393,7 +389,7 @@
   <!-- PROFIEL -->
   <section id="profiel" aria-labelledby="proftitel">
     <div class="wrap">
-      <div class="sec-head sec-head--quiet reveal">
+      <div class="sec-head sec-head--quiet">
         <h2 id="proftitel">Praktijkervaring</h2>
         <span class="rule" aria-hidden="true"></span>
       </div>
@@ -408,7 +404,7 @@
           </div>
         </div>
       </div>
-      <div class="sec-head sec-head--quiet reveal" style="margin-top:clamp(28px,3.4vw,44px)">
+      <div class="sec-head sec-head--quiet" style="margin-top:clamp(28px,3.4vw,44px)">
         <h2>Opleiding</h2>
         <span class="rule" aria-hidden="true"></span>
       </div>
@@ -440,13 +436,13 @@
   <!-- CONTACT -->
   <section id="contact" aria-labelledby="contacttitel">
     <div class="wrap">
-      <div class="sec-head reveal">
+      <div class="sec-head">
         <h2 id="contacttitel">Contact</h2>
         <span class="rule" aria-hidden="true"></span>
       </div>
       <div class="contact-grid">
-        <p class="big reveal">Een verhaal of project in gedachten?<br><a class="mailto" href="mailto:robinbonnast@hotmail.com">Stuur me een mail.</a></p>
-        <div class="contact-list reveal">
+        <p class="big">Een verhaal of project in gedachten?<br><a class="mailto" href="mailto:robinbonnast@hotmail.com">Stuur me een mail.</a></p>
+        <div class="contact-list">
           <a href="mailto:robinbonnast@hotmail.com">
             <span class="k">E-mail</span>
             <span>robinbonnast@hotmail.com</span>
@@ -481,12 +477,6 @@
       p.appendChild(f);
     });
   });
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
-    });
-  }, {threshold:.14, rootMargin:'0px 0px -40px 0px'});
-  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
 </script>
 </body>
 </html>
