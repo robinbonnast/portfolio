@@ -5,11 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robin Bonnast — Audiovisueel storyteller</title>
 <meta name="description" content="Portfolio van Robin Bonnast, audiovisueel storyteller en videomaker. Reportages die complexe maatschappelijke onderwerpen toegankelijk maken.">
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --paper:#EAEBED;
@@ -21,10 +19,9 @@
     --blue-deep:#1E20BE;
     --white:#FAFAFB;
     --maxw:1180px;
-    --disp:"Bricolage Grotesque",system-ui,sans-serif;
+    --disp:"Archivo",system-ui,sans-serif;
     --body:"Hanken Grotesk",system-ui,sans-serif;
   }
-
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{
@@ -39,9 +36,7 @@
   ::selection{background:var(--blue);color:var(--white)}
   img{display:block;max-width:100%}
   a{color:inherit}
-
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
-
   /* labels: tight uppercase grotesk, no mono */
   .label{
     font-family:var(--body);
@@ -51,7 +46,6 @@
     text-transform:uppercase;
     color:var(--ink-soft);
   }
-
   /* signature: broadcast lower-third — blue bar, white text */
   .chyron{
     display:inline-block;
@@ -71,7 +65,6 @@
     animation:slidein .6s .25s cubic-bezier(.4,.1,.1,1) forwards;
   }
   @keyframes slidein{to{transform:none;opacity:1}}
-
   /* inline blue tag used in the lede */
   .tag{
     background:var(--blue);
@@ -80,7 +73,6 @@
     font-weight:600;
     white-space:nowrap;
   }
-
   /* ---------- masthead ---------- */
   .masthead{
     position:sticky;top:0;z-index:50;
@@ -105,7 +97,6 @@
   nav a::after{content:"";position:absolute;left:0;right:100%;bottom:-2px;height:2px;background:var(--blue);transition:right .25s ease}
   nav a:hover,nav a:focus-visible{color:var(--ink)}
   nav a:hover::after,nav a:focus-visible::after{right:0}
-
   /* ---------- hero ---------- */
   .hero{padding:clamp(44px,7vw,84px) 0 clamp(48px,6vw,72px)}
   .hero .topline{display:flex;align-items:center;gap:14px;margin-bottom:clamp(28px,3.5vw,44px)}
@@ -136,7 +127,6 @@
   .btn.ghost{border:2px solid var(--ink);color:var(--ink)}
   .btn.ghost:hover{background:var(--ink);color:var(--paper)}
   .btn:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
-
   .portrait{height:100%}
   .portrait figure{margin:0;position:relative;height:100%}
   .portrait img{width:100%;height:100%;min-height:430px;object-fit:cover;object-position:center 28%;filter:grayscale(.12) contrast(1.03)}
@@ -146,7 +136,6 @@
     font-weight:600;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
     padding:7px 12px;
   }
-
   /* ---------- sections ---------- */
   section{padding:clamp(56px,7vw,104px) 0}
   .sec-head{display:flex;align-items:center;gap:16px;margin-bottom:clamp(32px,4vw,52px)}
@@ -155,7 +144,6 @@
     font-size:clamp(1.7rem,3.6vw,2.7rem);letter-spacing:-.02em;text-transform:uppercase;
   }
   .sec-head .rule{height:2px;background:var(--ink);flex:1}
-
   /* intro statement */
   #intro{padding-top:clamp(36px,4vw,60px)}
   .statement-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(28px,4vw,64px);align-items:start}
@@ -166,7 +154,6 @@
   .statement em{font-style:normal;color:var(--blue)}
   .statement-body p{margin-bottom:1.1em;max-width:52ch}
   .statement-body p:last-child{margin-bottom:0}
-
   /* ledger */
   .ledger{display:grid;gap:0}
   .entry{display:grid;grid-template-columns:210px 1fr;gap:clamp(16px,3vw,48px);padding:26px 0;border-top:1.5px solid var(--ink)}
@@ -176,7 +163,6 @@
   .entry .org{font-weight:600;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;color:var(--blue);margin-bottom:.7em}
   .entry p{max-width:62ch}
   .entry p + p{margin-top:.8em}
-
   /* ---------- projects ---------- */
   .project{border-top:2px solid var(--ink);padding:clamp(40px,5vw,68px) 0}
   .project:first-of-type{border-top:none;padding-top:0}
@@ -194,7 +180,6 @@
     text-decoration:none;padding:9px 15px;border:2px solid var(--line);color:var(--ink-soft);transition:.2s;
   }
   .pill:hover{border-color:var(--blue);color:var(--blue)}
-
   /* video facade */
   .player{position:relative;width:100%;aspect-ratio:16/9;background:var(--ink);overflow:hidden}
   .player img{width:100%;height:100%;object-fit:cover;transition:transform .5s,filter .3s}
@@ -202,7 +187,7 @@
   .player .play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:none;border:0;cursor:pointer;width:100%}
   .player .play::before{
     content:"";width:76px;height:76px;border-radius:50%;background:var(--blue);
-    display:block;transition:transform .25s,background .25s;box-shadow:0 10px 34px rgba(42,45,224,.4);
+    display:block;transition:transform .25s,background .25s;box-shadow:0 8px 20px rgba(20,21,26,.28);
   }
   .player .play::after{
     content:"";position:absolute;border-left:22px solid var(--white);
@@ -215,7 +200,6 @@
     position:absolute;left:0;bottom:0;background:var(--blue);color:var(--white);
     font-weight:600;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;padding:7px 13px;
   }
-
   /* ---------- contact ---------- */
   #contact{background:var(--blue);color:var(--white)}
   #contact .sec-head h2{color:var(--white)}
@@ -232,14 +216,11 @@
   .contact-list a:last-child{border-bottom:1px solid rgba(255,255,255,.35)}
   .contact-list a:hover{padding-left:8px}
   .contact-list .k{font-weight:600;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;opacity:.7}
-
   footer{padding:30px 0;border-top:1px solid var(--line)}
   footer .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
-
   /* reveal */
   .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
   .reveal.in{opacity:1;transform:none}
-
   /* responsive */
   @media(max-width:880px){
     .hero-grid,.statement-grid,.proj-grid,.contact-grid{grid-template-columns:1fr}
@@ -265,7 +246,6 @@
 </style>
 </head>
 <body>
-
 <header class="masthead">
   <div class="wrap row">
     <div class="nameplate">Robin Bonnast<b>.</b></div>
@@ -278,7 +258,6 @@
     </nav>
   </div>
 </header>
-
 <main>
   <!-- HERO -->
   <section class="hero" aria-labelledby="naam">
@@ -309,7 +288,6 @@
       </div>
     </div>
   </section>
-
   <!-- INTRO -->
   <section id="intro" aria-labelledby="introtitel">
     <div class="wrap statement-grid">
@@ -320,7 +298,6 @@
       </div>
     </div>
   </section>
-
   <!-- WERK -->
   <section id="werk" aria-labelledby="werktitel">
     <div class="wrap">
@@ -328,9 +305,8 @@
         <h2 id="werktitel">Geselecteerd werk</h2>
         <span class="rule" aria-hidden="true"></span>
       </div>
-
       <!-- RESET -->
-      <article class="project reveal">
+      <article class="project">
         <div class="proj-grid">
           <div class="proj-text">
             <div class="proj-kicker"><span class="chyron">Reportage · feb–mrt 2026</span></div>
@@ -350,9 +326,8 @@
           </div>
         </div>
       </article>
-
       <!-- OVAM -->
-      <article class="project reveal">
+      <article class="project">
         <div class="proj-grid">
           <div class="proj-text">
             <div class="proj-kicker"><span class="chyron">Reportage · in opdracht · dec 2025</span></div>
@@ -371,9 +346,8 @@
           </div>
         </div>
       </article>
-
       <!-- PORTRET -->
-      <article class="project reveal">
+      <article class="project">
         <div class="proj-grid">
           <div class="proj-text">
             <div class="proj-kicker"><span class="chyron">One-minute portret · okt 2025</span></div>
@@ -394,7 +368,6 @@
       </article>
     </div>
   </section>
-
   <!-- PROFIEL -->
   <section id="profiel" aria-labelledby="proftitel">
     <div class="wrap">
@@ -403,7 +376,7 @@
         <span class="rule" aria-hidden="true"></span>
       </div>
       <div class="ledger">
-        <div class="entry reveal">
+        <div class="entry">
           <div class="when">apr–jun 2026<br>Stage · Redacteur</div>
           <div>
             <h3>VRT Factcheckers</h3>
@@ -413,27 +386,26 @@
           </div>
         </div>
       </div>
-
       <div class="sec-head reveal" style="margin-top:clamp(48px,6vw,80px)">
         <h2>Opleiding</h2>
         <span class="rule" aria-hidden="true"></span>
       </div>
       <div class="ledger">
-        <div class="entry reveal">
+        <div class="entry">
           <div class="when">2025–2026</div>
           <div>
             <h3>Banaba Toegepaste Audiovisuele Communicatie — non-fictie</h3>
             <div class="org">Thomas More · Mechelen</div>
           </div>
         </div>
-        <div class="entry reveal">
+        <div class="entry">
           <div class="when">2018–2019</div>
           <div>
             <h3>Banaba Buitengewoon Onderwijs</h3>
             <div class="org">UCLL</div>
           </div>
         </div>
-        <div class="entry reveal">
+        <div class="entry">
           <div class="when">2016–2018</div>
           <div>
             <h3>Lerarenopleiding Lager Onderwijs</h3>
@@ -443,7 +415,6 @@
       </div>
     </div>
   </section>
-
   <!-- CONTACT -->
   <section id="contact" aria-labelledby="contacttitel">
     <div class="wrap">
@@ -467,14 +438,12 @@
     </div>
   </section>
 </main>
-
 <footer>
   <div class="wrap row">
     <span class="label">© 2026 Robin Bonnast</span>
     <span class="label">Audiovisueel storyteller</span>
   </div>
 </footer>
-
 <script>
   document.querySelectorAll('.player').forEach(function(p){
     var btn = p.querySelector('.play');
@@ -490,7 +459,6 @@
       p.appendChild(f);
     });
   });
-
   var io = new IntersectionObserver(function(entries){
     entries.forEach(function(e){
       if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
