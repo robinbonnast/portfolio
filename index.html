@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Robin Bonnast — Videomaker & redacteur</title>
+<title>Robin Bonnast - Videomaker & redacteur</title>
 <meta name="description" content="Portfolio van Robin Bonnast, videomaker en redacteur. Heldere reportages en korte video's over complexe maatschappelijke thema's, van research tot montage.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,7 +27,7 @@
     --disp:"Bricolage Grotesque",system-ui,sans-serif;
     --body:"Hanken Grotesk",system-ui,sans-serif;
     --shadow:0 1px 2px rgba(20,20,25,.05), 0 10px 30px rgba(20,20,25,.07);
-    --pad:clamp(48px,6vw,88px);
+    --pad:clamp(34px,4vw,58px);
   }
 
   *{box-sizing:border-box;margin:0;padding:0}
@@ -103,7 +103,7 @@
   .hero .topline{display:flex;align-items:center;gap:16px;margin-bottom:clamp(28px,3.5vw,44px);color:var(--ink-2)}
   .hero .topline .k{font-weight:600;font-size:.8rem;letter-spacing:.11em;text-transform:uppercase}
   .hero .topline .rule{height:1px;background:var(--line);flex:1}
-  .hero-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:clamp(30px,4vw,60px);align-items:stretch}
+  .hero-grid{display:grid;grid-template-columns:1fr 320px;gap:clamp(30px,4vw,56px);align-items:center}
   .hero-text{display:flex;flex-direction:column;justify-content:center}
   h1.name{
     font-family:var(--disp);font-weight:800;
@@ -125,10 +125,8 @@
   .btn:active{transform:translateY(1px)}
   .btn:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 
-  .portrait{height:100%}
-  .portrait .frame,.portrait figure{height:100%}
   .portrait figure{margin:0;position:relative}
-  .portrait img{width:100%;height:100%;min-height:430px;object-fit:cover;object-position:center 26%}
+  .portrait img{width:100%;height:auto;aspect-ratio:930/1100;object-fit:cover;object-position:center 26%}
   .portrait .cap{
     position:absolute;left:9px;bottom:9px;background:var(--accent);color:var(--white);
     font-weight:600;font-size:.74rem;letter-spacing:.09em;text-transform:uppercase;padding:8px 13px;
@@ -159,7 +157,7 @@
 
   /* ---------- projects ---------- */
   .projects{display:flex;flex-direction:column;gap:clamp(40px,5vw,68px)}
-  .proj-grid{display:grid;grid-template-columns:1fr 1.12fr;gap:clamp(28px,4vw,56px);align-items:center}
+  .proj-grid{display:grid;grid-template-columns:1fr 1.12fr;gap:clamp(28px,4vw,56px);align-items:start}
   .project:nth-of-type(even) .proj-media{order:1}
   .project:nth-of-type(even) .proj-text{order:2}
   .proj-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:14px}
@@ -255,9 +253,7 @@
     .hero-grid,.intro-grid,.proj-grid,.contact-grid{grid-template-columns:1fr}
     .hero-grid{gap:32px}
     .hero-text{justify-content:flex-start}
-    .portrait{max-width:380px;height:auto}
-    .portrait .frame,.portrait figure{height:auto}
-    .portrait img{height:auto;min-height:0;aspect-ratio:930/1100}
+    .portrait{max-width:300px}
     .proj-media{order:-1 !important}
     .proj-text{order:0 !important}
     .entry{grid-template-columns:1fr;gap:8px}
@@ -305,7 +301,7 @@
   <section class="hero" aria-labelledby="naam">
     <div class="wrap">
       <div class="topline">
-        <span class="k">Videomaker &amp; redacteur — non-fictie</span>
+        <span class="k">Videomaker &amp; redacteur - non-fictie</span>
         <span class="rule" aria-hidden="true"></span>
         <span class="k num">Mechelen · 2026</span>
       </div>
@@ -315,7 +311,7 @@
           <div class="role-bar">
             <span class="chyron animate">Videomaker &amp; redacteur · non-fictie</span>
           </div>
-          <p class="lede">Ik maak heldere reportages en korte video's over complexe maatschappelijke thema's — <span class="tag">van research tot montage</span>.</p>
+          <p class="lede">Ik maak heldere reportages en korte video's over complexe maatschappelijke thema's - <span class="tag">van research tot montage</span>.</p>
           <p class="avail">Op zoek naar een plek waar ik kan meedraaien als <strong>redactielid</strong>, mee concepten bedenk én ze ook <strong>visueel vormgeef</strong>.</p>
           <div class="cta-row">
             <a class="btn primary" href="#werk">Bekijk mijn werk</a>
@@ -326,7 +322,7 @@
           <div class="frame">
             <figure>
               <img src="images/robin.jpg" alt="Portretfoto van Robin Bonnast">
-              <figcaption class="cap">Robin Bonnast — Redacteur</figcaption>
+              <figcaption class="cap">Robin Bonnast - Redacteur</figcaption>
             </figure>
           </div>
         </div>
@@ -372,7 +368,7 @@
                 <span class="proj-year num">2026</span>
               </div>
               <h3>RESET</h3>
-              <p class="dek">Wat gebeurt er wanneer de zekerheid van een vertrouwd leven begint te wringen? Iris en Sander voelen allebei dat er iets in beweging is — maar zo'n keuze maak je niet van de ene dag op de andere. Twee persoonlijke verhalen over verandering, risico en de zoektocht naar wat echt klopt.</p>
+              <p class="dek">Wat gebeurt er wanneer de zekerheid van een vertrouwd leven begint te wringen? Iris en Sander voelen allebei dat er iets in beweging is - maar zo'n keuze maak je niet van de ene dag op de andere. Twee persoonlijke verhalen over verandering, risico en de zoektocht naar wat echt klopt.</p>
               <dl class="casemeta">
                 <div class="cm"><dt>Mijn rol</dt><dd>Concept &amp; realisatie</dd></div>
               </dl>
@@ -406,7 +402,7 @@
                 <span class="proj-year num">2026</span>
               </div>
               <h3>Bosmans Tuin &amp; Dier</h3>
-              <p class="dek">Toen Bosmans Tuin &amp; Dier in Bertem zijn winkel verbouwde, bedacht ik een reel om klanten mee achter de schermen te nemen: wat er verandert, waarom, en hoe de vernieuwde winkel eruit gaat zien — zodat iedereen tijdens de werken op de hoogte bleef.</p>
+              <p class="dek">Toen Bosmans Tuin &amp; Dier in Bertem zijn winkel verbouwde, bedacht ik een reel om klanten mee achter de schermen te nemen: wat er verandert, waarom, en hoe de vernieuwde winkel eruit gaat zien - zodat iedereen tijdens de werken op de hoogte bleef.</p>
               <dl class="casemeta">
                 <div class="cm"><dt>Mijn rol</dt><dd>Concept, drone- &amp; iPhonebeelden, montage</dd></div>
                 <div class="cm"><dt>Resultaat</dt><dd>De populairste social-mediapost die de zaak ooit plaatste</dd></div>
@@ -440,7 +436,7 @@
                 <span class="proj-year num">2025</span>
               </div>
               <h3>OVAM: Reduce &amp; Reuse</h3>
-              <p class="dek">Voor OVAM maakten we een reportage in het UZ Gent over het gebruik van herbruikbare ziekenhuismaterialen — bedoeld om hun initiatieven rond duurzaamheid in de zorgsector in beeld te brengen.</p>
+              <p class="dek">Voor OVAM maakten we een reportage in het UZ Gent over het gebruik van herbruikbare ziekenhuismaterialen - bedoeld om hun initiatieven rond duurzaamheid in de zorgsector in beeld te brengen.</p>
               <dl class="casemeta">
                 <div class="cm"><dt>Mijn rol</dt><dd>Camera, montage, scenario &amp; interviews (groepswerk)</dd></div>
                 <div class="cm"><dt>Resultaat</dt><dd>Communicatievideo voor de website van OVAM</dd></div>
@@ -509,14 +505,14 @@
       </div>
       <div class="ledger">
         <div class="entry reveal">
-          <div class="when num">apr–jun 2026<br>Stage</div>
+          <div class="when num">apr-jun 2026<br>Stage</div>
           <div>
-            <h3>Redacteur — VRT Factcheckers</h3>
+            <h3>Redacteur - VRT Factcheckers</h3>
             <div class="org">VRT Studio's</div>
             <p class="summary">Als redactielid onderzocht ik feiten voor reportages en factchecks, en werkte ik mee van research tot opnamedag.</p>
             <ul class="duties">
               <li>Research &amp; scenario voor reportages (o.a. ultrabewerkt voedsel, kermisspeelgoed): feiten uitspitten en aanscherpen tot iets helders en relevant.</li>
-              <li>Concept &amp; scenario voor de shorts — factchecks van ±1 minuut in TikTok-vorm.</li>
+              <li>Concept &amp; scenario voor de shorts - factchecks van ±1 minuut in TikTok-vorm.</li>
               <li>Productie: getuigen en experts zoeken, contact met universiteiten en labo's, voxpops en figuranten regelen, en feedback op ruwe montages.</li>
             </ul>
           </div>
@@ -528,15 +524,15 @@
       </div>
       <div class="ledger">
         <div class="entry reveal">
-          <div class="when num">2025–2026</div>
+          <div class="when num">2025-2026</div>
           <div>
-            <h3>Banaba Toegepaste Audiovisuele Communicatie — non-fictie</h3>
+            <h3>Banaba Toegepaste Audiovisuele Communicatie - non-fictie</h3>
             <div class="org">Thomas More · Mechelen</div>
             <div class="distinction">Afgestudeerd met onderscheiding</div>
           </div>
         </div>
         <div class="entry reveal">
-          <div class="when num">2018–2019</div>
+          <div class="when num">2018-2019</div>
           <div>
             <h3>Banaba Buitengewoon Onderwijs</h3>
             <div class="org">UCLL</div>
@@ -544,7 +540,7 @@
           </div>
         </div>
         <div class="entry reveal">
-          <div class="when num">2016–2018</div>
+          <div class="when num">2016-2018</div>
           <div>
             <h3>Lerarenopleiding Lager Onderwijs</h3>
             <div class="org">UCLL</div>
