@@ -58,11 +58,7 @@
   .hero-inner{ position:relative; max-width: 720px; margin:0 auto; }
   .hero-eyebrow{ font-family:'IBM Plex Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: .12em; color: #F4CE7A; margin: 0 0 6px; }
   .hero h1{ font-family:'Fraunces', serif; font-weight: 600; font-size: clamp(26px, 7vw, 38px); margin: 0 0 4px; line-height: 1.05; }
-  .hero p.sub{ margin: 0 0 14px; color: #CFE0DD; font-size: 13.5px; }
-  .hero-stats{ display:flex; flex-wrap:wrap; gap: 8px; }
-  .hero-stat{ background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); border-radius: 10px; padding: 7px 11px; font-size: 12px; display:flex; flex-direction:column; gap:2px; }
-  .hero-stat b{ font-family:'Fraunces', serif; font-size: 14px; font-weight:600; }
-  .hero-stat span{ color:#CFE0DD; }
+  .hero p.sub{ margin:0; color:#CFE0DD; font-size:13.5px; }
 
   .tabbar{ position: sticky; top:0; z-index: 20; background: var(--whitewash); border-bottom: 1px solid var(--line); padding: 10px 14px 0; }
   .tabrow{ display:flex; gap:8px; overflow-x:auto; padding-bottom:10px; scrollbar-width: none; }
@@ -274,6 +270,38 @@
   .emergency-item b{ display:block; margin-bottom:2px; color:var(--azulejo-deep); }
   .print-btn{ width:100%; min-height:44px; border:0; border-radius:10px; background:var(--azulejo); color:#fff; font-weight:700; cursor:pointer; }
 
+  .egg-host{ position:relative; }
+  .easter-egg{ position:absolute; z-index:8; width:68px; height:68px; padding:0; border-radius:50%; border:4px solid #fff; background-color:#D8E4E1; background-image:url('assets/reisgroep.png'); background-repeat:no-repeat; background-size:600px auto; box-shadow:0 4px 13px rgba(18,42,49,.3); cursor:pointer; transition:transform .2s ease,box-shadow .2s ease; }
+  .easter-egg:hover,.easter-egg:focus-visible{ transform:translateY(-3px) rotate(-3deg) scale(1.06); box-shadow:0 8px 18px rgba(18,42,49,.38); }
+  .easter-egg.found{ border-color:#F4CE7A; box-shadow:0 0 0 4px rgba(244,206,122,.3),0 5px 14px rgba(18,42,49,.3); }
+  .easter-egg.found::after{ content:"✓"; position:absolute; right:-5px; bottom:-4px; width:22px; height:22px; display:flex; align-items:center; justify-content:center; border-radius:50%; background:var(--ochre); color:#fff; font-size:13px; font-weight:800; }
+  .face-0{ background-position:-38px -106px; }
+  .face-1{ background-position:-130px -30px; }
+  .face-2{ background-position:-227px -60px; }
+  .face-3{ background-position:-335px -55px; }
+  .face-4{ background-position:-448px -51px; }
+  .egg-pos-a{ right:-4px; top:8px; }
+  .egg-pos-b{ left:-8px; bottom:6px; }
+  .egg-pos-c{ right:9px; bottom:-12px; }
+  .egg-pos-d{ right:-4px; top:10px; }
+  .egg-pos-e{ left:-4px; top:64px; }
+  .egg-progress{ display:inline-flex; align-items:center; gap:5px; margin-top:8px; padding:5px 9px; border-radius:999px; background:#EEEAE0; color:var(--ink-soft); font-size:10.5px; font-weight:700; }
+  .egg-modal{ position:fixed; inset:0; z-index:100; display:grid; place-items:center; padding:18px; }
+  .egg-modal[hidden]{ display:none; }
+  .egg-backdrop{ position:absolute; inset:0; background:rgba(7,29,38,.72); backdrop-filter:blur(4px); }
+  .egg-dialog{ position:relative; width:min(100%,410px); max-height:calc(100vh - 36px); overflow:auto; padding:22px; border-radius:18px; background:var(--card); box-shadow:0 22px 60px rgba(0,0,0,.35); text-align:center; }
+  .egg-modal-face{ width:104px; height:104px; margin:-2px auto 12px; border-radius:50%; border:4px solid #F4CE7A; background-color:#D8E4E1; background-image:url('assets/reisgroep.png'); background-repeat:no-repeat; background-size:600px auto; box-shadow:0 6px 18px rgba(18,42,49,.25); }
+  .egg-modal-face.face-0{ background-position:-20px -88px; }
+  .egg-modal-face.face-1{ background-position:-112px -12px; }
+  .egg-modal-face.face-2{ background-position:-209px -42px; }
+  .egg-modal-face.face-3{ background-position:-317px -37px; }
+  .egg-modal-face.face-4{ background-position:-430px -33px; }
+  .egg-dialog h3{ margin:0 0 7px; font-family:'Fraunces',serif; font-size:24px; color:var(--azulejo-deep); }
+  .egg-dialog p{ margin:0 0 14px; font-size:14px; line-height:1.6; color:var(--ink-soft); }
+  .egg-count{ display:inline-block; margin-bottom:11px; padding:4px 9px; border-radius:999px; background:#FFF3D8; color:#664A0B; font-size:11px; font-weight:800; }
+  .egg-group-photo{ width:100%; max-height:190px; object-fit:cover; border-radius:12px; margin:4px 0 14px; }
+  .egg-close{ width:100%; min-height:44px; border:0; border-radius:10px; background:var(--azulejo); color:#fff; font-weight:700; cursor:pointer; }
+
   footer.note{ text-align:center; font-size:11.5px; color: var(--ink-soft); padding: 18px 20px 4px; }
 
   .bottomnav{ position: fixed; bottom:0; left:0; right:0; z-index:30; background: var(--card); border-top:1px solid var(--line); display:flex; padding: 6px 6px calc(6px + env(safe-area-inset-bottom)); box-shadow: 0 -4px 14px rgba(20,30,35,.06); }
@@ -301,12 +329,6 @@
     <p class="hero-eyebrow">🇵🇹 5 — 14 augustus 2026</p>
     <h1>Portugal Roadtrip</h1>
     <p class="sub">Casa Cabreiros, Salir de Matos · uitvalsbasis met zwembad</p>
-    <div class="hero-stats">
-      <div class="hero-stat"><b>10 dagen</b><span>5 - 14 aug</span></div>
-      <div class="hero-stat"><b>5 personen</b><span>huurwagen</span></div>
-      <div class="hero-stat"><b>SN3815</b><span>BRU → LIS · 09:15</span></div>
-      <div class="hero-stat"><b>max 3u</b><span>rijregel per rit</span></div>
-    </div>
   </div>
 </div>
 
@@ -344,7 +366,19 @@
   <button class="navbtn" data-mode="info"><span class="ic">ℹ️</span>Info</button>
 </div>
 
-<footer class="note">Reisbijbel — laat weer en zee mee beslissen. Check openingsuren en boottijden vlak voor vertrek. Tik op een activiteit voor foto, tips en route.</footer>
+<footer class="note">Reisbijbel — laat weer en zee mee beslissen. Check openingsuren en boottijden vlak voor vertrek. Tik op een activiteit voor foto, tips en route.<br><span class="egg-progress" id="eggProgress" aria-live="polite">🥚 Zoekspel: 0/5 gevonden</span></footer>
+
+<div class="egg-modal" id="eggModal" hidden>
+  <div class="egg-backdrop" data-egg-close></div>
+  <div class="egg-dialog" role="dialog" aria-modal="true" aria-labelledby="eggTitle" aria-describedby="eggFact">
+    <div class="egg-modal-face" id="eggPortrait" aria-hidden="true"></div>
+    <span class="egg-count" id="eggCount">1/5 gevonden</span>
+    <h3 id="eggTitle">Reiziger gevonden!</h3>
+    <p id="eggFact"></p>
+    <img class="egg-group-photo" id="eggGroupPhoto" src="assets/reisgroep.png" alt="De vijf reizigers samen" hidden>
+    <button type="button" class="egg-close" id="eggClose">Verder zoeken</button>
+  </div>
+</div>
 
 <script>
 const IMG = {
@@ -463,6 +497,14 @@ const PORTUGAL_PHRASES = [
   {pt:"Onde fica…?", nl:"Waar ligt…?"},
   {pt:"Fala inglês?", nl:"Spreekt u Engels?"},
   {pt:"Sem gelo", nl:"Zonder ijs"}
+];
+
+const EASTER_EGGS = [
+  {id:0, mode:"dagen", day:0, selector:".timeline .item:nth-child(5)", pos:"egg-pos-a", fact:"Wie bedankt, kiest het woord: een man zegt ‘obrigado’, een vrouw ‘obrigada’. Het hangt dus af van de spreker, niet van de persoon die de dank krijgt."},
+  {id:1, mode:"dagen", day:2, selector:".timeline .item:nth-child(3)", pos:"egg-pos-b", fact:"Cabo da Roca is het westelijkste punt van het Europese vasteland. Vanaf daar ligt er vooral héél veel Atlantische Oceaan tussen jullie en Amerika."},
+  {id:2, mode:"kaart", selector:".map-intro", pos:"egg-pos-c", fact:"De universiteit van Coimbra werd al in 1290 gesticht. Zelfs de oudste student in jullie groep is daar dus nog een groentje."},
+  {id:3, mode:"info", section:"portugal-tips", selector:".tip-hero", pos:"egg-pos-d", fact:"Een espresso heet in Lissabon vaak een ‘bica’ en in Porto een ‘cimbalino’. Zelfde cafeïneshot, ander geheim wachtwoord."},
+  {id:4, mode:"info", section:"paklijst", selector:"main > .card:first-child", pos:"egg-pos-e", fact:"De mooie zwart-witte straatmozaïeken heten calçada portuguesa. Na regen veranderen sommige stukken spontaan in een onofficiële schaatsbaan."}
 ];
 
 const WEATHER_URL = "https://www.ipma.pt/en/otempo/prev.localidade.hora/index.jsp";
@@ -967,15 +1009,18 @@ function placeStopsHTML(key){
 /* ---------------- STATE / STORAGE ---------------- */
 let boekState = {};
 let pakState = {};
+let eggState = {};
 function readState(key){
   try{ return JSON.parse(localStorage.getItem(key) || '{}'); }catch(e){ return {}; }
 }
 function loadState(){
   boekState = readState('portugal-boekingen');
   pakState = readState('portugal-paklijst');
+  eggState = readState('portugal-zoekspel');
 }
 function saveBoek(){ try{ localStorage.setItem('portugal-boekingen', JSON.stringify(boekState)); }catch(e){} }
 function savePak(){ try{ localStorage.setItem('portugal-paklijst', JSON.stringify(pakState)); }catch(e){} }
+function saveEggs(){ try{ localStorage.setItem('portugal-zoekspel', JSON.stringify(eggState)); }catch(e){} }
 
 /* ---------------- RENDER ---------------- */
 const main = document.getElementById('main');
@@ -1025,6 +1070,60 @@ function renderInfoNavigation(){
     button.classList.toggle('active',active);
     button.setAttribute('aria-pressed',String(active));
   });
+}
+
+let lastEggTrigger = null;
+function foundEggCount(){
+  return EASTER_EGGS.filter(egg=>eggState[egg.id]).length;
+}
+function updateEggProgress(){
+  const progress=document.getElementById('eggProgress');
+  if(progress) progress.textContent=`🥚 Zoekspel: ${foundEggCount()}/5 gevonden`;
+}
+function eggIsOnCurrentScreen(egg){
+  if(egg.mode!==currentMode) return false;
+  if(egg.day!==undefined && egg.day!==currentDay) return false;
+  if(egg.section && egg.section!==currentSection) return false;
+  return true;
+}
+function injectEasterEggs(){
+  EASTER_EGGS.filter(eggIsOnCurrentScreen).forEach(egg=>{
+    const host=document.querySelector(egg.selector);
+    if(!host || host.querySelector(`[data-egg-id="${egg.id}"]`)) return;
+    host.classList.add('egg-host');
+    const button=document.createElement('button');
+    button.type='button';
+    button.className=`easter-egg face-${egg.id} ${egg.pos}${eggState[egg.id]?' found':''}`;
+    button.dataset.eggId=egg.id;
+    button.setAttribute('aria-label',`Verborgen reiziger ${egg.id+1} gevonden`);
+    button.title='Psst… tik op mij';
+    button.addEventListener('click',()=>revealEasterEgg(egg,button));
+    host.appendChild(button);
+  });
+  updateEggProgress();
+}
+function revealEasterEgg(egg,trigger){
+  lastEggTrigger=trigger;
+  eggState[egg.id]=true;
+  saveEggs();
+  trigger.classList.add('found');
+  const count=foundEggCount();
+  const complete=count===EASTER_EGGS.length;
+  const portrait=document.getElementById('eggPortrait');
+  portrait.className=`egg-modal-face face-${egg.id}`;
+  document.getElementById('eggCount').textContent=`${count}/5 gevonden`;
+  document.getElementById('eggTitle').textContent=complete?'🎉 Missão cumprida!':'Reiziger gevonden!';
+  document.getElementById('eggFact').textContent=complete?`${egg.fact} Alle vijf zijn gevonden — jullie zijn officieel klaar voor Portugal!`:egg.fact;
+  document.getElementById('eggGroupPhoto').hidden=!complete;
+  document.getElementById('eggClose').textContent=complete?'Fantástico!':'Verder zoeken';
+  const modal=document.getElementById('eggModal');
+  modal.hidden=false;
+  updateEggProgress();
+  document.getElementById('eggClose').focus();
+}
+function closeEggModal(){
+  document.getElementById('eggModal').hidden=true;
+  if(lastEggTrigger?.isConnected) lastEggTrigger.focus();
 }
 
 function renderDayTabs(){
@@ -1494,6 +1593,7 @@ function render(){
   else if(currentMode==='kaart') renderMapView();
   else if(currentMode==='regelen') renderRegelen();
   else if(currentMode==='info') renderInfoSection();
+  injectEasterEggs();
 }
 
 document.querySelectorAll('.navbtn').forEach(b=>b.addEventListener('click', ()=>{
@@ -1519,6 +1619,11 @@ document.querySelectorAll('.groupbtn').forEach(button=>button.addEventListener('
 document.querySelectorAll('.stab').forEach(s=>s.addEventListener('click', ()=>{
   currentSection = s.dataset.sec; activeInfoGroup=s.dataset.group; currentMode='info'; render();
 }));
+document.getElementById('eggClose').addEventListener('click',closeEggModal);
+document.querySelector('[data-egg-close]').addEventListener('click',closeEggModal);
+document.addEventListener('keydown',event=>{
+  if(event.key==='Escape' && !document.getElementById('eggModal').hidden) closeEggModal();
+});
 
 (async function init(){
   await loadState();
