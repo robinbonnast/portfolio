@@ -916,6 +916,9 @@ const PLAATSENGIDS = [
  {title:"Aveiro", where:"kanalen en lagune", duur:"halve dag", img:"aveiro", map:"Aveiro, Portugal", why:"Aveiro combineert art-nouveauhuizen, kanalen en kleurrijke moliceiroboten die vroeger voor zeewiertransport werden gebruikt. De traditionele zoetigheid ovos moles is overal verkrijgbaar. Wie meer tijd heeft, kan doorrijden naar Costa Nova voor de gestreepte vissershuizen en het brede strand.", parking:{q:"Parque de Estacionamento Rossio, Aveiro", note:"Parking vlak bij de kanalen in het centrum, op loopafstand van de moliceiro-aanlegsteiger."}}
 ];
 
+const PARKING_BY_KEY = {};
+PLAATSENGIDS.forEach(p=>{ if(p.key && p.parking) PARKING_BY_KEY[p.key] = p.parking; });
+
 const SCHUIFPLAN = [
  {sit:"Boot naar Berlengas kan niet", keuze:"Surf/kustdag Peniche-Baleal maken", schuif:"Berlengas doorschuiven naar dinsdag 11 augustus"},
  {sit:"Extreme hitte", keuze:"Grotten Mira de Aire, zwembad, markt vroeg doen", schuif:"Sintra of Porto niet op het heetste moment volproppen"},
@@ -1188,6 +1191,7 @@ function itemsHTML(day){
             ${it.desc?`<div class="acc-desc">${it.desc}</div>`:''}
             ${it.info?`<div class="acc-info">${it.info}</div>`:''}
             ${placeStopsHTML(it.place)}
+            ${parkingBoxHTML(PARKING_BY_KEY[it.place])}
             ${it.note?`<div class="acc-note">${it.note}</div>`:''}
             <div class="acc-actions">
               ${it.map?`<a class="route-btn" href="${mapsUrl(it.map)}" target="_blank" rel="noopener noreferrer">📍 Route</a>`:''}
@@ -1385,16 +1389,19 @@ function pcardHTML(p, extraBadge){
   </div>`;
 }
 
-function parkingHTML(p){
-  if(!p.parking) return '';
+function parkingBoxHTML(parking){
+  if(!parking) return '';
   return `<div class="parking-box">
     <div class="parking-label">🅿️ Parkeren</div>
-    <div class="parking-note">${p.parking.note}</div>
+    <div class="parking-note">${parking.note}</div>
     <div class="parking-links">
-      <a href="${mapsUrl(p.parking.q)}" target="_blank" rel="noopener noreferrer">Google Maps →</a>
-      <a href="${wazeUrl(p.parking.q)}" target="_blank" rel="noopener noreferrer">Waze →</a>
+      <a href="${mapsUrl(parking.q)}" target="_blank" rel="noopener noreferrer">Google Maps →</a>
+      <a href="${wazeUrl(parking.q)}" target="_blank" rel="noopener noreferrer">Waze →</a>
     </div>
   </div>`;
+}
+function parkingHTML(p){
+  return parkingBoxHTML(p.parking);
 }
 function guideCardHTML(p){
   const visual = p.img && IMG[p.img]
