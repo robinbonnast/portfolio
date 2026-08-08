@@ -2,6 +2,9 @@
 <html lang="nl">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#16495F">
 <meta name="robots" content="noindex, nofollow, noarchive">
@@ -633,49 +636,45 @@ const DAYS = [
   {time:"20:00", type:"eten", title:"Avond in Peniche/Baleal of terug richting huisje",
    info:"<p>Vrije keuze volgens energie van de groep — Peniche heeft een gezellige vissershaven met eetgelegenheden voor wie nog wil blijven hangen.</p>"}
 ]},
-{ date:"Zo 9 aug", title:"Rustdag & Nazaré", items:[
-  {time:"09:30", type:"vrij", title:"Uitslapen + zwembadvoormiddag", img:"pool",
-   info:"<p>Na de lange Porto-dag is dit een bewust lichte ochtend. Niet elke dag van een vakantie hoeft een expeditie te zijn — vandaag draait grotendeels om herstellen bij het zwembad.</p>"},
-  {time:"12:30", type:"eten", title:"Lunch in huisje of onderweg",
+{ date:"Zo 9 aug", title:"Volledige rustdag bij het huisje", items:[
+  {time:"09:30", type:"vrij", title:"Uitslapen + rustig ontbijt", img:"pool",
+   info:"<p>Na de lange Porto-dag is dit een bewust volledig lege dag zonder verplaatsingen. Niet elke dag van een vakantie hoeft een expeditie te zijn — vandaag draait alles om herstellen.</p>"},
+  {time:"11:00", type:"vrij", title:"Zwembad & luieren rond het huisje",
+   info:"<p>Geen planning, geen rijtijd — gewoon een boek, een dutje, een spelletje in de tuin of bij het zwembad.</p>"},
+  {time:"13:00", type:"eten", title:"Lunch bij het huisje",
    info:"<p>Budgetvriendelijk: zelf lunch maken met de marktproducten van eerder in de week.</p>"},
-  {time:"14:00", type:"natuur", title:"São Martinho do Porto of Praia do Salgado", img:"saomartinho", place:"saomartinho", map:"São Martinho do Porto, Portugal",
-   info:"<p><b>São Martinho do Porto</b> ligt in een bijna perfect ronde, beschutte baai — daardoor is het water er opvallend kalm en ondiep, ideaal voor wie liever niet in stevige branding zwemt. <b>Praia do Salgado</b>, iets noordelijker, is ruiger en minder bebouwd, met meer ruimte en een wildere sfeer.</p>"},
-  {time:"16:00", type:"cultuur", title:"Nazaré beneden + promenade", img:"nazare", place:"nazare", note:"In augustus meestal geen monsterwaves, maar de plek blijft indrukwekkend.", map:"Nazaré, Portugal",
-   info:"<p><b>Nazaré</b> is wereldberoemd om zijn reuzengolven — in de winter breken hier de hoogste surfgolven ter wereld, dankzij een onderzeese canyon die de golfenergie bundelt. In augustus is de zee doorgaans rustig, maar de vissersfeer, het brede zandstrand en de levendige promenade blijven de moeite waard.</p>"},
-  {time:"17:30", type:"natuur", title:"Sítio + Praia do Norte uitzichtpunt", note:"Vooral kijken/wandelen. Zwemmen enkel als vlaggen en omstandigheden veilig zijn.", map:"Sítio de Nazaré",
-   info:"<p>Vanaf de wijk <b>Sítio</b>, hoog boven het strand, heb je het klassieke uitzicht over <b>Praia do Norte</b> — precies de plek waar 's winters de gigantische golven breken. Een kabelbaan of de weg omhoog brengt je er snel.</p>"},
-  {time:"19:30", type:"eten", title:"Avond in Nazaré of rustig terug",
-   info:"<p>Vis, zeevruchten, een wandeling langs de promenade en de zonsondergang boven de Atlantische Oceaan — een toeristische maar gezellige afsluiter.</p>"}
+  {time:"15:00", type:"vrij", title:"Vrije namiddag: zwembad, spelletjes of een dutje",
+   info:"<p>Volledig invulbaar naar eigen zin — vandaag is er bewust niets vastgelegd.</p>"},
+  {time:"19:30", type:"eten", title:"Avondactiviteit: Portugese BBQ (churrasco) bij het huisje", note:"Optionele suggestie — vervang gerust door iets anders als de groep liever iets anders doet.",
+   info:"<p>Een <b>churrasco</b> (Portugese BBQ) is een leuke, ontspannen manier om de rustdag af te sluiten: gegrilde vis, chouriço of frango piri-piri, met wat lokale wijn erbij. Ook leuk als het huisje een tuin heeft: een spelletjesavond of, bij heldere hemel, wat buiten sterren kijken — ver van de stad is de sterrenhemel op het platteland vaak verrassend helder.</p>"}
 ]},
-{ date:"Ma 10 aug", title:"Sintra & Cabo da Roca", items:[
-  {time:"07:15", type:"reis", title:"Vroeg vertrek richting Sintra", desc:"Rijtijd ca. 1u30-1u50.", note:"Vroeg vertrekken is hier echt de moeite waard wegens drukte en parkeren.", map:"Sintra, Portugal",
+{ date:"Ma 10 aug", title:"Surfles Peniche (geboekt)", items:[
+  {time:"09:30", type:"vrij", title:"Rustige ochtend / zwembad", img:"pool",
+   info:"<p>De surfles is pas 's namiddags, dus de ochtend mag rustig beginnen — dit was ook meteen de back-updag voor Berlengas, mocht de boot zaterdag niet uitvaren.</p>"},
+  {time:"12:30", type:"eten", title:"Lichte lunch", note:"Niet te zwaar eten vlak voor het surfen.",
+   info:"<p>Eet op tijd en niet te zwaar — met een volle maag is 2 uur actief surfen minder aangenaam.</p>"},
+  {time:"14:10", type:"reis", title:"Vertrek naar Go4surf, Peniche", desc:"Trefpunt: Tv. da Exportadora, 2520-497 Peniche (tegenover Praia da Gamboa).", note:"Zoek een open garagedeur aan de zijkant van het langhuis — daar wacht de aanbieder. Aanwezig zijn om 14:20u (10 min voor de les), anders vervalt het tijdslot.", map:"Tv. da Exportadora, Peniche",
+   info:"<p>De surfschool <b>Go4surf</b> ligt vlak tegenover Praia da Gamboa in Peniche.</p>"},
+  {time:"14:30", type:"actief", title:"Surfles bij Go4surf (geboekt)", img:"almagreira", note:"5 volwassenen · 2 uur · Engelstalige les · wetsuit en surfplank inbegrepen. Boekingsreferentie GYGZGZWXA2HV · Pincode C76zcdF2 · Aanbieder: Go4surf, +351 964 104 927. Volledige terugbetaling bij annulatie vóór 14:30u op 9 augustus.", map:"Tv. da Exportadora, Peniche", links:["gyg"],
+   info:"<p>Instructeurs coachen alle niveaus, van complete beginners tot gevorderden. Alle uitrusting (wetsuit, surfplank) wordt ter plekke voorzien — enkel enthousiasme meenemen.</p>"},
+  {time:"16:30", type:"vrij", title:"Strand Peniche/Baleal — afspoelen en nagenieten", img:"pool",
+   info:"<p>Na de les is er nog tijd om even na te genieten aan het strand, af te spoelen en te ontspannen voor de terugrit.</p>"},
+  {time:"19:00", type:"eten", title:"Avond in Peniche, Baleal of thuis",
+   info:"<p>Vrije keuze — Peniche en Baleal hebben tal van eetgelegenheden met zicht op zee, of gewoon rustig koken bij het huisje.</p>"}
+]},
+{ date:"Di 11 aug", title:"Sintra & Cabo da Roca", items:[
+  {time:"06:30", type:"reis", title:"Vroeg vertrek richting Sintra", desc:"Rijtijd ca. 1u30-1u50.", note:"Ticket voor Quinta da Regaleira staat vast om 09:00u — ruim op tijd vertrekken is hier extra belangrijk wegens drukte en parkeren.", map:"Sintra, Portugal",
    info:"<p>Sintra is een van de populairste dagtrips vanuit Lissabon, en dat merk je aan het verkeer en de wachtrijen bij de paleizen vanaf midden voormiddag. <b>Vroeg vertrekken is hier het verschil tussen rustig genieten en urenlang in de rij staan.</b></p>"},
-  {time:"09:30", type:"cultuur", title:"Quinta da Regaleira of Pena Palace", img:"sintra", place:"sintra", note:"Te reserveren: timed tickets.", map:"Quinta da Regaleira, Sintra", links:["regaleira","pena"],
-   info:"<p>Sintra ligt verscholen in een koel, beboste heuvellandschap en voelt daardoor bijna sprookjesachtig aan. <b>Quinta da Regaleira</b> is een romantisch 20e-eeuws landgoed vol symboliek: verborgen tunnels, grotten en de beroemde <b>Initiatieput</b>, een spiraaltrap die diep de grond in draait, ooit gebruikt voor tarot- en vrijmetselaarsrituelen.</p><p><b>Pena Palace</b> is het kleurrijke, romantische paleis op de heuveltop, gebouwd in de 19e eeuw in een mix van stijlen — Moors, Manuelien, Gotisch — en vaak hét symbool van Sintra. Kies liever één van beide grondig dan allebei gehaast; beide vragen een vooraf geboekt tijdslot.</p>"},
-  {time:"12:30", type:"eten", title:"Sintra centrum + lunch/snack", note:"Proef travesseiros of queijadas als lokale zoetigheid.", map:"Sintra centrum",
+  {time:"09:00", type:"cultuur", title:"Quinta da Regaleira (geboekt)", img:"sintra", place:"sintra", note:"Geboekt via Headout — Booking ID 33316672, 5 volwassenen, €125. Ticket volgt per mail (check ook spam).", map:"Quinta da Regaleira, Sintra", links:["regaleira"],
+   info:"<p>Sintra ligt verscholen in een koel, beboste heuvellandschap en voelt daardoor bijna sprookjesachtig aan. <b>Quinta da Regaleira</b> is een romantisch 20e-eeuws landgoed vol symboliek: verborgen tunnels, grotten en de beroemde <b>Initiatieput</b>, een spiraaltrap die diep de grond in draait, ooit gebruikt voor tarot- en vrijmetselaarsrituelen.</p>"},
+  {time:"11:30", type:"eten", title:"Sintra centrum + lunch/snack", note:"Proef travesseiros of queijadas als lokale zoetigheid.", map:"Sintra centrum",
    info:"<p>Het historische centrum is compact en wandelvriendelijk. Proef er de twee lokale specialiteiten: <b>travesseiros</b> (bladerdeeggebakjes met amandelvulling) en <b>queijadas</b> (kleine kaastaartjes) — beide al generaties lang gemaakt volgens traditionele recepten.</p>"},
-  {time:"14:00", type:"natuur", title:"Cabo da Roca", img:"caboroca", place:"caboroca", map:"Cabo da Roca, Portugal",
+  {time:"13:30", type:"natuur", title:"Cabo da Roca", img:"caboroca", place:"caboroca", map:"Cabo da Roca, Portugal",
    info:"<p><b>Cabo da Roca</b> is het meest westelijke punt van het Europese vasteland — hier eindigt Europa en begint de open Atlantische Oceaan. De Portugese dichter Camões vatte het treffend samen: <i>\"Onde a terra se acaba e o mar começa\"</i> (waar het land eindigt en de zee begint). Verwacht stevige wind op de kliffen.</p>"},
-  {time:"15:30", type:"natuur", title:"Praia da Adraga / Azenhas do Mar / evt. Praia da Ursa", map:"Praia da Adraga, Portugal",
+  {time:"15:00", type:"natuur", title:"Praia da Adraga / Azenhas do Mar / evt. Praia da Ursa", map:"Praia da Adraga, Portugal",
    info:"<p>Drie heel verschillende sferen om uit te kiezen: <b>Praia da Adraga</b> is ruig maar makkelijk bereikbaar, met dramatische rotsformaties. <b>Azenhas do Mar</b> is een fotogeniek wit dorpje dat letterlijk tegen de kliffen aan de zee hangt. <b>Praia da Ursa</b> is het meest spectaculair — afgelegen, met opvallende rotspieken in zee — maar vraagt een stevige, steile afdaling die alleen met goede schoenen te doen is.</p>"},
-  {time:"18:30", type:"reis", title:"Avondeten aan de kust of terugrit", desc:"Rijtijd terug ca. 1u45 — laat genoeg marge.", map:"Salir de Matos, Portugal",
+  {time:"18:00", type:"reis", title:"Avondeten aan de kust of terugrit", desc:"Rijtijd terug ca. 1u45 — laat genoeg marge.", map:"Salir de Matos, Portugal",
    info:"<p>Kies tussen nog wat langer genieten van de kust met avondeten ter plekke, of op tijd vertrekken zodat de terugrit niet te laat wordt.</p>"}
-]},
-{ date:"Di 11 aug", title:"Actieve keuzedag", items:[
-  {time:"09:00", type:"actief", title:"Actieve dag — kies 1 hoofdactiviteit",
-   info:"<p>Deze dag is bewust flexibel opengelaten — en dient meteen als back-up voor Berlengas als de boot zaterdag niet uitvoer. Kies vooraf één hoofdactiviteit zodat de ochtend niet last-minute gezocht moet worden.</p>"},
-  {time:"10:00", type:"actief", title:"Optie A: surfles in Baleal/Peniche", img:"almagreira", note:"Richtduur ca. 2 uur.", map:"Baleal, Portugal", links:["gyg"],
-   info:"<p>De streek rond <b>Peniche en Baleal</b> is een van de bekendste surfbestemmingen van Portugal, met constante golven en scholen die het hele jaar door lesgeven aan beginners. Een aanrader als de groep iets actiefs samen wil doen zonder voorkennis nodig te hebben.</p>"},
-  {time:"10:00", type:"natuur", title:"Optie B: SUP of kayak op Lagoa de Óbidos", img:"foz", note:"Richtduur ca. 1,5 uur.", map:"Lagoa de Óbidos", links:["gyg"],
-   info:"<p>Rustiger dan de golven van de oceaan: peddelen over de vlakke, beschutte <b>Lagoa de Óbidos</b> is toegankelijk voor beginners en biedt een heel ander perspectief op het landschap dat je eerder al vanaf de oever zag.</p>"},
-  {time:"10:00", type:"actief", title:"Optie C: buggy/off-road rond Óbidos–Lagoa–Peniche", img:"obidos", note:"Vooraf beschikbaarheid checken via GetYourGuide of lokale aanbieders.", map:"Óbidos, Portugal", links:["gyg"],
-   info:"<p>Voor wie meer adrenaline zoekt: een begeleide buggytocht door het landschap tussen Óbidos, de lagune en Peniche, met natuur en uitzichten zonder de inspanning van een lange wandeling.</p>"},
-  {time:"13:00", type:"eten", title:"Lunch + strandmoment",
-   info:"<p>Combineer met een van de stranden van deze week — Baleal, Almagreira, Supertubos of Foz liggen allemaal binnen bereik.</p>"},
-  {time:"16:30", type:"vrij", title:"Zwembadnamiddag of korte kustwandeling", img:"pool",
-   info:"<p>Deze dag mag speels en ongepland blijven — precies de bedoeling van een flexibele dag tussen de vastere programmapunten door.</p>"},
-  {time:"19:30", type:"eten", title:"Avond in Peniche, Baleal, Foz of thuis",
-   info:"<p>Vrije keuze, afhankelijk van waar de activiteit van vandaag plaatsvond.</p>"}
 ]},
 { date:"Wo 12 aug", title:"Caldas, Grotten & Alcobaça", items:[
   {time:"09:00", type:"eten", title:"Caldas da Rainha — fruitmarkt", img:"caldas", place:"caldas", note:"Rijtijd ca. 15-20 min.", map:"Praça da Fruta, Caldas da Rainha",
@@ -730,8 +729,8 @@ const DAYS = [
 const BOOKINGEN = [
  {t:"Online check-in voor SN3815", s:"Zodra beschikbaar via Brussels Airlines; bewaar de boardingpasses voor alle 5 reizigers ook offline."},
  {t:"Boottickets Berlengas + BerlengasPass", s:"zaterdag 8 augustus, 14:15u — zeecondities kunnen alles wijzigen, dus tijdig checken."},
- {t:"Timed tickets Sintra", s:"Quinta da Regaleira of Pena Palace — maandag 10 augustus, vroeg boeken wegens drukte."},
- {t:"Activiteit dinsdag 11 augustus", s:"Surfles, SUP/kayak of buggy — beschikbaarheid vooraf checken via GetYourGuide of lokale aanbieder."},
+ {t:"Timed tickets Sintra", s:"Quinta da Regaleira — geboekt voor dinsdag 11 augustus, 09:00u (Booking ID 33316672)."},
+ {t:"Activiteit maandag 10 augustus", s:"Surfles bij Go4surf — geboekt, 14:30u (GYGZGZWXA2HV)."},
  {t:"Coasteering / kayak Arrábida-Sesimbra", s:"Donderdag 13 augustus — vooraf reserveren."},
  {t:"Eventueel 6 Bridges Cruise Porto", s:"Vrijdag 7 augustus, optioneel bij aankomst ter plekke boeken."},
  {t:"Huurwagen: creditcard-limiet checken", s:"Waarborg is 420 EUR op creditcard (of debit VISA/Mastercard) met pincode, op naam van de hoofdbestuurder — zorg voor voldoende bestedingslimiet."},
@@ -934,7 +933,7 @@ const PARKING_BY_KEY = {};
 PLAATSENGIDS.forEach(p=>{ if(p.key && p.parking) PARKING_BY_KEY[p.key] = p.parking; });
 
 const SCHUIFPLAN = [
- {sit:"Boot naar Berlengas kan niet", keuze:"Surf/kustdag Peniche-Baleal maken", schuif:"Berlengas doorschuiven naar dinsdag 11 augustus"},
+ {sit:"Boot naar Berlengas kan niet", keuze:"Surf/kustdag Peniche-Baleal maken", schuif:"Maandagochtend 10 augustus is nog vrij (surfles is pas 14:30u) — Berlengas zelf vraagt een volledige dag, dus eerder een andere vrije dag zoeken indien nodig."},
  {sit:"Extreme hitte", keuze:"Grotten Mira de Aire, zwembad, markt vroeg doen", schuif:"Sintra of Porto niet op het heetste moment volproppen"},
  {sit:"Veel wind / ruwe oceaan", keuze:"Lagune van Óbidos, zwembad, stadjes", schuif:"Wilde stranden alleen wandelen/kijken, niet zwemmen"},
  {sit:"Groep is moe", keuze:"Halve dag zwembad + korte avondstop Foz/Óbidos", schuif:"Arrábida vervangen door Buddha Eden of favoriete plek opnieuw"},
@@ -1587,7 +1586,7 @@ function renderInfoSection(){
     </div>`;
   } else if(currentSection==='activiteiten'){
     body = `<div class="card"><h3>Activiteiten om uit te kiezen</h3>
-    <p class="intro">Kies liefst 1 hoofdactiviteit vooraf voor dinsdag 11 of donderdag 13 augustus.</p>
+    <p class="intro">Voor maandag 10 augustus staat de surfles al vast (Go4surf, geboekt). Kies voor donderdag 13 augustus nog een hoofdactiviteit.</p>
     <div class="grid">${ACTIVITEITEN.map(a=>pcardHTML(a, `<span class="pill p-${a.intensiteit==='actief'?'actief':a.intensiteit==='rustig'?'rustig':'middel'}">${a.intensiteit}</span>`)).join('')}</div>
     </div>`;
   } else if(currentSection==='markten'){
