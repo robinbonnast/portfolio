@@ -88,6 +88,11 @@
   .day-head{ margin: 4px 0 14px; }
   .day-head h2{ font-family:'Fraunces', serif; font-size: 21px; margin: 0 0 2px; font-weight:600;}
   .day-head p{ margin:0; color: var(--ink-soft); font-size: 13px; }
+  .day-intro{ background:#EFF6F1; border:1px solid #D7E4DE; border-radius: var(--radius); padding: 12px 14px; margin: 0 0 12px; font-size: 13.5px; line-height:1.55; }
+  .day-intro p{ margin:0 0 8px; }
+  .day-intro p:last-child{ margin-bottom:0; }
+  .day-todos{ margin-bottom: 14px; }
+  .day-todos h3{ margin:0 0 8px; }
 
   .timeline{ position:relative; padding-left: 20px; }
   .timeline::before{ content:""; position:absolute; left:6px; top:6px; bottom:6px; width:2px; background: var(--line); }
@@ -659,7 +664,18 @@ const DAYS = [
   {time:"19:00", type:"eten", title:"Avond in Peniche, Baleal of thuis",
    info:"<p>Vrije keuze — Peniche en Baleal hebben tal van eetgelegenheden met zicht op zee, of gewoon rustig koken bij het huisje.</p>"}
 ]},
-{ date:"Di 11 aug", title:"Sintra & Cabo da Roca", items:[
+{ date:"Di 11 aug", title:"Sintra & Cabo da Roca",
+  intro:"<p>Sintra is een van de drukste dagtrips van Portugal — vanaf halverwege de voormiddag staan er lange rijen aan de paleizen en raakt het parkeren snel vol. Jullie hebben om <b>09:00u</b> een vast tijdslot voor Quinta da Regaleira, dus alles draait vandaag rond op tijd zijn. Na Sintra gaat het richting de kust: Cabo da Roca (het westelijkste punt van Europa) en een strand naar keuze, met daarna de rit terug.</p>",
+  todos:[
+    {t:"Wekker zetten voor vertrek om 06:30u"},
+    {t:"Regaleira-ticket controleren in de mailbox", s:"Check ook spam — komt via Headout."},
+    {t:"Water, snacks en zonnecrème meenemen"},
+    {t:"Schoenen met grip aandoen", s:"Voor Regaleira's tunnels/trappen én de kliffenwandeling bij Cabo da Roca."},
+    {t:"Volle tank / voldoende batterij checken"},
+    {t:"Strand kiezen: Adraga, Azenhas do Mar of Ursa", s:"Ursa is het mooist maar vraagt een steile afdaling — bespaart tijd ter plekke."},
+    {t:"Lichte jas/windjack mee", s:"Het waait vaak stevig bij Cabo da Roca."}
+  ],
+  items:[
   {time:"06:30", type:"reis", title:"Vroeg vertrek richting Sintra", desc:"Rijtijd ca. 1u30-1u50.", note:"Ticket voor Quinta da Regaleira staat vast om 09:00u — ruim op tijd vertrekken is hier extra belangrijk wegens drukte en parkeren.", map:"Sintra, Portugal",
    info:"<p>Sintra is een van de populairste dagtrips vanuit Lissabon, en dat merk je aan het verkeer en de wachtrijen bij de paleizen vanaf midden voormiddag. <b>Vroeg vertrekken is hier het verschil tussen rustig genieten en urenlang in de rij staan.</b></p>"},
   {time:"09:00", type:"cultuur", title:"Quinta da Regaleira (geboekt)", img:"sintra", place:"sintra", note:"Geboekt via Headout — Booking ID 33316672, 5 volwassenen, €125. Ticket volgt per mail (check ook spam).", map:"Quinta da Regaleira, Sintra", links:["regaleira"],
@@ -1044,6 +1060,7 @@ function placeStopsHTML(key){
 let boekState = {};
 let pakState = {};
 let eggState = {};
+let todoState = {};
 function readState(key){
   try{ return JSON.parse(localStorage.getItem(key) || '{}'); }catch(e){ return {}; }
 }
@@ -1051,10 +1068,12 @@ function loadState(){
   boekState = readState('portugal-boekingen');
   pakState = readState('portugal-paklijst');
   eggState = readState('portugal-zoekspel');
+  todoState = readState('portugal-todos');
 }
 function saveBoek(){ try{ localStorage.setItem('portugal-boekingen', JSON.stringify(boekState)); }catch(e){} }
 function savePak(){ try{ localStorage.setItem('portugal-paklijst', JSON.stringify(pakState)); }catch(e){} }
 function saveEggs(){ try{ localStorage.setItem('portugal-zoekspel', JSON.stringify(eggState)); }catch(e){} }
+function saveTodos(){ try{ localStorage.setItem('portugal-todos', JSON.stringify(todoState)); }catch(e){} }
 
 /* ---------------- RENDER ---------------- */
 const main = document.getElementById('main');
@@ -1238,9 +1257,12 @@ function renderDayView(){
       <h2>${d.date} — ${d.title}</h2>
       <p>Dag ${currentDay+1} van ${DAYS.length} · tik op een activiteit voor foto, tips en route</p>
     </div>
+    ${d.intro?`<div class="day-intro">${d.intro}</div>`:''}
+    ${d.todos?`<div class="card day-todos"><h3>To do's voor deze dag</h3>${checklistHTML(d.todos, todoState, 'day'+currentDay+'-')}</div>`:''}
     ${itemsHTML(d)}
   `;
   attachAccordions(main);
+  if(d.todos) attachChecklistHandlers(main, todoState, saveTodos, renderDayView);
   document.getElementById('openDayMap')?.addEventListener('click', ()=>{
     mapFocusDay = currentDay;
     currentMode = 'kaart';
