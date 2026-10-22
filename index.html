@@ -343,6 +343,89 @@
   .entry p { max-width:78ch; }
   .entry p strong { font-weight:700; color:#0f2419; }
   h1,h2,h3 { overflow-wrap:break-word; hyphens:manual; -webkit-hyphens:manual; }
+
+/* Mobile corrections. Keep after the existing styles; desktop (>900px) is unchanged. */
+@media (max-width: 900px) {
+  .hero-grid, .intro .intro-grid, .proj-grid, .contact-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .hero-grid > *, .intro-grid > *, .proj-grid > *, .contact-grid > *,
+  .proj-head > *, .casemeta > div > *, .contact-list a > * {
+    min-width: 0;
+  }
+  main, footer { overflow-wrap: anywhere; }
+  .tag {
+    white-space: normal;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+  .chyron { max-width: 100%; line-height: 1.45; }
+  .btn, .pill {
+    max-width: 100%; min-height: 48px;
+    padding: 12px 18px; line-height: 1.35; text-align: center;
+  }
+  .pill { display: inline-flex; align-items: center; justify-content: center; }
+  .spec { min-width: 0; max-width: 100%; }
+  .spec > span { min-width: 0; }
+  .proj-year { flex-shrink: 0; }
+  .player .badge { max-width: 100%; }
+  .contact-list .v { min-width: 0; overflow-wrap: anywhere; }
+  section[id] { scroll-margin-top: calc(var(--mobile-header-height, 58px) + 16px); }
+}
+
+@media (max-width: 560px) {
+  :root { --gutter: clamp(16px, 4.5vw, 24px); --pad: 44px; }
+  body { font-size: 1rem; line-height: 1.6; }
+  /* Let both rows contribute to the sticky header's height. */
+  .masthead .row {
+    height: auto; min-height: 0;
+    flex-direction: column; flex-wrap: nowrap;
+    align-items: stretch; justify-content: flex-start;
+    gap: 4px; padding: 10px var(--gutter) 6px;
+  }
+  .nameplate { width: auto; text-align: center; font-size: 1.2rem; line-height: 1.35; }
+  .masthead nav { width: 100%; min-width: 0; }
+  .masthead nav ul { justify-content: center; flex-wrap: wrap; gap: 0 12px; }
+  .masthead nav a {
+    display: flex; align-items: center; justify-content: center;
+    min-height: 44px; padding: 8px 6px;
+    font-size: .75rem; line-height: 1.25;
+  }
+  .masthead nav a::after { bottom: 5px; }
+  .hero { padding-top: 32px; }
+  .hero-grid { gap: 28px; }
+  h1.name { font-size: clamp(2.75rem, 11vw, 3.5rem); line-height: .95; }
+  .role-bar { margin: 18px 0; }
+  .chyron { font-size: .7rem; letter-spacing: .09em; gap: 10px; }
+  .chyron::before { width: 20px; }
+  .lede { font-size: 1.0625rem; line-height: 1.55; margin-bottom: 1em; }
+  .avail { font-size: 1rem; line-height: 1.6; margin-bottom: 1.5em; }
+  .cta-row { gap: 10px; }
+  .btn { font-size: .9rem; flex: 0 1 auto; }
+  .portrait { max-width: 300px; }
+  .cred { margin-top: 28px; gap: 10px; }
+  .cred > span { font-size: .7rem; }
+  .cred ul { font-size: .875rem; gap: 8px 16px; }
+  .cred li:not(:last-child)::after { content: none; }
+  .statement { font-size: clamp(1.75rem, 7.5vw, 2.2rem); line-height: 1.12; }
+  .intro .statement-body { padding-left: 16px; }
+  .section-head h2 { font-size: clamp(1.9rem, 8vw, 2.3rem); line-height: 1.08; }
+  .project { padding: clamp(16px, 4.5vw, 22px); border-radius: 20px; }
+  .project h3 { font-size: clamp(1.65rem, 7vw, 2rem); line-height: 1.08; }
+  .proj-grid { gap: 22px; }
+  .proj-head { gap: 10px; }
+  .kicker { font-size: .7rem; letter-spacing: .1em; }
+  .kicker::before { flex-shrink: 0; width: 16px; }
+  .casemeta > div { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .contact-grid .big { font-size: clamp(1.5rem, 6.5vw, 1.9rem); line-height: 1.2; }
+  .contact-list a { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .contact-list a:hover { transform: none; }
+  footer .row { letter-spacing: .06em; }
+}
+
+@media (max-width: 380px) {
+  .cta-row .btn { flex-basis: 100%; width: 100%; }
+}
 </style>
 </head>
 <body>
@@ -630,6 +713,18 @@
 </footer>
 
 <script>
+  // Keep mobile anchor destinations below the actual header, including enlarged text.
+  var masthead = document.querySelector('.masthead');
+  function updateHeaderHeight() {
+    document.documentElement.style.setProperty('--mobile-header-height', masthead.getBoundingClientRect().height + 'px');
+  }
+  updateHeaderHeight();
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(updateHeaderHeight).observe(masthead);
+  } else {
+    window.addEventListener('resize', updateHeaderHeight);
+  }
+
   document.querySelectorAll('.player[data-embed]').forEach(function(p){
     var btn = p.querySelector('.play');
     if(!btn) return;
