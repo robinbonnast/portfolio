@@ -387,7 +387,22 @@
   .avail { font-size: 1rem; line-height: 1.6; margin-bottom: 1.5em; }
   .cta-row { gap: 10px; }
   .btn { font-size: .9rem; flex: 0 1 auto; }
-  .portrait { width: 46%; max-width: 180px; justify-self: end; }
+  .hero-grid {
+    grid-template-columns: minmax(0, 1fr) clamp(90px, 28vw, 128px);
+    gap: 20px 16px;
+  }
+  .hero-text { display: contents; }
+  .hero-text > .name, .hero-text > .role-bar,
+  .hero-text > .avail, .hero-text > .cta-row { grid-column: 1 / -1; }
+  .hero-text > .name { grid-row: 1; }
+  .hero-text > .role-bar { grid-row: 2; margin: 0; }
+  .hero-text > .lede { grid-column: 1; grid-row: 3; align-self: start; margin-bottom: 0; }
+  .hero-text > .avail { grid-row: 4; margin-bottom: 0; }
+  .hero-text > .cta-row { grid-row: 5; }
+  .portrait {
+    grid-column: 2; grid-row: 3; align-self: start;
+    width: 100%; max-width: 128px; justify-self: end;
+  }
   .portrait .frame { padding: 6px; border-radius: 20px; }
   .portrait img { border-radius: 12px; }
   .cred { margin-top: 28px; gap: 10px; }
