@@ -462,6 +462,37 @@
   }
   .masthead nav a::after { bottom: 5px; }
 }
+
+/* Layout proposal; appended only in voorstel.html. */
+.hero .chyron::before { display: none; }
+@media (max-width: 560px) {
+  .hero { padding-top: 28px; padding-bottom: 32px; }
+  .hero-grid {
+    grid-template-columns: minmax(0, 1fr) clamp(88px, 27vw, 116px);
+    gap: 14px 18px;
+  }
+  h1.name { font-size: clamp(2.5rem, 11.5vw, 3.25rem); line-height: 1; letter-spacing: -.02em; }
+  h1.name br { display: none; }
+  .hero-text > .role-bar { margin-top: -6px; margin-bottom: 4px; }
+  .chyron { font-size: .675rem; letter-spacing: .07em; gap: 8px; }
+  .hero .lede { font-size: 1.0625rem; line-height: 1.5; }
+  .hero .tag { padding: 0; background: transparent; color: #ffdf81; font-weight: 700; }
+  .portrait { max-width: 116px; }
+  .portrait .frame {
+    padding: 4px; border: 1px solid rgba(255,255,255,.6);
+    border-radius: 16px; background: rgba(255,255,255,.1);
+    box-shadow: 0 8px 24px rgba(0,0,0,.12);
+  }
+  .portrait img { border-radius: 11px; aspect-ratio: 1; }
+  .hero .avail { line-height: 1.6; }
+  .hero .cta-row { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 12px; margin-top: 4px; }
+  .hero .cta-row .btn { width: 100%; padding: 12px 10px; }
+  .hero .btn.ghost { border-width: 1px; }
+  .cred { display: block; margin-top: 28px; padding-top: 18px; }
+  .cred > span { display: block; margin-bottom: 12px; font-size: .675rem; letter-spacing: .08em; }
+  .cred ul { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px 16px; font-size: .8125rem; line-height: 1.5; }
+}
+
 </style>
 </head>
 <body>
@@ -492,9 +523,9 @@
     <div class="wrap">
       <div class="hero-grid">
         <div class="hero-text">
-          <h1 class="name" id="naam">Robin<br>Bonnast</h1>
+          <h1 class="name" id="naam">Robin <br>Bonnast</h1>
           <div class="role-bar">
-            <span class="chyron animate">Videomaker &amp; redacteur · non-fictie</span>
+            <span class="chyron animate">Videomaker &amp; redacteur</span>
           </div>
           <p class="lede">Ik maak heldere reportages en korte video’s over maatschappelijke thema’s, <span class="tag">van research tot montage</span>.</p>
           <p class="avail">In de eerste plaats zoek ik een plek waar ik kan meedraaien als <strong>redactielid</strong>, mee concepten bedenk en ze ook <strong>visueel vormgeef</strong>. Maar ik ben leergierig en ijverig, dus ik sta ook open voor meer <strong>productionele of technische functies</strong>.</p>
