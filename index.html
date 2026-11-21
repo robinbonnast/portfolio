@@ -172,7 +172,12 @@
   .proj-media.vertical{position:relative;align-self:stretch;min-height:380px}
   .proj-media.vertical .frame{position:absolute;top:0;bottom:0;left:50%;transform:translateX(-50%);aspect-ratio:9/16;max-width:100%}
   .proj-media.vertical .player{height:100%;aspect-ratio:auto}
+  .proj-grid.has-vertical{display:flex;align-items:stretch}
+  .proj-grid.has-vertical .proj-text{flex:1 1 0;min-width:0}
+  .proj-grid.has-vertical .dek{max-width:none}
+  .proj-grid.has-vertical .proj-media{flex:0 0 clamp(190px,22%,240px)}
   @media(max-width:900px){
+    .proj-grid.has-vertical{display:grid}
     .proj-media.vertical{position:static;min-height:0}
     .proj-media.vertical .frame{position:static;transform:none;width:min(100%,260px);margin-inline:auto}
     .proj-media.vertical .player{height:auto;aspect-ratio:9/16}
@@ -608,7 +613,7 @@
 
         <!-- BOSMANS KERST -->
         <article class="project reveal">
-          <div class="proj-grid">
+          <div class="proj-grid has-vertical">
             <div class="proj-text">
               <div class="proj-head">
                 <span class="kicker plain">Social media · reel</span>
@@ -634,7 +639,7 @@
 
         <!-- BOSMANS -->
         <article class="project reveal">
-          <div class="proj-grid">
+          <div class="proj-grid has-vertical">
             <div class="proj-text">
               <div class="proj-head">
                 <span class="kicker plain">Social media · reel</span>
@@ -651,10 +656,10 @@
                 <a class="pill" href="https://www.facebook.com/reel/1214373464204346" target="_blank" rel="noopener">↗ Bekijk op Facebook</a>
               </div>
             </div>
-            <div class="proj-media">
+            <div class="proj-media vertical">
               <div class="frame">
-                <a class="player player-link" href="https://www.facebook.com/reel/1214373464204346" target="_blank" rel="noopener" aria-label="Bekijk de reel van Bosmans Tuin & Dier op Facebook (opent in nieuw tabblad)">
-                  <img src="images/bosmans.jpg" alt="Dronebeeld van de verbouwing bij Bosmans Tuin & Dier in Bertem">
+                <a class="player player-link vertical" href="https://www.facebook.com/reel/1214373464204346" target="_blank" rel="noopener" aria-label="Bekijk de reel van Bosmans Tuin & Dier op Facebook (opent in nieuw tabblad)">
+                  <img src="images/bosmans-verbouwing.jpg" alt="Werfbeeld van de verbouwing bij Bosmans Tuin & Dier in Bertem: twee bouwvakkers bespreken de afwerking">
                   <span class="play" aria-hidden="true"></span>
                   <span class="badge">Bekijk op Facebook ↗</span>
                 </a>
