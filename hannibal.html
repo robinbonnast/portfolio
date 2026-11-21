@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="nl-BE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Activiteitenbank – Hannibal Vakanties (voorbeeld)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --groen:#a1c033; --groen-donker:#7f9a1f; --groen-licht:#f1f6dd;
+  --tekst:#575756; --donker:#333; --lijn:#e3e3e0; --wit:#fff; --achtergrond:#f7f8f3;
+  --teal:#2f9a96;
+  --kop:"Barlow Semi Condensed",system-ui,sans-serif;
+  --lees:Verdana,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--lees);color:var(--tekst);background:var(--achtergrond);line-height:1.5}
+h1,h2,h3{font-family:var(--kop);font-weight:600;margin:0;color:var(--donker)}
+.sr{position:absolute;left:-9999px}
+.top{background:var(--wit);border-bottom:1px solid var(--lijn)}
+.top .in{max-width:1180px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.merk{font-family:var(--kop);font-size:2rem;font-weight:700;color:var(--groen);letter-spacing:.5px}
+.merk small{display:block;font-size:.8rem;color:var(--tekst);font-weight:500;letter-spacing:0}
+.demo{background:var(--groen-licht);color:var(--groen-donker);font-size:.8rem;padding:6px 12px;border-radius:99px}
+.hero{background:var(--teal);color:#fff}
+.hero .in{max-width:1180px;margin:0 auto;padding:36px 20px 40px}
+.hero h1{color:#fff;font-size:clamp(1.6rem,4vw,2.4rem);text-transform:uppercase;max-width:20ch}
+.hero p{max-width:60ch;margin:12px 0 0}
+main{max-width:1180px;margin:0 auto;padding:24px 20px 60px}
+.stap{margin-bottom:26px}
+.stap h2{font-size:1.35rem;margin-bottom:4px}
+.stap .uitleg{margin:0 0 12px;font-size:.9rem}
+.nr{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--groen);color:#fff;font-size:.95rem;margin-right:8px}
+.kampen{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.kamp{text-align:left;background:var(--wit);border:2px solid var(--lijn);border-radius:14px;padding:14px 16px;cursor:pointer;font:inherit;color:inherit;transition:.15s}
+.kamp:hover{border-color:var(--groen)}
+.kamp[aria-pressed=true]{border-color:var(--groen);background:var(--groen-licht);box-shadow:0 0 0 3px rgba(161,192,51,.25)}
+.kamp b{display:block;font-family:var(--kop);font-size:1.25rem;color:var(--donker)}
+.kamp span{display:block;font-size:.85rem}
+.kamp .doel{margin-top:6px;font-size:.78rem;color:var(--groen-donker);font-weight:700}
+.filters{background:var(--wit);border:1px solid var(--lijn);border-radius:14px;padding:16px 18px;display:grid;gap:14px}
+.groep{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.groep>.lab{font-family:var(--kop);font-weight:600;color:var(--donker);min-width:120px}
+.chip{border:1.5px solid var(--lijn);background:var(--wit);border-radius:99px;padding:6px 14px;font:inherit;font-size:.85rem;cursor:pointer;color:var(--tekst)}
+.chip:hover{border-color:var(--groen)}
+.chip[aria-pressed=true]{background:var(--groen);border-color:var(--groen);color:#fff;font-weight:700}
+.zoek{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.zoek input{flex:1;min-width:200px;padding:10px 14px;border:1.5px solid var(--lijn);border-radius:99px;font:inherit}
+.zoek input:focus,.chip:focus-visible,.kamp:focus-visible,.kaart:focus-visible,button:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+.reset{background:none;border:none;color:var(--teal);text-decoration:underline;cursor:pointer;font:inherit;font-size:.85rem}
+.balk{display:flex;justify-content:space-between;align-items:center;margin:22px 0 12px;flex-wrap:wrap;gap:8px}
+.balk h2{font-size:1.3rem}
+.raster{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.kaart{background:var(--wit);border:1px solid var(--lijn);border-radius:14px;padding:16px;cursor:pointer;text-align:left;font:inherit;color:inherit;display:flex;flex-direction:column;gap:8px;transition:.15s}
+.kaart:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.08);border-color:var(--groen)}
+.kaart h3{font-size:1.2rem}
+.kaart p{margin:0;font-size:.87rem}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:.72rem;padding:3px 9px;border-radius:99px;background:#eef0ea;color:var(--tekst)}
+.tag.type{background:var(--groen-licht);color:var(--groen-donker);font-weight:700}
+.tag.thema{background:#e3f2f1;color:#1f6f6c}
+.meta{display:flex;justify-content:space-between;font-size:.78rem;margin-top:auto;padding-top:8px;border-top:1px dashed var(--lijn)}
+.mat-ok{color:var(--groen-donker);font-weight:700}
+.mat-koop{color:#b3591c;font-weight:700}
+.leeg{padding:40px;text-align:center;background:var(--wit);border:1px dashed var(--lijn);border-radius:14px}
+dialog{border:none;border-radius:16px;padding:0;max-width:680px;width:calc(100% - 28px);box-shadow:0 20px 60px rgba(0,0,0,.3)}
+dialog::backdrop{background:rgba(0,0,0,.45)}
+.dkop{background:var(--teal);color:#fff;padding:18px 22px;display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.dkop h2{color:#fff;font-size:1.6rem}
+.dkop button{background:rgba(255,255,255,.2);color:#fff;border:none;border-radius:50%;width:36px;height:36px;font-size:1.2rem;cursor:pointer;flex:none}
+.dbody{padding:20px 22px 24px;display:grid;gap:16px}
+.dbody h3{font-size:1.05rem;margin-bottom:4px}
+.dbody ul{margin:0;padding-left:20px}
+.dbody li{margin:2px 0}
+.dgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.dgrid div{background:var(--achtergrond);border-radius:10px;padding:10px 12px;font-size:.85rem}
+.dgrid b{display:block;font-family:var(--kop);color:var(--donker)}
+.hn{display:inline-block;font-size:.7rem;font-weight:700;border-radius:99px;padding:1px 8px;margin-left:6px}
+.hn.ja{background:var(--groen-licht);color:var(--groen-donker)}
+.hn.nee{background:#fbe9dc;color:#b3591c}
+.tip{background:var(--groen-licht);border-left:4px solid var(--groen);padding:10px 14px;border-radius:0 10px 10px 0;font-size:.88rem}
+footer{text-align:center;font-size:.8rem;padding:24px;color:#888}
+@media(max-width:560px){.groep>.lab{min-width:100%}}
+
+.hero .in{padding:22px 20px 24px}
+.hero h1{font-size:clamp(1.3rem,3vw,1.8rem);max-width:none}
+.hero p{margin-top:6px;font-size:.9rem}
+main{padding-top:16px}
+.filters{background:var(--wit);border:1px solid var(--lijn);border-radius:14px;padding:14px 16px;display:grid;gap:10px;position:relative}
+.rij{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:flex-start}
+.veld{display:grid;gap:4px;min-width:0}
+.veld label,.veld .lbl{font-family:var(--kop);font-weight:600;font-size:.9rem;color:var(--donker)}
+.veld select,.veld input{padding:7px 12px;border:1.5px solid var(--lijn);border-radius:10px;font:inherit;font-size:.85rem;background:#fff;min-width:210px}
+.veld.zoek{flex:1;min-width:200px}.veld.zoek input{width:100%}
+.groep{display:flex;flex-wrap:wrap;gap:6px}
+.chip{padding:4px 11px;font-size:.8rem}
+.nota{margin:0;font-size:.82rem;background:var(--groen-licht);border-left:4px solid var(--groen);padding:6px 12px;border-radius:0 8px 8px 0}
+details summary{cursor:pointer;font-size:.85rem;color:var(--teal);font-weight:700}
+.reset{justify-self:start}
+.balk{margin:16px 0 10px}
+.mat-onb{color:#888;font-weight:700}.hn.onb{background:#eee;color:#777}
+.matnota{margin:8px 0 0;font-size:.8rem;background:#fff6e0;border-left:4px solid #e0a526;padding:6px 10px;border-radius:0 8px 8px 0;color:#6b5314}
+
+.kijker{margin:20px 0 6px;background:#fffbea;border:1px solid #f0dfa0;border-radius:14px;padding:14px 16px}
+.kijker h2{font-size:1.25rem}.kuitleg{margin:2px 0 10px;font-size:.82rem}
+.kraster{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.kk{background:#fff;border:1px solid #f0dfa0;border-radius:12px;padding:12px 14px;cursor:pointer;text-align:left;font:inherit;color:inherit;display:grid;gap:6px}
+.kk:hover{border-color:#e0a526;box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.kk h3{font-size:1.1rem}
+.kk q{font-size:.85rem;font-style:italic;quotes:"“" "”"}
+.kk .wie{font-size:.76rem;color:#8a6d12;font-weight:700}
+.ster{display:inline-block;font-size:.72rem;font-weight:700;background:#fff3c4;color:#8a6d12;border-radius:99px;padding:2px 9px}
+.kijkertip{background:#fffbea;border-left:4px solid #e0a526;padding:10px 14px;border-radius:0 10px 10px 0;font-size:.88rem}
+
+.kop{display:flex;align-items:center;gap:10px}
+.kop h3{flex:1}
+.ico{flex:none;width:42px;height:42px;border-radius:12px;background:var(--groen-licht);display:grid;place-items:center;font-size:1.4rem}
+.kaart:hover .ico{background:#e4efbe}
+.ster{margin-right:2px}
+.tegels{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;width:100%}
+.chip.tegel{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 4px;border-radius:12px;font-size:.82rem;line-height:1.2;text-align:center}
+.chip.tegel .ti{font-size:1.5rem;line-height:1}
+.sg{display:inline-flex;border-radius:10px;overflow:hidden;border:1.5px solid var(--lijn);background:var(--wit)}
+.chip.seg{border:none;border-right:1px solid var(--lijn);border-radius:0;padding:5px 11px;background:var(--wit)}
+.sg .chip.seg:last-child{border-right:none}
+.chip.seg:hover{background:var(--groen-licht)}
+.chip.seg[aria-pressed=true]{background:var(--groen);color:#fff}
+.rij.seg-rij{gap:10px 20px;align-items:flex-end}
+.meerw{text-align:center;margin:22px 0 0}
+.meer{font:inherit;font-size:.95rem;font-family:var(--kop);font-weight:600;background:var(--wit);color:var(--teal);border:2px solid var(--teal);border-radius:99px;padding:9px 26px;cursor:pointer}
+.meer:hover{background:var(--teal);color:#fff}
+.meerw small{display:block;margin-top:8px;color:#888;font-size:.78rem}
+@media(max-width:560px){.tegels{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.foto{width:100%;height:150px;object-fit:cover;border-radius:10px;background:#eef0ea}.dfoto{display:block;width:100%;max-height:300px;object-fit:cover}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="in">
+  <div class="merk">Hannibal<small>Activiteitenbank voor begeleiders</small></div>
+  <span class="demo">Voorbeeldversie – inhoud is fictief</span>
+</div></header>
+
+<section class="hero"><div class="in">
+  <h1>Zin in een activiteit? Vind snel wat past bij jouw groep. 🎈</h1>
+  <p>Kies eerst je kamp, verfijn daarna met de filters en klik op een activiteit voor alle info en het materiaal.</p>
+</div></section>
+
+<main>
+  <section class="filters" aria-label="Filters">
+    <div class="rij">
+      <div class="veld" style="flex:1;min-width:210px">
+        <label for="kamp">🏕️ Kamp</label>
+        <select id="kamp" style="width:100%"><option value="">Alle kampen</option></select>
+      </div>
+      <div class="veld zoek" style="flex:1.4"><label for="zoek">🔎 Zoeken</label>
+        <input id="zoek" type="search" placeholder="Naam, materiaal of thema…"></div>
+    </div>
+    <p class="nota" id="kampnota" hidden></p>
+    <div class="veld"><span class="lbl">🧩 Soort activiteit</span><div class="groep tegels" data-groep="type"></div></div>
+    <div class="rij seg-rij">
+      <div class="veld"><span class="lbl">Mentale beperking</span><div class="sg" data-groep="mentaal"></div></div>
+      <div class="veld"><span class="lbl">♿ Fysieke beperking</span><div class="sg" data-groep="fysiek"></div></div>
+      <div class="veld"><span class="lbl">👥 Begeleiding</span><div class="sg" data-groep="vorm"></div></div>
+      <div class="veld"><span class="lbl">⏱️ Duur</span><div class="sg" data-groep="duur"></div></div>
+    </div>
+    <details>
+      <summary>Meer filters: thema en materiaal</summary>
+      <div class="rij" style="margin-top:10px">
+        <div class="veld"><span class="lbl">🎯 Thema</span><div class="groep" data-groep="thema"></div></div>
+        <div class="veld"><span class="lbl">🧰 Materiaal</span><div class="groep" data-groep="mat"></div>
+          <p class="matnota">ℹ️ Hannibal-materiaal is niet op elke vakantie aanwezig: vraag het na bij je vakantieverantwoordelijke.</p></div>
+      </div>
+    </details>
+    <button class="reset" id="reset" type="button">Alles wissen</button>
+  </section>
+
+  <section class="kijker" id="kijker" aria-labelledby="kt" hidden>
+    <h2 id="kt">⭐ In de kijker</h2>
+    <p class="kuitleg">Favorieten van onze vrijwilligers.</p>
+    <div class="kraster" id="kraster"></div>
+  </section>
+
+  <div class="balk"><h2 id="aantal" aria-live="polite"></h2></div>
+  <div class="raster" id="raster"></div>
+  <div class="meerw" id="meerw" hidden><button type="button" class="meer" id="meer"></button><small id="meertel"></small></div>
+</main>
+
+<dialog id="dlg" aria-labelledby="dtitel"></dialog>
+<footer>Voorbeeld van een activiteitenbank – kampnamen, filters en activiteiten zijn aanpasbaar.</footer>
+
+<script>
+/* ============ INSTELLINGEN – hier pas je de inhoud aan ============ */
+
+// Echte Hannibal-kampen. Profiel: mentaal = niveau(s), fysiek = ook fysieke beperking, vorm = begeleiding.
+// Enkel Post uit Brugge en Heerlijks uit Turnhout zijn al ingevuld. De rest (profiel:null) vul je zelf aan.
+const P=(naam,leeftijd,profiel=null)=>({naam,leeftijd,profiel});
+const KAMPEN = [
+  P("Post uit Brugge","6-21",{mentaal:["licht"],fysiek:false,vorm:["1op1"]}),
+  P("Heerlijks uit Turnhout","6-30",{mentaal:["zwaar"],fysiek:false,vorm:[]}),
+  P("Genieten in Beverdonk","6-30"),P("Beleven in Maasmechelen","6-30"),P("Verwennen in Retie","6-30"),
+  P("Ravotten in Retie","12-18"),P("Dollen in Nieuwpoort","12-18"),P("Avontuur in Watou","8-18"),
+  P("Op weekend in Antwerpen","18-30"),P("Skivakantie in Frankrijk","18-30"),P("Krokusweekend in Brakel","18-30"),
+  P("Festivalitis in Antwerpen","18-30"),P("Vertoeven in Drenthe","18-30"),P("Roadtrippen in Duitsland en Tsjechië","18-30"),
+  P("Spetteren in Brugge","18-30"),P("Eigenzinnig in de Bourgogne","18-30"),P("Luilekker in Ottenstein","18-30"),
+  P("Op verlof in de Westhoek","18-30"),P("Schitteren in Maasmechelen","18-30"),P("Zomeren in de Champagnestreek","18-30"),
+  P("Relaxen in de Handicamper","18-30"),P("Congé in Dieppe","18-30"),P("Toerist in Friesland","18-30"),
+  P("Ontspannen in de Kempen","18-30"),P("Languit in Bastogne","18-30"),P("Op zwier in Parijs","18-30"),P("Groetjes uit Keulen","18-30")
+];
+// Mentale beperking en fysieke beperking zijn twee aparte assen: ze kunnen samen voorkomen.
+const NIVEAUS = {licht:"Licht", matig:"Matig", zwaar:"Zwaar"};
+const NIVEAU_HULP = {licht:"Weinig ondersteuning nodig", matig:"Hulp bij uitleg en uitvoering", zwaar:"Intensieve zorg, zintuiglijk"};
+const FYSIEK = {ja:"Ook geschikt bij fysieke beperking"};
+const OUD = {zelfstandig:"licht", ondersteund:"matig", intensief:"zwaar"};
+const niv = a => a.kampen.map(k=>OUD[k]).filter(Boolean);
+const fys = a => a.kampen.includes("beweging");
+const TYPES = {knutselen:"Knutselen", binnen:"Binnen", buiten:"Buiten", wacht:"Wachtactiviteit", kennismaking:"Kennismaking"};
+const VORMEN = {"1op1":"1 op 1", "2op1":"2 op 1", groep:"Groepsactiviteit"};
+const DUREN = [
+  {id:"kort", label:"Tot 15 min", test:m=>m<=15},
+  {id:"midden", label:"15 – 30 min", test:m=>m>15&&m<=30},
+  {id:"lang", label:"30 – 60 min", test:m=>m>30&&m<=60},
+  {id:"extra", label:"Meer dan 1 uur", test:m=>m>60}
+];
+
+const H=(n)=>({n,h:true}), Z=(n)=>({n,h:false}), Q=(n)=>({n,h:null}); // H = Hannibal-materiaal, Z = zelf kopen/meebrengen
+
+const ACT = [
+ {t:"Sleutelhangers van strijkkralen", type:["knutselen","binnen"], vorm:["1op1","groep"], min:45, thema:"Creatief", kampen:["zelfstandig","ondersteund"],
+  inhoud:"Elke deelnemer legt een eigen patroon met strijkkralen op een plaatje. De begeleider strijkt het resultaat vast. Op het einde krijgt iedereen een sleutelhanger.",
+  mat:[Z("Strijkkralen"),Z("Strijkplaten"),Z("Strijkijzer"),H("Bakpapier"),Z("Sleutelringen")],
+  tip:"Bij fijne motoriek: grote kralen gebruiken. Strijken doet altijd de begeleider."},
+ {t:"Handafdrukken-schilderij", type:["knutselen","binnen"], vorm:["1op1","2op1"], min:30, thema:"Zomer", kampen:["ondersteund","intensief","beweging"],
+  inhoud:"Met verf op de handen maak je afdrukken op een groot doek. Samen maak je er een vrolijk kunstwerk van, bv. een zon, bloem of vlinder.",
+  mat:[H("Verf (bussen van 1 liter)"),H("Vuile tafelkleedjes (om op te schilderen)"),H("Keukenschorten"),H("Vochtige doekjes")],
+  tip:"Werkt ook met voetafdrukken of met een penseel in de mond- of voetgreep."},
+ {t:"Zintuigenbox", type:["binnen","wacht"], vorm:["1op1"], min:20, thema:"Zintuigen", kampen:["intensief"],
+  inhoud:"Een doos met voorwerpen om te voelen, ruiken en bekijken: zachte stoffen, een zaklamp, geurzakjes en een belletje. De deelnemer ontdekt in eigen tempo.",
+  mat:[Z("Zaklampen"),H("Gekleurde doeken"),Z("Geurzakjes"),H("Muziekkoffer (instrumenten)")],
+  tip:"Laat de reactie leiden. Stop zodra de deelnemer afhaakt of overprikkeld raakt."},
+ {t:"Waterballonnen-estafette", type:["buiten"], vorm:["groep"], min:30, thema:"Water", kampen:["zelfstandig","ondersteund"],
+  inhoud:"Twee teams geven waterballonnen door aan elkaar of dragen ze op een lepel naar een emmer. Het team met de meeste volle emmer wint.",
+  mat:[H("Emmers"),H("Lepels (plastiek)"),H("Ballonnen")],
+  tip:"Haal opgeblazen restjes nadien op, ook voor dieren."},
+ {t:"Natuurbingo", type:["buiten"], vorm:["1op1","groep","2op1"], min:45, thema:"Natuur", kampen:["zelfstandig","ondersteund","beweging"],
+  inhoud:"Op een bingokaart staan foto’s van dingen uit de natuur: een veer, een steen, een blad. Wie ze ziet of vindt, kruist ze af. Eén lijn is bingo.",
+  mat:[Z("Bingokaarten (afdrukken)"),H("Potloden"),Z("Mandjes")],
+  tip:"Kies een verharde route zodat rolstoelen mee kunnen."},
+ {t:"Sponzenspel in de teil", type:["buiten"], vorm:["1op1","2op1"], min:20, thema:"Water", kampen:["ondersteund","intensief","beweging"],
+  inhoud:"Een teil met water, sponzen en bekers. Overgieten, uitknijpen en spetteren. Je oefent rustig motoriek en geniet van het water.",
+  mat:[H("Afwasteiltjes"),H("Bekers (plastiek)"),Z("Sponzen")],
+  tip:"Zet de teil op tafelhoogte voor rolstoelgebruikers."},
+ {t:"Pannenkoeken bakken", type:["binnen"], vorm:["1op1","groep"], min:75, thema:"Eten", kampen:["zelfstandig","ondersteund"],
+  inhoud:"Samen beslag maken, bakken en versieren. Iedereen krijgt een eigen taak: wegen, roeren, keren of toppings voorzien.",
+  mat:[H("Pannenkoekenpan, klopper en keukenweegschaal"),Z("Kookplaat (van het verblijf)"),Z("Bloem, eieren, melk"),Z("Toppings")],
+  tip:"Check vooraf allergieën en dieetwensen in het dossier."},
+ {t:"Ik zie, ik zie", type:["wacht"], vorm:["groep","2op1"], min:10, thema:"Spel", kampen:["zelfstandig","ondersteund","beweging"],
+  inhoud:"Eén persoon ziet iets en geeft een kleur of letter. De anderen raden. Handig bij het wachten op de bus of aan tafel.",
+  mat:[],
+  tip:"Gebruik voorwerpen die iedereen ziet, ook vanuit een rolstoel."},
+ {t:"Muziekstoelendans (zittend)", type:["binnen"], vorm:["groep"], min:20, thema:"Muziek", kampen:["zelfstandig","ondersteund","beweging"],
+  inhoud:"Bij muziek beweegt iedereen zittend met armen, sjaals of instrumenten. Valt de muziek stil, dan bevries je. Wie als laatste beweegt, is af.",
+  mat:[Z("Stoelen (van het verblijf)"),H("Bluetooth-speaker"),H("Gekleurde doeken")],
+  tip:"Speel mee zodat niemand zich bekeken voelt."},
+ {t:"Voorlezen met geluidjes", type:["binnen","wacht"], vorm:["1op1","2op1"], min:15, thema:"Rust", kampen:["intensief","ondersteund"],
+  inhoud:"Een kort verhaal waarbij je op bepaalde woorden een geluid maakt: regen met vingers, donder met een trommel, een belletje voor de fee.",
+  mat:[H("Voorleesboeken"),H("Muziekkoffer (instrumenten)")],
+  tip:"Hou het verhaal kort en herhaal woorden. Herkenning geeft rust."},
+ {t:"Fotozoektocht met tablet", type:["buiten"], vorm:["1op1","2op1","groep"], min:45, thema:"Foto", kampen:["zelfstandig","beweging"],
+  inhoud:"Op de tablet staat een lijst: foto van iets roods, iets ronds, iets dat klinkt. Teams zoeken en maken de foto’s. Achteraf bekijken jullie ze samen.",
+  mat:[Z("Tablet"),Z("Opdrachtenlijst (afdrukken)")],
+  tip:"Laat een deelnemer de tablet vasthouden, de ander kiest het onderwerp."},
+ {t:"Vingerverf in scheerschuim", type:["knutselen","binnen"], vorm:["1op1","2op1"], min:30, thema:"Zintuigen", kampen:["ondersteund","intensief"],
+  inhoud:"Op een tray komt scheerschuim met druppels verfkleur. Met de vingers meng en teken je, en je kan een afdruk op papier maken.",
+  mat:[Z("Scheerschuim"),H("Verf (bussen van 1 liter)"),Z("Trays"),H("Papier A4"),H("Vochtige doekjes")],
+  tip:"Niet voor wie dingen in de mond steekt, gebruik dan eetbare verf met yoghurt."},
+ {t:"Uno-tornooi", type:["wacht","binnen"], vorm:["1op1","groep"], min:30, thema:"Spel", kampen:["zelfstandig","ondersteund"],
+  inhoud:"Een tafelrondje Uno met aangepaste regels: kaarten tonen is toegelaten en begeleiders helpen mee kiezen.",
+  mat:[H("Uno")],
+  tip:"Kaartenhouders zijn handig bij beperkte handfunctie."},
+ {t:"Windmolentjes", type:["knutselen","buiten"], vorm:["1op1","groep"], min:40, thema:"Wind", kampen:["zelfstandig","ondersteund"],
+  inhoud:"Papieren vierkanten knippen, plooien en op een stokje prikken. Nadien testen we buiten welke molen het snelst draait.",
+  mat:[H("Papier A4 kleur"),H("Scharen"),Z("Houten prikkers"),H("Assortiment spelden (met punaises)")],
+  tip:"Punaises: enkel de begeleider prikt vast."},
+ {t:"Reuzenbellen blazen", type:["buiten"], vorm:["1op1","groep"], min:20, thema:"Zomer", kampen:["zelfstandig","ondersteund","intensief","beweging"],
+  inhoud:"Met grote bellenblaasstokken maak je enorme zeepbellen. Volgen, vangen of kapotprikken: iedereen doet mee op zijn niveau.",
+  mat:[H("Bellenblazer"),H("Emmers"),H("Hoepels")],
+  tip:"Fijn om naar te kijken voor wie liever rustig blijft."},
+ {t:"Parachutespel", type:["buiten","binnen"], vorm:["groep"], min:20, thema:"Beweging", kampen:["zelfstandig","ondersteund","beweging"],
+  inhoud:"Samen houden we een parachute vast en maken golven. Een bal of knuffel springt erop. Of we kruipen eronder.",
+  mat:[H("Parachute"),H("Zachte ballen (bal mousse)")],
+  tip:"Deelnemers in rolstoel houden de rand vast of zitten eronder."},
+ {t:"Bingo met kleurplaten", type:["wacht"], vorm:["groep"], min:15, thema:"Spel", kampen:["zelfstandig","ondersteund"],
+  inhoud:"Elke deelnemer krijgt een kleurplaat met vakjes. Op een kleur wordt getrokken en wie die heeft, kleurt het vakje in.",
+  mat:[Z("Kleurplaten (afdrukken)"),H("Viltstiften")],
+  tip:"Prima opvuller tijdens een lange reis."},
+ {t:"Dansen met sjaals", type:["binnen"], vorm:["groep","1op1"], min:15, thema:"Muziek", kampen:["intensief","beweging","ondersteund"],
+  inhoud:"Zachte muziek en kleurrijke sjaals. We zwaaien, laten vallen en dansen samen, ook zittend of liggend.",
+  mat:[H("Gekleurde doeken"),H("Bluetooth-speaker")],
+  tip:"Kies muziek met een rustig ritme."},
+ {t:"Kampkrant maken", type:["knutselen","binnen"], vorm:["groep"], min:75, thema:"Terugblik", kampen:["zelfstandig"],
+  inhoud:"Foto’s en tekeningen van het kamp worden op een grote affiche geplakt, met korte tekstjes van de deelnemers zelf.",
+  mat:[Z("Afgedrukte foto’s"),H("Papier grote flappen"),H("Lijmstift"),H("Viltstiften")],
+  tip:"Vraag toestemming voor foto’s volgens de afspraken van Hannibal."},
+ {t:"Lantaarns van jampotten", type:["knutselen","binnen"], vorm:["1op1","2op1","groep"], min:45, thema:"Avond", kampen:["zelfstandig","ondersteund"],
+  inhoud:"Jampotten worden beplakt met vloeipapier. Met een ledkaarsje erin heb je een mooie lantaarn voor de avondwandeling.",
+  mat:[Z("Lege jampotten"),H("Crêpepapier"),H("Lijmstift en verborstels"),Z("Ledkaarsjes")],
+  tip:"Gebruik plastic potjes bij kans op breken."},
+ {t:"Aangepast hindernisparcours", type:["buiten"], vorm:["groep"], min:40, thema:"Beweging", kampen:["beweging","zelfstandig"],
+  inhoud:"Een parcours met slalom, tunnel en mikspel. Elke post bestaat in een rolstoelvriendelijke variant.",
+  mat:[H("Kegels"),H("Hoepels"),H("Zachte ballen (bal mousse)"),H("Stoepkrijt")],
+  tip:"Laat deelnemers zelf het parcours testen en aanpassen."},
+ {t:"Kleiplezier", type:["knutselen","binnen"], vorm:["1op1","groep","2op1"], min:45, thema:"Creatief", kampen:["zelfstandig","ondersteund","beweging"],
+  inhoud:"Met zelfdrogende klei maak je een dier, kom of figuurtje. Daarna laat je alles drogen en schilder je het nadien.",
+  mat:[H("Klei (pakjes van 1 kg)"),H("Verf (bussen van 1 liter)"),H("Verborstels (penselen)"),Z("Onderleggers")],
+  tip:"Bij zwakke handkracht: voorgekneed of zachte klei gebruiken."},
+ {t:"Raad het geluid", type:["wacht"], vorm:["groep","2op1"], min:10, thema:"Zintuigen", kampen:["zelfstandig","ondersteund","intensief"],
+  inhoud:"In doosjes zitten rijst, munten, knopen of een bel. Schudden en raden maar. Een snelle opvuller bij het wachten.",
+  mat:[Z("Kleine doosjes"),Z("Rijst, munten, knopen")],
+  tip:"Verschillende doosjes voor wie liever voelt dan hoort."},
+ {t:"Fruitspiesjes", type:["binnen"], vorm:["1op1","2op1","groep"], min:30, thema:"Eten", kampen:["zelfstandig","ondersteund","beweging"],
+  inhoud:"Fruit wassen, snijden en op spiesjes prikken, om dan samen op te eten. Iedereen kiest een eigen volgorde van kleuren.",
+  mat:[Z("Fruit"),Z("Stompe spiesjes"),H("Snijplankjes"),H("Aardappelmesjes")],
+  tip:"Check allergieën. Voor wie slikproblemen heeft: kleiner snijden of pureren."},
+ {t:"Avondsnoezel met lichtjes", type:["binnen","wacht"], vorm:["1op1"], min:20, thema:"Rust", kampen:["intensief"],
+  inhoud:"Dim het licht, zet zachte muziek op en laat een lichtketting of projector kleuren op het plafond tonen. Een rustig moment voor het slapengaan.",
+  mat:[H("Gekleurde lampen"),H("Beamer"),Z("Dekens")],
+  tip:"Vaste volgorde en dezelfde muziek helpt om tot rust te komen."},
+ {t:"LEGO-toren maken", foto:"hannibal-fotos/lego-toren-maken.jpg", type:["binnen"], vorm:["1op1"], min:15, dt:"15 min", thema:"Bouwen", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Bouw vrij met LEGO: een hoge toren, een voertuig, een huis of een fantasiedier. Je kan ook de hoogste toren bouwen of rond een voorwerp bouwen tot het verstopt zit.", mat:[H("Lego")], tip:"Uitbreiding: twee identieke torens laten nabouwen als sorteeropdracht."},
+ {t:"Knikkerbaan", foto:"hannibal-fotos/knikkerbaan.jpg", type:["binnen"], vorm:["1op1"], min:15, dt:"15 min", thema:"Bouwen", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Bouw een knikkerbaan met bochten, sprongen over hellingen en tunnels. Daarna maak je er een race van: welke knikker is als eerste aan de finish?", mat:[H("Knikkerbaan")], tip:"Uitdaging: obstakels toevoegen, samen een superlange baan bouwen of andere ondergronden proberen."},
+ {t:"Raamstiften", foto:"hannibal-fotos/raamstiften.jpg", type:["knutselen","binnen"], vorm:["1op1"], min:15, dt:"15 min", thema:"Creatief", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Met raamstiften teken je figuren, schrijf je boodschappen of maak je een doolhof dat je met een vinger kan volgen.", mat:[Z("Raamstiften")], tip:"Uitdaging: tekenestafette (de ene begint een lijn, de volgende maakt ze af) of een zoekplaat voor anderen tekenen."},
+ {t:"Kaartjes schrijven", foto:"hannibal-fotos/kaartjes-schrijven.jpg", type:["binnen"], vorm:["1op1"], min:15, dt:"15 min", thema:"Creatief", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"De begeleider bereidt invulkaartjes voor, leest de mogelijke antwoorden voor en vinkt de keuzes van de deelnemer aan. De deelnemer drukt een vingerafdruk op elk kaartje, steekt ze in enveloppen en de begeleider kleeft ze dicht.", mat:[Z("Kaartjes"),H("Papier A4"),H("Balpennen"),Z("Inktkussen")]},
+ {t:"Steekparels", foto:"hannibal-fotos/steekparels.jpg", type:["binnen"], vorm:["1op1"], min:15, dt:"15 min", thema:"Creatief", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Op de werktafel staan twee mandjes, elk met een steekbord en de parels voor een patroon op ware grootte. De deelnemer werkt de mandjes één voor één af en zet elk klaar mandje rechts.", mat:[Z("Steekparels"),Z("Steekborden"),Z("Patronen (zelf maken)")]},
+ {t:"Puzzels", type:["binnen"], vorm:["1op1"], min:15, dt:"15 min", thema:"Spel", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"De deelnemer kiest één van twee puzzels en werkt eraan.", mat:[H("Puzzels")]},
+ {t:"K'nex", foto:"hannibal-fotos/k-nex.jpg", type:["binnen"], vorm:["1op1"], min:20, dt:"ca. 20 min", thema:"Bouwen", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Vier mandjes links op de werktafel bevatten elk K'nex-stukken en een patroon. De deelnemer bouwt ze één voor één en zet de klare figuren rechts. In totaal bouw je vier figuren.", mat:[H("K'nex"),Z("Patronen (zelf maken)")]},
+ {t:"Gezelschapsspel", foto:"hannibal-fotos/gezelschapsspel.jpg", type:["binnen"], vorm:["1op1"], min:15, dt:"15 min (met time timer)", thema:"Spel", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Op een keuzekaart staan twee spelletjes en de deelnemer kiest er één, bv. Vier op een rij, Lucky Luke Memory of Domino.", mat:[H("Gezelschapsspelletjes"),Z("Time timer")]},
+ {t:"LEGO-huisje bouwen", foto:"hannibal-fotos/lego-huisje-bouwen.jpg", type:["binnen"], vorm:["1op1"], min:15, dt:"15 min (met time timer)", thema:"Bouwen", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"De deelnemer bouwt een klein LEGO-huisje volgens een stappenplan, of bouwt samen met de begeleider iets zelfgekozen.", mat:[H("Lego"),Z("Stappenplan (zelf maken)"),Z("Time timer")]},
+ {t:"Parels rijgen", foto:"hannibal-fotos/parels-rijgen.jpg", type:["binnen"], vorm:["1op1"], min:20, dt:"ca. 20 min", thema:"Creatief", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Meerdere mandjes bevatten elk andere materialen, zoals rubberen en houten kralen, en een patroon. De deelnemer rijgt de kralen volgens het patroon en werkt de mandjes één voor één af.", mat:[Z("Mandjes"),Z("Kralen"),Z("Patronen (zelf maken)")]},
+ {t:"UNO", foto:"hannibal-fotos/uno.jpg", type:["binnen","wacht"], vorm:["1op1"], min:15, dt:"15 min", thema:"Spel", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Speel UNO, of sorteer de kaarten op kleur of op nummer.", mat:[H("Uno")]},
+ {t:"Gooihoepel", foto:"hannibal-fotos/gooihoepel.jpg", type:["binnen"], vorm:["1op1"], min:20, dt:"15–25 min", thema:"Beweging", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Kleef stroken tape op een hoepel, hang de hoepel op in de ruimte en gooi er ballen naar als doelwit.", mat:[H("Hoepels"),H("Tape (doorzichtig of papiertape)"),H("Ballenbadballen of pingpongballen")]},
+ {t:"Zoekplaat", foto:"hannibal-fotos/zoekplaat.jpg", type:["binnen"], vorm:["1op1"], min:10, dt:"ca. 10 min", thema:"Spel", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Maak vooraf een zoekplaat: teken en kleur kleine figuurtjes op een blad in een plastic hoesje, leg er een zwart blad achter en knip een zaklamp met lichtbundel uit wit papier. Daarmee zoek je de figuurtjes. Nadien kan je zelf een zoekactiviteit maken.", mat:[Z("Plastic hoesje"),Z("Zwart blad"),Z("Uitgeknipte zaklamp")]},
+ {t:"LEGO-doolhof", foto:"hannibal-fotos/lego-doolhof.jpg", type:["binnen"], vorm:["1op1"], min:20, dt:"ca. 20 min", thema:"Bouwen", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Bouw met LEGO op een basisplaat een doolhof of parcours en rol er een knikker doorheen.", mat:[H("Lego"),Q("LEGO-basisplaat"),H("Knikkers")]},
+ {t:"Scheerschuim", foto:"hannibal-fotos/scheerschuim.jpg", type:["binnen"], vorm:["1op1"], min:20, dt:"ca. 20 min", thema:"Zintuigen", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Een zintuiglijke activiteit met scheerschuim. Het gaat om genieten van het materiaal met de handen of met bakjes en schepjes. Je kan er voorwerpen in verstoppen om te zoeken.", mat:[Z("Scheerschuim"),H("Groene bakken"),Z("Eventueel: voedingskleurstof, schepjes en potjes, kleine dierenfiguurtjes")]},
+ {t:"Visspel", foto:"hannibal-fotos/visspel.jpg", type:["binnen"], vorm:["1op1"], min:15, dt:"10–15 min", thema:"Spel", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Magnetische figuurtjes liggen in een bak en je vist ze met een hengel met magneet. Om beurt vang je een visje, of je gooit met een gekleurde dobbelsteen en vangt een figuurtje in die kleur.", mat:[Z("Magnetische figuurtjes"),Z("Hengel met magneet"),H("Groene bakken"),H("Dobbelstenen (bal)")], tip:"Moeilijker: papiersnippers in de bak leggen zodat de figuurtjes lastiger te vinden zijn."},
+ {t:"Voelmemory", foto:"hannibal-fotos/voelmemory.jpg", type:["binnen"], vorm:["1op1"], min:15, dt:"10–15 min", thema:"Zintuigen", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Vul ballonnen met verschillende materialen. De spelers zoeken passende ballonnen, koppelen een ballon aan de juiste losse vulling of aan een foto van de vulling.", mat:[H("Ballonnen"),Z("Foto's of een beetje losse vulling")]},
+ {t:"Ballen vissen", foto:"hannibal-fotos/ballen-vissen.jpg", type:["binnen"], vorm:["1op1"], min:15, dt:"10–15 min", thema:"Water", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Vul een bak met water en ballenbadballen. Met een schep of grote lepel vis je de ballen eruit en leg je ze in een tweede bak.", mat:[H("Groene bakken"),H("Ballenbadballen"),H("Schep")]},
+ {t:"Petanque", foto:"hannibal-fotos/petanque.jpg", type:["buiten"], vorm:["1op1"], min:null, dt:"5 rondes", thema:"Mikspel", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Leg een stok op de grond. De begeleider gooit de kleine bal, daarna gooit de deelnemer om beurt een grote bal. Wie het dichtst bij de kleine bal ligt, wint. De kleine bal wordt 5 keer gegooid en na elk spel schrap je een bal op een blaadje.", mat:[H("Petanqueset"),Z("Scoreblaadje")]},
+ {t:"Wandelzoektocht", foto:"hannibal-fotos/wandelzoektocht.jpg", type:["buiten"], vorm:["1op1"], min:20, dt:"15–30 min", thema:"Zoektocht", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Ontdek de omgeving te voet. Hang of verstop vooraf aanwijzingen, koppel er een doel aan (een schat, een ijsjeskraam, puzzelstukken) of ga op pad met een bingokaart. Je bent klaar als alles gevonden is, bv. een stopbord, boom, vogel, bakker of plas.", mat:[Z("Bingokaart")], tip:"Variant: zoeken naar een schat, een ijsjeskraam of puzzelstukken."},
+ {t:"Bellen blazen", foto:"hannibal-fotos/bellen-blazen.jpg", type:["buiten","wacht"], vorm:["1op1"], min:15, dt:"15 min", thema:"Zomer", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Daag elkaar uit om de grootste bel te blazen of zoveel mogelijk bellen in één adem. Je kan een bel ook opvangen met het stokje. Gebruik een teiltje water of het zwembadje als ondergrond.", mat:[H("Bellenblazer")], tip:"Uitdaging: zoveel mogelijk bellen blazen of prikken binnen een bepaalde tijd."},
+ {t:"Blikjesspel", foto:"hannibal-fotos/blikjesspel.jpg", type:["buiten"], vorm:["1op1"], min:null, dt:"3 rondes", thema:"Mikspel", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Zes blikken met elk een andere figuur staan opgesteld. Vanachter een lijn gooi je steentjes en je probeert in elk blik een steentje te laten landen. Wie in de meeste verschillende blikjes raakt, wint. De geraakte figuren noteer je op een scoreblad.", mat:[Z("6 blikken met figuren"),Z("Steentjes"),Z("Scorebladen")]},
+ {t:"Schoenendoos", foto:"hannibal-fotos/schoenendoos.jpg", type:["buiten"], vorm:["1op1"], min:null, dt:"6 worpen per speler", thema:"Mikspel", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Teken een grote cirkel op de grond en zet in het midden een omgekeerde emmer met een schoenendoos erop. Gooi vanachter een lijn een bal naar de doos. Het vak waarin de bal valt, bepaalt de punten.", mat:[H("Stoepkrijt"),H("Bal"),H("Emmer"),Z("Schoenendoos"),Z("Scoreblad")]},
+ {t:"Pittenzakjes gooien", foto:"hannibal-fotos/pittenzakjes-gooien.jpg", type:["buiten"], vorm:["1op1"], min:15, dt:"15 min", thema:"Mikspel", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Teken vooraf 6 cirkels op de grond. Vanaf 3 meter gooien de spelers pittenzakjes naar de cirkels en verzamelen zo veel mogelijk punten. Elke speler heeft een eigen kleur.", mat:[H("Stoepkrijt"),Z("Pittenzakjes in 2 kleuren"),Z("Mand per speler")], tip:"Variant: in bordjes gooien om punten te verzamelen."},
+ {t:"Frisbee in de roos", foto:"hannibal-fotos/frisbee-in-de-roos.jpg", type:["buiten"], vorm:["1op1"], min:null, dt:"tot elke lijn gegooid is", thema:"Mikspel", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Teken een schietschijf op de grond. Gooi een frisbee in de roos: in de roos krijg je 3 figuurtjes, in de ring daarnaast 2 en daarbuiten 1. Na elke beurt gooi je vanachter een verdere lijn (5 lijnen in totaal).", mat:[H("Stoepkrijt"),Z("Frisbee"),Z("Scoreblad"),Z("Figuurtjes")]},
+ {t:"Blind sorteren", foto:"hannibal-fotos/blind-sorteren.jpg", type:["buiten"], vorm:["1op1"], min:null, dt:"6 beurten per speler", thema:"Zintuigen", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Een kom met ballonnen, kurken en plastic flesjes staat klaar. De speler wordt geblinddoekt en probeert de voorwerpen in 3 aparte bakken te sorteren.", mat:[H("Kommetjes (plastiek)"),H("Ballonnen"),Z("Plastic flesjes"),Z("Kurken"),H("Groene bakken")], tip:"Bij warm weer leg je de voorwerpen in een bak met water."},
+ {t:"Ringwerpen", foto:"hannibal-fotos/ringwerpen.jpg", type:["buiten"], vorm:["1op1"], min:null, dt:"7 ringen", thema:"Mikspel", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Vijf half met zand gevulde flessen staan ongeveer 15 cm uit elkaar. Gooi vanachter de lijn ringen rond de flessen. Na elke worp schrap je een ring op het blad.", mat:[Z("Flessen met zand"),H("Werpringenset"),Z("Scoreblad")]},
+ {t:"Kegelvoetbal", foto:"hannibal-fotos/kegelvoetbal.jpg", type:["buiten"], vorm:["1op1"], min:20, dt:"20 min", thema:"Mikspel", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Zet tien flessen op en probeer ze omver te schoppen door tegen een bal te trappen.", mat:[Z("10 flessen"),H("Stoepkrijt"),H("Bal")], tip:"Variant: per speler drie keer schoppen, met drie ballen in een emmer aan de lijn."},
+ {t:"Bal in de hals", foto:"hannibal-fotos/bal-in-de-hals.jpg", type:["buiten"], vorm:["1op1"], min:null, dt:"tot alle ballen overgebracht zijn", thema:"Beweging", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Breng een bal van de ene emmer naar de andere en loop terug. Handen zijn niet toegelaten: de bal klem je tussen kin en hals.", mat:[H("Stoepkrijt"),H("Bal"),H("Emmers")]},
+ {t:"Stoepkrijt", foto:"hannibal-fotos/stoepkrijt.jpg", type:["buiten"], vorm:["1op1"], min:20, dt:"20 min", thema:"Creatief", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Teken met stoepkrijt bloemen, wolken, de zon, dieren en wat je maar wil.", mat:[H("Stoepkrijt")]},
+ {t:"Puzzeljacht", foto:"hannibal-fotos/puzzeljacht.jpg", type:["buiten"], vorm:["1op1"], min:null, dt:"tot de puzzel af is", thema:"Spel", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Teken een lijn op ongeveer 5 meter van een emmer met puzzelstukken. De speler loopt naar de emmer, neemt één stuk, legt het op de juiste plaats en loopt terug, tot de puzzel af is.", mat:[H("Inlegpuzzel"),H("Emmer"),H("Stoepkrijt")]},
+ {t:"Hinkelen", foto:"hannibal-fotos/hinkelen.jpg", type:["buiten"], vorm:["1op1"], min:null, dt:"tot alle steentjes gegooid zijn", thema:"Beweging", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Teken een hinkelspel (of doe het samen met de deelnemer). Gooi een steentje in een vak en hink over het spel zonder in dat vak te springen. Elke speler heeft 8 steentjes.", mat:[H("Stoepkrijt"),Z("Steentjes")], tip:"Variant: op één of twee benen springen, naargelang wat de deelnemer kan."},
+ {t:"Zwembad-memory", type:["buiten"], vorm:["1op1"], min:null, dt:"tot de memory af is", thema:"Water", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Verstop gelamineerde kaartjes in het zwembad met de witte kant naar boven en speel samen met de deelnemer memory.", mat:[Z("Gelamineerde kaartjes")]},
+ {t:"Eendjes vissen", foto:"hannibal-fotos/eendjes-vissen.jpg", type:["buiten"], vorm:["1op1"], min:null, thema:"Water", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Vis met een hengel of haak zoveel mogelijk eendjes uit het zwembad.", mat:[H("Badeendjes"),Z("Hengel of haak")], tip:"Variant: wie vangt het snelst alle eendjes, of het snelst zijn eigen kleuren."},
+ {t:"Met de ballon spelen", foto:"hannibal-fotos/met-de-ballon-spelen.jpg", type:["buiten"], vorm:["1op1"], min:null, thema:"Beweging", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Houd een ballon zo lang mogelijk in de lucht.", mat:[H("Ballonnen")], tip:"Variant: meerdere ballonnen tegelijk hoog houden, of proberen de ballon van de ander op de grond te krijgen."},
+ {t:"Zoektocht: Sprookjesbos", type:["buiten"], vorm:["1op1"], min:30, dt:"30 min", thema:"Zoektocht", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Je rijdt met een go-cart naar plaatsen op basis van tips. Bij het juiste antwoord krijg je een opdracht en na elke geslaagde proef een puzzelstuk. Lukt alles, dan leg je de hele puzzel. De vijf proeven: 5 keer een bal in de basketbalring gooien, 5 goals maken als keeper, verstopte autootjes zoeken, vier bloemen tekenen met stoepkrijt en bowlen op het speelplaatsje.", mat:[H("Go-cart"),H("Bal"),H("Auto's"),H("Stoepkrijt"),H("Kegels"),H("Puzzel")]},
+ {t:"Waterspelletjes", type:["buiten"], vorm:["1op1"], min:null, thema:"Water", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Drie mogelijkheden: kleine waterballonnetjes met een racket zo lang mogelijk omhoog houden, een klein parcours afleggen en met een spons zo snel mogelijk een fles laten overlopen, of een tekening op de grond maken met een waterpistool.", mat:[Q("Materiaal niet vermeld op de bron")]},
+ {t:"Slangenbubbels", foto:"hannibal-fotos/slangenbubbels.jpg", type:["buiten"], vorm:["1op1"], min:15, dt:"15 min", thema:"Zomer", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Snijd de onderkant uit een lege fles. Bevestig een oude washand, sok of dergelijke aan de onderkant met een stevig elastiekje of tape. Vul een kommetje met bellenblaasvloeistof (of afwasmiddel met water) en blaas bellen.", mat:[Z("Lege fles"),Z("Oude washand, handdoek, zakdoek of sok"),H("Tape (doorzichtig of papiertape)"),H("Elastieken"),H("Afwasmiddel (voor bellenblaas)"),H("Kommetjes (plastiek)")]},
+ {t:"Bewegingsparcours", foto:"hannibal-fotos/bewegingsparcours.jpg", type:["buiten"], vorm:["1op1"], min:null, thema:"Beweging", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Teken met stoepkrijt een parcours met bewegingsopdrachten, zoals “spring als een kikker”, “volg de lijn”, “volg de stippen” of “stap als een olifant of dino”.", mat:[Q("Materiaal niet vermeld op de bron")]},
+ {t:"Kijkdoos maken", foto:"hannibal-fotos/kijkdoos-maken.jpg", type:["knutselen"], vorm:["1op1"], min:15, dt:"15 min, meerdere keren", thema:"Creatief", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Maak in een doos een miniwereld met een thema, bv. jungle, ruimte of zee, met knipsels, kleurtjes en figuurtjes.", mat:[Z("Schoenendoos"),H("Verf"),H("Wasco's"),H("Potloden")], tip:"Variant: doorschijnend papier voor een magisch effect, beweegbare onderdelen met draadjes of een zaklamp erachter. Sommige deelnemers werken er lang aan, anderen doen beter meerdere kwartiertjes."},
+ {t:"Bloempotje versieren", foto:"hannibal-fotos/bloempotje-versieren.jpg", type:["knutselen"], vorm:["1op1"], min:15, dt:"15 min", thema:"Natuur", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Versier een bloempotje (steen, plastic of oude confituurpot) met verf, stickers, touw, crêpepapier, wasco of stempels. Vul het met potgrond of watjes en zaai tuinkers.", mat:[Z("Bloempotje"),H("Verf"),Z("Watjes of potgrond"),Z("Tuinkers"),H("Crêpepapier"),H("Wasco's"),H("Touw"),Z("Stickers")], tip:"Doe dit in het begin van de week. Dagelijks water geven en de groei volgen is een fijn ritueel."},
+ {t:"Naambordje", type:["knutselen"], vorm:["1op1"], min:15, dt:"15 min", thema:"Creatief", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Rijd met een klein autootje door verf en laat zo sporen in verschillende kleuren over een groot blad lopen. Maak ronde vormen met een ballon, plak stickers en kleur de drukletters van de naam in.", mat:[H("Verf"),H("Autootje"),H("Ballonnen"),Z("Stickers"),H("Papier A4")], tip:"Houd rekening met wat je deelnemer aankan: sommigen maken hun handen niet graag vuil, anderen juist wel."},
+ {t:"Fotohouder", foto:"hannibal-fotos/fotohouder.jpg", type:["knutselen"], vorm:["1op1"], min:15, dt:"15 min, meerdere keren", thema:"Creatief", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"De begeleider rolt vooraf een plak klei van 2 cm dik uit en bewaart die afgesloten in een plastic zak. De deelnemer drukt figuurtjes uit de klei met vormpjes. In het midden komt een geplooid stuk ijzerdraad waarin later een foto geklemd kan worden. Versier met parels en pailletten.", mat:[H("Klei (pakjes van 1 kg, met ijzerdraad)"),Z("Uitdrukvormpjes"),Z("Parels"),Z("Pailletten"),H("Diepvrieszakjes")], tip:"Rol de klei vooraf uit. Sommige deelnemers werken er lang aan, anderen doen beter meerdere kwartiertjes."},
+ {t:"Tatoeages grimeren", foto:"hannibal-fotos/tatoeages-grimeren.jpg", type:["knutselen"], vorm:["1op1"], min:15, dt:"15 min", thema:"Creatief", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Schilder grime-tatoeages op de armen van de deelnemer. Daarna schildert de deelnemer ook een tatoeage op de arm van de begeleider.", mat:[H("Grimeerkoffer"),Z("Water"),H("Penselen"),Z("Spiegel")]},
+ {t:"Rietjesfiguur", foto:"hannibal-fotos/rietjesfiguur.jpg", type:["knutselen"], vorm:["1op1"], min:15, dt:"15 min", thema:"Creatief", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Rol een balletje klei en steek stukjes rietje erin als armen, benen, ogen en wat je maar wil.", mat:[H("Klei (pakjes van 1 kg, met ijzerdraad)"),H("Rietjes")]},
+ {t:"Rugzak knutselen", foto:"hannibal-fotos/rugzak-knutselen.jpg", type:["knutselen"], vorm:["1op1"], min:15, dt:"15 min, meerdere keren", thema:"Creatief", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Schilder, kleur, bestempel of maak een collage op een papieren zak. Knip stukken papier uit en plak ze erop. Bevestig linten aan de zak.", mat:[Z("Papieren zak"),H("Papier A4"),H("Kleurpotloden"),H("Viltstiften"),H("Wasco's"),Z("Linten")], tip:"Sommige deelnemers werken er lang aan, anderen doen beter meerdere kwartiertjes."},
+ {t:"Crêpepapier-waterkunstwerk", foto:"hannibal-fotos/crepepapier-waterkunstwerk.jpg", type:["knutselen"], vorm:["1op1"], min:15, dt:"15 min", thema:"Water", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Leg crêpepapier op een wit blad, bespuit het met water en haal het crêpepapier weg. De kleur blijft achter op het papier.", mat:[H("Crêpepapier"),H("Plantenspuit"),H("Papier A4")]},
+ {t:"Natuurkunstwerk", foto:"hannibal-fotos/natuurkunstwerk.jpg", type:["knutselen"], vorm:["1op1"], min:15, dt:"15 min", thema:"Natuur", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Verzamel natuurmaterialen en plak ze op doorzichtige kleeffolie. Werk de randen af met papierstroken of houten stokjes. Voeg eventueel een touwtje toe om het op te hangen.", mat:[Z("Natuurmaterialen (verzamelen)"),Z("Doorzichtige kleeffolie"),H("Papierstroken"),Z("Houten stokjes"),H("Touw")]},
+ {t:"Zonnevangers", foto:"hannibal-fotos/zonnevangers.jpg", type:["knutselen"], vorm:["1op1"], min:15, dt:"15 min", thema:"Creatief", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Knip een vorm uit wit of zwart papier en plak die op zelfklevende folie. Plak er gekleurd zijdepapier of gekleurde doorzichtige folie op.", mat:[H("Papier A4"),H("Scharen"),Z("Zelfklevende doorzichtige folie"),Z("Gekleurd zijdepapier of folie")]},
+ {t:"Verven zonder smossen", foto:"hannibal-fotos/verven-zonder-smossen.jpg", type:["knutselen"], vorm:["1op1"], min:15, dt:"15 min", thema:"Creatief", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Stop een blad in een ziplockzakje en voeg verf toe. De deelnemer kiest zelf welke kleuren en hoeveel. Sluit het zakje en wrijf, klop of kneed. Open het daarna, haal de tekening eruit en laat drogen.", mat:[H("Diepvrieszakjes (ziplock)"),H("Papier A4"),H("Verf")], tip:"Handig voor wie niet graag vuile handen krijgt."},
+ {t:"IJsschilderij", foto:"hannibal-fotos/ijsschilderij.jpg", type:["knutselen"], vorm:["1op1"], min:15, dt:"15 min", thema:"Water", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Meng water met voedingskleurstof in ijsblokjesvormpjes, steek in elk een stokje en vries in. Als de ijsblokken klaar zijn, kan je ermee tekenen en kleuren.", mat:[Z("IJsblokjesvormpjes"),Z("Voedingskleurstof"),Z("Stokjes (bv. friscostokjes)"),H("Tekenpapier")], tip:"Je hebt een vriezer nodig en moet de ijsblokken vooraf maken."},
+ {t:"Kunst op watjes", foto:"hannibal-fotos/kunst-op-watjes.jpg", type:["knutselen"], vorm:["1op1"], min:15, dt:"15 min", thema:"Creatief", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Plak watjes in een vorm, bv. een ijsje, vlinder, regenboog of bloem. Vul potjes met water en kleurstof en laat met pipetjes druppels op de watjes vallen, zodat ze kleur krijgen.", mat:[Z("Watjes"),H("Papier of karton"),Z("Voedingskleurstof"),Z("Pipetjes of spuitjes"),Z("Potjes")]},
+ {t:"Schilderen op bubbelfolie", foto:"hannibal-fotos/schilderen-op-bubbelfolie.jpg", type:["knutselen"], vorm:["1op1"], min:15, dt:"15 min", thema:"Creatief", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Schilder op een stuk bubbelplastic en maak daarna een afdruk van het kunstwerk op een blad papier.", mat:[Z("Bubbelplastic"),H("Verf"),H("Verborstels (penselen)"),H("Papier A4")], tip:"Houd rekening met wat je deelnemer aankan: sommigen maken hun handen niet graag vuil, anderen juist wel."},
+ {t:"Schudflesjes maken", foto:"hannibal-fotos/schudflesjes-maken.jpg", type:["knutselen"], vorm:["1op1"], min:15, dt:"15 min", thema:"Zintuigen", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Vul een leeg, schoon en droog flesje met rijst, kralen of pasta, draai het dopje erop en versier het met linten of stickers.", mat:[Z("Lege kleine flesjes"),Z("Vulmateriaal (kralen, rijst, pasta)"),Z("Linten en stickers (eventueel)")]},
+ {t:"Knikkerkunst", foto:"hannibal-fotos/knikkerkunst.jpg", type:["knutselen"], vorm:["1op1"], min:20, dt:"15–20 min", thema:"Creatief", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Leg een blad in een doos, voeg verf toe, gooi er knikkers in en schud.", mat:[Z("Doos"),H("Papier A4"),H("Knikkers"),H("Verf")], tip:"Houd rekening met wat je deelnemer aankan: sommigen maken hun handen niet graag vuil, anderen juist wel."},
+ {t:"Wolfiguurtjes", foto:"hannibal-fotos/wolfiguurtjes.jpg", type:["knutselen"], vorm:["1op1"], min:20, dt:"15–20 min", thema:"Creatief", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Knip een vorm naar keuze uit karton, kies een kleur wol en wikkel die willekeurig rond het karton tot je het karton niet meer ziet.", mat:[Z("Karton"),H("Scharen"),H("Wol")]},
+ {t:"Windlichtje", foto:"hannibal-fotos/windlichtje.jpg", type:["knutselen"], vorm:["1op1"], min:20, dt:"15–20 min", thema:"Avond", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Knip of scheur stukjes zijdepapier. Smeer een glazen bokaal in met vloeibare lijm en plak de stukjes willekeurig op het glas. Zet er een theelichtje in (mag ook op batterijen).", mat:[Z("Glazen bokaal"),H("Crêpepapier"),Z("Vloeibare lijm"),Z("Theelichtje (of ledkaarsje)")]},
+ {t:"Dromenvanger", foto:"hannibal-fotos/dromenvanger.jpg", type:["knutselen"], vorm:["1op1"], min:20, dt:"15–20 min", thema:"Creatief", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Knip het midden uit een kartonnen bordje en versier de randen. Maak gaatjes aan de binnenkant van de cirkel en rijg er wol doorheen. Onderaan maak je ongeveer 3 gaatjes voor een draadje met een veer, bovenaan één om hem op te hangen.", mat:[Z("Kartonnen bordje"),H("Viltstiften"),H("Wol"),Z("Veertjes"),H("Perforator")]},
+ {t:"Wasco-kunst", foto:"hannibal-fotos/wasco-kunst.jpg", type:["knutselen"], vorm:["1op1"], min:15, dt:"15 min", thema:"Creatief", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Teken en kleur op papier met wasco's. Schilder daarna met verdunde waterverf over het blad. Het kunstwerk komt zo tevoorschijn.", mat:[H("Papier A4"),H("Wasco's"),H("Waterverf"),H("Verborstels (penselen)")]},
+ {t:"Strip of boekje lezen", type:["wacht"], vorm:["1op1"], min:null, dt:"flexibel", thema:"Rust", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Lees samen een strip of een boekje terwijl je wacht op de volgende activiteit.", mat:[H("Strips"),H("Voorleesboeken")], tip:"Wachtactiviteiten plan je niet. Ze dienen als buffer tot de volgende activiteit."},
+ {t:"Muziek luisteren", foto:"hannibal-fotos/muziek-luisteren.jpg", type:["wacht"], vorm:["1op1"], min:null, dt:"flexibel", thema:"Muziek", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Luister samen naar muziek terwijl je wacht.", mat:[H("Bluetooth-speaker")]},
+ {t:"Met een bal naar elkaar gooien", foto:"hannibal-fotos/met-een-bal-naar-elkaar-gooien.jpg", type:["wacht"], vorm:["1op1"], min:null, dt:"flexibel", thema:"Beweging", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Gooi een bal naar elkaar terwijl je wacht.", mat:[H("Bal")]},
+ {t:"Kleurplaat kleuren", type:["wacht"], vorm:["1op1"], min:null, dt:"flexibel", thema:"Creatief", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Kleur samen een kleurplaat in.", mat:[Z("Kleurplaten (afdrukken)"),H("Kleurpotloden")]},
+ {t:"Friemelspeelgoed", foto:"hannibal-fotos/friemelspeelgoed.jpg", type:["wacht"], vorm:["1op1"], min:null, dt:"flexibel", thema:"Zintuigen", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Friemelspeelgoed om in de handen te houden, zoals tangles, pop-its, knijpballen en spinners. De lijst op de bron is niet volledig.", mat:[Z("Friemelspeelgoed (tangles, pop-it, knijpballen, spinners)")]},
+ {t:"Naamkaartje knutselen", foto:"hannibal-fotos/naamkaartje-knutselen.jpg", type:["kennismaking", "knutselen"], vorm:["1op1"], min:15, dt:"15 min", thema:"Eerste dag", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Schrijf de naam van de deelnemer in grote drukletters op een A3-blad. De deelnemer kleurt die in met wasco of stift. Je kan ook stickers plakken, stempelen, verven of tekeningen toevoegen. Daarna hang je het kaartje aan de slaapkamerdeur of aan jullie tafel.", mat:[H("Papier A3"),H("Wasco's"),H("Alcoholstiften (drukletters)"),Z("Stickers"),H("Verf")], tip:"Niet alle kennismakingsactiviteiten zijn voor elke deelnemer geschikt. Twijfel je, vraag het aan je leefgroepverantwoordelijke."},
+ {t:"Kennismakingsrad", foto:"hannibal-fotos/kennismakingsrad.jpg", type:["kennismaking"], vorm:["1op1"], min:null, thema:"Eerste dag", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Verzin vragen en schrijf ze op een blad. Bevestig het blad met een splitpen in het midden zodat het kan draaien. Om de beurt draaien jullie en stel je elkaar een vraag.", mat:[H("Papier A4"),H("Assortiment spelden (met splitpen)")], tip:"Op kamp is er geen rad waar je aan kan draaien. Maak het vooraf en neem het mee."},
+ {t:"Kennismakingsspel-bord", foto:"hannibal-fotos/kennismakingsspel-bord.jpg", type:["kennismaking"], vorm:["1op1"], min:null, thema:"Eerste dag", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Teken een eenvoudig spelbord en schrijf in elk vakje een vraag, zoals “Wat doe je heel graag?”, “Wat is je lievelingskleur?” of “Frietjes of spruitjes?”. Dobbel en lees de vraag voor aan de deelnemer.", mat:[H("Papier A4"),H("Balpennen"),H("Dobbelstenen (bal)")]},
+ {t:"Wandeling in het gebouw", foto:"hannibal-fotos/wandeling-in-het-gebouw.jpg", type:["kennismaking"], vorm:["1op1"], min:null, thema:"Eerste dag", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Loop met de deelnemer door het gebouw en toon alle ruimtes: de eetzaal (en jullie plek), de slaapkamer van de deelnemer, de toneelzaal en de binnenspeeltuin. Als laatste toon je het leefgroeplokaal en ga je daar samen aan jullie bureau zitten.", mat:[]},
+ {t:"Vlaggetjes knutselen", type:["kennismaking", "knutselen"], vorm:["1op1"], min:null, thema:"Eerste dag", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Knip vooraf vlaggetjes uit. Maak er verschillende met iets dat de deelnemer typeert: een vlaggetje in de lievelingskleur, met het lievelingseten (jij tekent het, de deelnemer kleurt het in) of met het lievelingsprogramma.", mat:[H("Papier A4 kleur"),H("Scharen"),H("Kleurpotloden")]},
+ {t:"Zoektocht in het gebouw", foto:"hannibal-fotos/zoektocht-in-het-gebouw.jpg", type:["kennismaking"], vorm:["1op1"], min:null, thema:"Eerste dag", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Verstop enveloppen, kleurplaten of andere items in het gebouw, bv. steeds in dezelfde kleur. In elke envelop zit een vraag over de deelnemer en over jezelf. Elke vraag geeft een tip naar de volgende locatie.", mat:[H("Enveloppen"),Z("Kleurplaten (afdrukken)")]}
+];
+
+// In de kijker: kies activiteiten (titel moet exact kloppen) met naam en quote van een vrijwilliger.
+// Vervang de voorbeeldtekst door echte gegevens, of laat naam/quote leeg.
+const KIJKER = [
+  {act:"Zoektocht: Sprookjesbos", naam:"[Naam vrijwilliger]", quote:"Voorbeeldtekst: een vaste favoriet. Door de puzzelstukken blijft iedereen gemotiveerd."},
+  {act:"Knikkerkunst", naam:"[Naam vrijwilliger]", quote:"Voorbeeldtekst: weinig voorbereiding en een mooi resultaat."},
+  {act:"Dromenvanger", naam:"[Naam vrijwilliger]", quote:"Voorbeeldtekst: een knutsel waar deelnemers trots op zijn."}
+];
+const kijkerVan = a => KIJKER.find(k=>k.act===a.t);
+// Iconen (emoji): pas ze hier aan
+const ICO_TYPE = {knutselen:"🎨", binnen:"🏠", buiten:"🌳", wacht:"⏳", kennismaking:"👋"};
+const ICO_VORM = {"1op1":"🧍", "2op1":"👫", groep:"👥"};
+const ICO_NIV  = {licht:"🌱", matig:"🌿", zwaar:"🌳"};
+const ICO_THEMA = {Creatief:"🎨", Zomer:"☀️", Zintuigen:"🖐️", Water:"💦", Natuur:"🍃", Eten:"🍎", Spel:"🎲", Muziek:"🎵", Rust:"🌙", Foto:"📷", Wind:"💨", Beweging:"🏃", Terugblik:"📰", Avond:"🕯️", Bouwen:"🧱", Mikspel:"🎯", Zoektocht:"🔍", "Eerste dag":"👋"};
+const icoThema = t => ICO_THEMA[t]||"✨";
+
+
+/* ============ Programma ============ */
+const $=(s,r=document)=>r.querySelector(s);
+const thema = [...new Set(ACT.map(a=>a.thema))].sort();
+const PAGE=12;let lastKey="";
+const state = {n:PAGE, kamp:"", fysiek:false, mentaal:new Set(), type:new Set(), vorm:new Set(), duur:new Set(), thema:new Set(), mat:new Set(), q:""};
+
+function matStatus(a){
+  if(!a.mat.length) return {k:"ok",t:"Geen materiaal nodig"};
+  const zelf=a.mat.filter(m=>m.h===false);
+  if(zelf.length) return {k:"koop",t:"Zelf kopen: "+zelf.length+" item"+(zelf.length>1?"s":"")};
+  if(a.mat.some(m=>m.h===null)) return {k:"onb",t:"Herkomst materiaal nog invullen"};
+  return {k:"ok",t:"Alles van Hannibal"};
+}
+function dur(m,t){if(t)return t;if(m==null)return "duur niet vermeld";return m>=60?(Math.floor(m/60)+" u"+(m%60?" "+m%60:"")):m+" min"}
+
+// kampen (keuzelijst)
+const ksel=$("#kamp");
+KAMPEN.forEach((k,i)=>{const o=document.createElement("option");o.value=i;o.textContent=k.naam+" ("+k.leeftijd+")"+(k.profiel?"":" *");ksel.appendChild(o)});
+ksel.onchange=()=>{
+  state.kamp=ksel.value;
+  const nota=$("#kampnota");
+  if(state.kamp===""){nota.hidden=true;render();return}
+  const k=KAMPEN[state.kamp];
+  if(k.profiel){
+    state.mentaal=new Set(k.profiel.mentaal);state.fysiek=k.profiel.fysiek;state.vorm=new Set(k.profiel.vorm);
+    nota.textContent=k.naam+": mentale beperking "+k.profiel.mentaal.map(n=>NIVEAUS[n].toLowerCase()).join(" / ")+
+      (k.profiel.fysiek?", met fysieke beperking":", geen fysieke beperking")+(k.profiel.vorm.length?", begeleiding "+k.profiel.vorm.map(v=>VORMEN[v]).join(" / "):"")+". Filters zijn automatisch ingesteld, je kan ze nog aanpassen.";
+  }else{
+    nota.textContent=k.naam+": het profiel van dit kamp is nog niet ingevuld, kies zelf de filters.";
+  }
+  nota.hidden=false;render();
+};
+
+// chips
+const ICO_CHIP=(g,id)=>g==="type"?ICO_TYPE[id]:g==="vorm"?ICO_VORM[id]:g==="mentaal"?"":g==="thema"?icoThema(id):g==="duur"?"":g==="mat"?({geenaankoop:"🛒",hannibal:"🎒",geen:"🙌"})[id]:"";
+function maakChips(groep,opts){
+  const w=$(`[data-groep="${groep}"]`);
+  opts.forEach(([id,label,hulp])=>{
+    const c=document.createElement("button");c.type="button";c.className="chip"+(groep==="type"?" tegel":["mentaal","vorm","duur"].includes(groep)?" seg":"");
+    if(groep==="type"){c.innerHTML='<span class="ti" aria-hidden="true">'+ICO_CHIP(groep,id)+'</span><span>'+label+'</span>'}else{c.textContent=(ICO_CHIP(groep,id)?ICO_CHIP(groep,id)+" ":"")+label}c.setAttribute("aria-pressed","false");c.dataset.id=id;
+    if(hulp)c.title=hulp;
+    c.onclick=()=>{const s=state[groep];s.has(id)?s.delete(id):s.add(id);render()};
+    w.appendChild(c);
+  });
+}
+maakChips("mentaal",Object.entries(NIVEAUS).map(([id,l])=>[id,l,NIVEAU_HULP[id]]));
+{const c=document.createElement("button");c.type="button";c.className="chip seg";c.id="fysiekchip";c.textContent="Aangepast";c.setAttribute("aria-pressed","false");c.title=FYSIEK.ja;
+ c.onclick=()=>{state.fysiek=!state.fysiek;render()};$('[data-groep="fysiek"]').appendChild(c)}
+maakChips("type",Object.entries(TYPES));
+maakChips("vorm",Object.entries(VORMEN).map(([i,l])=>[i,i==="groep"?"Groep":l]));
+maakChips("duur",DUREN.map(d=>[d.id,d.label]));
+maakChips("thema",thema.map(t=>[t,t]));
+maakChips("mat",[["geenaankoop","Niets zelf kopen"],["hannibal","Enkel Hannibal-materiaal"],["geen","Geen materiaal nodig"]]);
+
+$("#zoek").oninput=e=>{state.q=e.target.value.trim().toLowerCase();render()};
+$("#reset").onclick=()=>{state.kamp="";state.fysiek=false;ksel.value="";$("#kampnota").hidden=true;["mentaal","type","vorm","duur","thema","mat"].forEach(g=>state[g].clear());state.q="";$("#zoek").value="";render()};
+
+function past(a){
+  if(state.mentaal.size && !niv(a).some(n=>state.mentaal.has(n))) return false;
+  if(state.fysiek && !fys(a)) return false;
+  if(state.type.size && !a.type.some(t=>state.type.has(t))) return false;
+  if(state.vorm.size && !a.vorm.some(v=>state.vorm.has(v))) return false;
+  if(state.duur.size && (a.min==null||![...state.duur].some(id=>DUREN.find(d=>d.id===id).test(a.min)))) return false;
+  if(state.thema.size && !state.thema.has(a.thema)) return false;
+  if(state.mat.size){
+    const zelf=a.mat.some(m=>!m.h);
+    const ok=[...state.mat].some(f=> f==="geenaankoop"?!zelf : f==="hannibal"?(a.mat.length>0&&!zelf) : a.mat.length===0);
+    if(!ok) return false;
+  }
+  if(state.q){
+    const hay=[a.t,a.inhoud,a.thema,...a.mat.map(m=>m.n)].join(" ").toLowerCase();
+    if(!hay.includes(state.q)) return false;
+  }
+  return true;
+}
+
+function render(){
+  $("#fysiekchip").setAttribute("aria-pressed",String(state.fysiek));
+  ["mentaal","type","vorm","duur","thema","mat"].forEach(g=>document.querySelectorAll(`[data-groep="${g}"] .chip`).forEach(c=>c.setAttribute("aria-pressed",String(state[g].has(c.dataset.id)))));
+  const key=JSON.stringify([state.kamp,state.fysiek,[...state.mentaal],[...state.type],[...state.vorm],[...state.duur],[...state.thema],[...state.mat],state.q]);
+  if(key!==lastKey){state.n=PAGE;lastKey=key}
+  const lijst=ACT.map((a,i)=>({a,i})).filter(x=>past(x.a));
+  const standaard=state.kamp===""&&!state.fysiek&&!state.q&&["mentaal","type","vorm","duur","thema","mat"].every(g=>state[g].size===0);
+  const kb=$("#kijker"),kr=$("#kraster");kr.innerHTML="";
+  const kl=standaard?KIJKER.map(k=>ACT.findIndex(a=>a.t===k.act)).filter(i=>i>=0):[];
+  kb.hidden=!kl.length;
+  kl.forEach(i=>{const a=ACT[i],k=kijkerVan(a);const b=document.createElement("button");b.type="button";b.className="kk";
+    b.innerHTML=`${a.foto?`<img class="foto" src="${a.foto}" alt="" loading="lazy" onerror="this.remove()">`:""}<div class="tags">${a.type.map(t=>`<span class="tag type">${ICO_TYPE[t]} ${TYPES[t]}</span>`).join("")}</div><h3>${icoThema(a.thema)} ${a.t}</h3>${k.quote?`<q>${k.quote}</q>`:""}${k.naam?`<span class="wie">Gekozen door ${k.naam}</span>`:""}`;
+    b.onclick=()=>open(i);kr.appendChild(b)});
+  $("#aantal").textContent = lijst.length+(lijst.length===1?" activiteit gevonden":" activiteiten gevonden")+(state.kamp!==""?" voor "+KAMPEN[state.kamp].naam:"");
+  const mw=$("#meerw");mw.hidden=true;
+  const r=$("#raster");r.innerHTML="";
+  if(!lijst.length){r.innerHTML='<div class="leeg"><b>Niets gevonden.</b><br>Probeer minder filters of klik op “Alles wissen”.</div>';return}
+  lijst.slice(0,state.n).forEach(({a,i})=>{
+    const s=matStatus(a);
+    const k=document.createElement("button");k.type="button";k.className="kaart";
+    k.innerHTML=`${a.foto?`<img class="foto" src="${a.foto}" alt="" loading="lazy" onerror="this.remove()">`:""}<div class="tags">${kijkerVan(a)?'<span class="ster">⭐ In de kijker</span>':""}${a.type.map(t=>`<span class="tag type">${ICO_TYPE[t]} ${TYPES[t]}</span>`).join("")}<span class="tag thema">${a.thema}</span></div>
+      <div class="kop"><span class="ico" aria-hidden="true">${icoThema(a.thema)}</span><h3>${a.t}</h3></div><p>${a.inhoud.length>110?a.inhoud.slice(0,107)+"…":a.inhoud}</p>
+      <div class="tags">${a.vorm.map(v=>`<span class="tag">${ICO_VORM[v]} ${VORMEN[v]}</span>`).join("")}</div>
+      <div class="meta"><span>${dur(a.min,a.dt)}</span><span class="mat-${s.k}">${({ok:"✅",koop:"🛒",onb:"❓"})[s.k]||"🙌"} ${s.t}</span></div>`;
+    k.onclick=()=>open(i);r.appendChild(k);
+  });
+  const rest=lijst.length-state.n;
+  if(rest>0){mw.hidden=false;$("#meer").textContent="Toon "+Math.min(PAGE,rest)+" meer";$("#meertel").textContent=state.n+" van "+lijst.length+" getoond";}
+  else if(lijst.length>PAGE){mw.hidden=false;$("#meer").hidden=true;$("#meertel").textContent="Alle "+lijst.length+" getoond"}
+  if(rest>0)$("#meer").hidden=false;
+}
+$("#meer").onclick=()=>{state.n+=PAGE;render()};
+
+function open(i){
+  const a=ACT[i],d=$("#dlg"),s=matStatus(a);
+  d.innerHTML=`<div class="dkop"><div><div class="tags">${a.type.map(t=>`<span class="tag type">${ICO_TYPE[t]} ${TYPES[t]}</span>`).join("")}</div><h2 id="dtitel">${icoThema(a.thema)} ${a.t}</h2></div><button type="button" aria-label="Sluiten" id="x">✕</button></div>
+  ${a.foto?`<img class="dfoto" src="${a.foto}" alt="${a.t}" onerror="this.remove()">`:""}
+  <div class="dbody">
+    <div class="dgrid">
+      <div><b>⏱️ Duur</b>${dur(a.min,a.dt)}</div>
+      <div><b>👥 Begeleiding</b>${a.vorm.map(v=>VORMEN[v]).join(", ")}</div>
+      <div><b>${icoThema(a.thema)} Thema</b>${a.thema}</div>
+      <div><b>Mentale beperking</b>${niv(a).map(n=>NIVEAUS[n]).join(", ")}</div>
+      <div><b>Fysieke beperking</b>${fys(a)?"Aangepast mogelijk":"Niet aangepast"}</div>
+    </div>
+    <div><h3>📝 Wat doen we?</h3><p style="margin:0">${a.inhoud}</p></div>
+    <div><h3>🧰 Materiaal <span class="hn ${s.k==="koop"?"nee":s.k==="onb"?"onb":"ja"}">${s.t}</span></h3>
+      ${a.mat.length?`<ul>${a.mat.map(m=>`<li>${m.n} <span class="hn ${m.h===true?"ja":m.h===false?"nee":"onb"}">${m.h===true?"Hannibal-materiaal":m.h===false?"zelf voorzien":"herkomst onbekend"}</span></li>`).join("")}</ul>`:"<p style='margin:0'>Je hebt niets nodig.</p>"}
+      ${a.mat.some(m=>m.h!==false)?`<p class="matnota">ℹ️ Hannibal heeft dit materiaal in principe, maar of het op jouw vakantie aanwezig is, verschilt van vakantie tot vakantie. Vraag het na bij je vakantieverantwoordelijke.</p>`:""}
+    </div>
+    ${kijkerVan(a)&&(kijkerVan(a).quote||kijkerVan(a).naam)?`<div class="kijkertip">⭐ <b>In de kijker${kijkerVan(a).naam?" – gekozen door "+kijkerVan(a).naam:""}</b>${kijkerVan(a).quote?"<br>“"+kijkerVan(a).quote+"”":""}</div>`:""}
+    ${a.tip?`<div class="tip"><b>Tip:</b> ${a.tip}</div>`:""}
+    ${a.bron?`<p style="margin:0;font-size:.78rem;color:#888">Bron: ${a.bron}</p>`:""}
+  </div>`;
+  d.showModal();$("#x",d).onclick=()=>d.close();
+}
+$("#dlg").addEventListener("click",e=>{if(e.target.id==="dlg")e.target.close()});
+render();
+</script>
+</body>
+</html>
