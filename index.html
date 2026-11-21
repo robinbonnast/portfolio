@@ -179,6 +179,12 @@
   .proj-grid.has-vertical .dek{margin-bottom:auto;padding-bottom:20px}
   .proj-grid.has-vertical .proj-text>:last-child{margin-bottom:0}
 
+  /* portfolio-filter */
+  .filters{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .pill.filter{background:none;cursor:pointer;font-family:var(--body)}
+  .pill.filter.is-active{background:var(--accent);border-color:var(--accent);color:var(--white)}
+  .project[hidden]{display:none}
+
   /* alinea's uitgevuld: tekst loopt tot tegen beide randen, ook op gsm */
   p:not([class]),.dek,.lede{text-align:justify;text-justify:inter-word;-webkit-hyphens:auto;hyphens:auto}
   .proj-grid.has-vertical .proj-media{flex:0 0 clamp(190px,22%,240px)}
@@ -583,11 +589,16 @@
     <div class="wrap">
       <div class="section-head reveal">
         <h2 id="werktitel">Portfolio</h2>
+        <div class="filters" role="group" aria-label="Filter projecten">
+          <button type="button" class="pill filter is-active" data-filter="all" aria-pressed="true">Alles</button>
+          <button type="button" class="pill filter" data-filter="reportage" aria-pressed="false">Reportage</button>
+          <button type="button" class="pill filter" data-filter="social" aria-pressed="false">Sociale media</button>
+        </div>
       </div>
 
       <div class="projects">
         <!-- RESET -->
-        <article class="project reveal">
+        <article class="project reveal" data-cat="reportage">
           <div class="proj-grid">
             <div class="proj-text">
               <div class="proj-head">
@@ -619,7 +630,7 @@
         </article>
 
         <!-- BOSMANS KERST -->
-        <article class="project reveal">
+        <article class="project reveal" data-cat="social">
           <div class="proj-grid has-vertical">
             <div class="proj-text">
               <div class="proj-head">
@@ -645,7 +656,7 @@
         </article>
 
         <!-- BOSMANS -->
-        <article class="project reveal">
+        <article class="project reveal" data-cat="social">
           <div class="proj-grid has-vertical">
             <div class="proj-text">
               <div class="proj-head">
@@ -675,7 +686,7 @@
         </article>
 
         <!-- OVAM -->
-        <article class="project reveal">
+        <article class="project reveal" data-cat="reportage">
           <div class="proj-grid">
             <div class="proj-text">
               <div class="proj-head">
@@ -706,7 +717,7 @@
         </article>
 
         <!-- PORTRET -->
-        <article class="project reveal">
+        <article class="project reveal" data-cat="reportage">
           <div class="proj-grid">
             <div class="proj-text">
               <div class="proj-head">
@@ -883,6 +894,21 @@
       f.title = 'Videospeler';
       p.innerHTML = '';
       p.appendChild(f);
+    });
+  });
+
+  var filterBtns = document.querySelectorAll('.filter');
+  filterBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var f = btn.getAttribute('data-filter');
+      filterBtns.forEach(function(b){
+        var on = b === btn;
+        b.classList.toggle('is-active', on);
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      document.querySelectorAll('.project[data-cat]').forEach(function(a){
+        a.hidden = !(f === 'all' || a.getAttribute('data-cat') === f);
+      });
     });
   });
 
