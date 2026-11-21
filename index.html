@@ -168,6 +168,8 @@
 
   /* video facade */
   .player{position:relative;width:100%;aspect-ratio:16/9;background:var(--ink);overflow:hidden}
+  .proj-media.vertical .frame{width:min(100%,340px);margin-inline:auto}
+  .player.vertical{aspect-ratio:9/16}
   .player img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease-out,filter .2s ease-out}
   .player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
   .player .play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:none;border:0;cursor:pointer;width:100%}
@@ -613,10 +615,10 @@
                 <li class="spec" aria-label="Gemonteerd in Adobe Premiere Pro"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.75" y="4.75" width="18.5" height="12" rx="1.5"></rect><path d="M12 16.75v2.6M8.6 19.35h6.8"></path><path d="M6 8.9h6M6 12.1h9"></path></svg><span>Adobe Premiere Pro</span></li>
               </ul>
             </div>
-            <div class="proj-media">
+            <div class="proj-media vertical">
               <div class="frame">
-                <div class="player">
-                  <img src="images/bosmans-kerst.jpg" alt="Still uit de kerstreel van Bosmans Tuin &amp; Dier met de Kerstman in de winkel">
+                <div class="player vertical">
+                  <img src="images/bosmans-kerst.jpg" alt="Still uit de kerstreel van Bosmans Tuin &amp; Dier: de Kerstman met een lichtgevend kerstmannetje en zijn zak in de winkel">
                 </div>
               </div>
             </div>
