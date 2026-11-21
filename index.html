@@ -175,9 +175,13 @@
   .proj-grid.has-vertical{display:flex;align-items:stretch}
   .proj-grid.has-vertical .proj-text{flex:1 1 0;min-width:0}
   .proj-grid.has-vertical .dek{max-width:none}
+  .proj-grid.has-vertical .proj-text{display:flex;flex-direction:column;padding-block:9px}
+  .proj-grid.has-vertical .dek{margin-bottom:auto;padding-bottom:20px}
+  .proj-grid.has-vertical .proj-text>:last-child{margin-bottom:0}
   .proj-grid.has-vertical .proj-media{flex:0 0 clamp(190px,22%,240px)}
   @media(max-width:900px){
     .proj-grid.has-vertical{display:grid}
+    .proj-grid.has-vertical .proj-text{display:block;padding-block:0}
     .proj-media.vertical{position:static;min-height:0}
     .proj-media.vertical .frame{position:static;transform:none;width:min(100%,260px);margin-inline:auto}
     .proj-media.vertical .player{height:auto;aspect-ratio:9/16}
