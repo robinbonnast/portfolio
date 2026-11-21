@@ -168,8 +168,15 @@
 
   /* video facade */
   .player{position:relative;width:100%;aspect-ratio:16/9;background:var(--ink);overflow:hidden}
-  .proj-media.vertical .frame{width:min(100%,340px);margin-inline:auto}
-  .player.vertical{aspect-ratio:9/16}
+  /* staand kader: even hoog als de tekstkolom */
+  .proj-media.vertical{position:relative;align-self:stretch;min-height:380px}
+  .proj-media.vertical .frame{position:absolute;top:0;bottom:0;left:50%;transform:translateX(-50%);aspect-ratio:9/16;max-width:100%}
+  .proj-media.vertical .player{height:100%;aspect-ratio:auto}
+  @media(max-width:900px){
+    .proj-media.vertical{position:static;min-height:0}
+    .proj-media.vertical .frame{position:static;transform:none;width:min(100%,260px);margin-inline:auto}
+    .proj-media.vertical .player{height:auto;aspect-ratio:9/16}
+  }
   .player img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease-out,filter .2s ease-out}
   .player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
   .player .play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:none;border:0;cursor:pointer;width:100%}
