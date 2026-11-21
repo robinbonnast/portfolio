@@ -178,6 +178,9 @@
   .proj-grid.has-vertical .proj-text{display:flex;flex-direction:column;padding-block:9px}
   .proj-grid.has-vertical .dek{margin-bottom:auto;padding-bottom:20px}
   .proj-grid.has-vertical .proj-text>:last-child{margin-bottom:0}
+
+  /* alinea's uitgevuld: tekst loopt tot tegen beide randen, ook op gsm */
+  p:not([class]),.dek,.lede{text-align:justify;text-justify:inter-word;-webkit-hyphens:auto;hyphens:auto}
   .proj-grid.has-vertical .proj-media{flex:0 0 clamp(190px,22%,240px)}
   @media(max-width:900px){
     .proj-grid.has-vertical{display:grid}
