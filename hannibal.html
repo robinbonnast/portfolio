@@ -8,142 +8,178 @@
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --groen:#a1c033; --groen-donker:#7f9a1f; --groen-licht:#f1f6dd;
-  --tekst:#575756; --donker:#333; --lijn:#e3e3e0; --wit:#fff; --achtergrond:#f7f8f3;
-  --teal:#2f9a96;
+  --groen:#a1c033; --groen-donker:#869f20; --groen-licht:rgba(161,192,51,.12);
+  --teal:#069999; --geel:#e6b703; --koraal:#dc4731; --paars:#ccc4e3;
+  --tekst:#575756; --donker:#333; --lijn:#ccc; --wit:#fff; --achtergrond:#f2f4f5;
   --kop:"Barlow Semi Condensed",system-ui,sans-serif;
   --lees:Verdana,sans-serif;
 }
 *{box-sizing:border-box}
-body{margin:0;font-family:var(--lees);color:var(--tekst);background:var(--achtergrond);line-height:1.5}
-h1,h2,h3{font-family:var(--kop);font-weight:600;margin:0;color:var(--donker)}
+body{margin:0;font-family:var(--lees);color:var(--tekst);background:#fff;line-height:1.55;font-size:16px}
+h1,h2,h3,h4{font-family:var(--kop);font-weight:500;margin:0;color:var(--tekst);text-transform:uppercase;letter-spacing:.2px}
 .sr{position:absolute;left:-9999px}
-.top{background:var(--wit);border-bottom:1px solid var(--lijn)}
-.top .in{max-width:1180px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.merk{font-family:var(--kop);font-size:2rem;font-weight:700;color:var(--groen);letter-spacing:.5px}
-.merk small{display:block;font-size:.8rem;color:var(--tekst);font-weight:500;letter-spacing:0}
-.demo{background:var(--groen-licht);color:var(--groen-donker);font-size:.8rem;padding:6px 12px;border-radius:99px}
+.melding{background:var(--paars);color:var(--donker);font-family:var(--kop);font-weight:700;font-size:.95rem;text-align:center;padding:9px 16px}
+.top{background:#fff;border-bottom:1px solid #eee}
+.top .in{max-width:1180px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.merk{font-family:var(--kop);font-size:2.2rem;font-weight:700;color:var(--groen);line-height:1;font-style:italic}
+.merk small{display:block;font-size:.8rem;color:var(--tekst);font-weight:500;font-style:normal;margin-top:4px;text-transform:uppercase;letter-spacing:.5px}
+.demo{display:none}
 .hero{background:var(--teal);color:#fff}
-.hero .in{max-width:1180px;margin:0 auto;padding:36px 20px 40px}
-.hero h1{color:#fff;font-size:clamp(1.6rem,4vw,2.4rem);text-transform:uppercase;max-width:20ch}
-.hero p{max-width:60ch;margin:12px 0 0}
-main{max-width:1180px;margin:0 auto;padding:24px 20px 60px}
-.stap{margin-bottom:26px}
-.stap h2{font-size:1.35rem;margin-bottom:4px}
-.stap .uitleg{margin:0 0 12px;font-size:.9rem}
-.nr{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--groen);color:#fff;font-size:.95rem;margin-right:8px}
-.kampen{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
-.kamp{text-align:left;background:var(--wit);border:2px solid var(--lijn);border-radius:14px;padding:14px 16px;cursor:pointer;font:inherit;color:inherit;transition:.15s}
-.kamp:hover{border-color:var(--groen)}
-.kamp[aria-pressed=true]{border-color:var(--groen);background:var(--groen-licht);box-shadow:0 0 0 3px rgba(161,192,51,.25)}
-.kamp b{display:block;font-family:var(--kop);font-size:1.25rem;color:var(--donker)}
-.kamp span{display:block;font-size:.85rem}
-.kamp .doel{margin-top:6px;font-size:.78rem;color:var(--groen-donker);font-weight:700}
-.filters{background:var(--wit);border:1px solid var(--lijn);border-radius:14px;padding:16px 18px;display:grid;gap:14px}
-.groep{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
-.groep>.lab{font-family:var(--kop);font-weight:600;color:var(--donker);min-width:120px}
-.chip{border:1.5px solid var(--lijn);background:var(--wit);border-radius:99px;padding:6px 14px;font:inherit;font-size:.85rem;cursor:pointer;color:var(--tekst)}
+.hero .in{max-width:1180px;margin:0 auto;padding:28px 20px 30px}
+.hero h1{color:#fff;font-size:clamp(1.6rem,4vw,2.5rem);line-height:1.15;max-width:26ch}
+.hero p{max-width:60ch;margin:10px 0 0;font-size:.95rem}
+main{max-width:1180px;margin:0 auto;padding:22px 20px 60px}
+.filters{background:var(--achtergrond);padding:18px 20px;display:grid;gap:14px}
+.rij{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:flex-start}
+.veld{display:grid;gap:5px;min-width:0}
+.veld label,.veld .lbl{font-family:var(--kop);font-weight:700;font-size:.95rem;color:var(--tekst);text-transform:uppercase;letter-spacing:.3px}
+.veld select,.veld input{padding:9px 12px;border:2px solid var(--lijn);border-radius:0;font:inherit;font-size:.88rem;background:#fff;color:var(--tekst);min-width:210px}
+.veld.zoek{flex:1;min-width:200px}.veld.zoek input{width:100%}
+.veld input:focus,.veld select:focus,.chip:focus-visible,.kaart:focus-visible,button:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+.groep{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:2px solid var(--lijn);background:#fff;border-radius:0;padding:5px 12px;font:inherit;font-size:.82rem;cursor:pointer;color:var(--tekst)}
 .chip:hover{border-color:var(--groen)}
 .chip[aria-pressed=true]{background:var(--groen);border-color:var(--groen);color:#fff;font-weight:700}
-.zoek{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-.zoek input{flex:1;min-width:200px;padding:10px 14px;border:1.5px solid var(--lijn);border-radius:99px;font:inherit}
-.zoek input:focus,.chip:focus-visible,.kamp:focus-visible,.kaart:focus-visible,button:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
-.reset{background:none;border:none;color:var(--teal);text-decoration:underline;cursor:pointer;font:inherit;font-size:.85rem}
-.balk{display:flex;justify-content:space-between;align-items:center;margin:22px 0 12px;flex-wrap:wrap;gap:8px}
-.balk h2{font-size:1.3rem}
-.raster{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
-.kaart{background:var(--wit);border:1px solid var(--lijn);border-radius:14px;padding:16px;cursor:pointer;text-align:left;font:inherit;color:inherit;display:flex;flex-direction:column;gap:8px;transition:.15s}
-.kaart:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.08);border-color:var(--groen)}
-.kaart h3{font-size:1.2rem}
-.kaart p{margin:0;font-size:.87rem}
-.tags{display:flex;flex-wrap:wrap;gap:6px}
-.tag{font-size:.72rem;padding:3px 9px;border-radius:99px;background:#eef0ea;color:var(--tekst)}
-.tag.type{background:var(--groen-licht);color:var(--groen-donker);font-weight:700}
-.tag.thema{background:#e3f2f1;color:#1f6f6c}
-.meta{display:flex;justify-content:space-between;font-size:.78rem;margin-top:auto;padding-top:8px;border-top:1px dashed var(--lijn)}
-.mat-ok{color:var(--groen-donker);font-weight:700}
-.mat-koop{color:#b3591c;font-weight:700}
-.leeg{padding:40px;text-align:center;background:var(--wit);border:1px dashed var(--lijn);border-radius:14px}
-dialog{border:none;border-radius:16px;padding:0;max-width:680px;width:calc(100% - 28px);box-shadow:0 20px 60px rgba(0,0,0,.3)}
-dialog::backdrop{background:rgba(0,0,0,.45)}
-.dkop{background:var(--teal);color:#fff;padding:18px 22px;display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
-.dkop h2{color:#fff;font-size:1.6rem}
-.dkop button{background:rgba(255,255,255,.2);color:#fff;border:none;border-radius:50%;width:36px;height:36px;font-size:1.2rem;cursor:pointer;flex:none}
-.dbody{padding:20px 22px 24px;display:grid;gap:16px}
-.dbody h3{font-size:1.05rem;margin-bottom:4px}
-.dbody ul{margin:0;padding-left:20px}
-.dbody li{margin:2px 0}
-.dgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
-.dgrid div{background:var(--achtergrond);border-radius:10px;padding:10px 12px;font-size:.85rem}
-.dgrid b{display:block;font-family:var(--kop);color:var(--donker)}
-.hn{display:inline-block;font-size:.7rem;font-weight:700;border-radius:99px;padding:1px 8px;margin-left:6px}
-.hn.ja{background:var(--groen-licht);color:var(--groen-donker)}
-.hn.nee{background:#fbe9dc;color:#b3591c}
-.tip{background:var(--groen-licht);border-left:4px solid var(--groen);padding:10px 14px;border-radius:0 10px 10px 0;font-size:.88rem}
-footer{text-align:center;font-size:.8rem;padding:24px;color:#888}
-@media(max-width:560px){.groep>.lab{min-width:100%}}
-
-.hero .in{padding:22px 20px 24px}
-.hero h1{font-size:clamp(1.3rem,3vw,1.8rem);max-width:none}
-.hero p{margin-top:6px;font-size:.9rem}
-main{padding-top:16px}
-.filters{background:var(--wit);border:1px solid var(--lijn);border-radius:14px;padding:14px 16px;display:grid;gap:10px;position:relative}
-.rij{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:flex-start}
-.veld{display:grid;gap:4px;min-width:0}
-.veld label,.veld .lbl{font-family:var(--kop);font-weight:600;font-size:.9rem;color:var(--donker)}
-.veld select,.veld input{padding:7px 12px;border:1.5px solid var(--lijn);border-radius:10px;font:inherit;font-size:.85rem;background:#fff;min-width:210px}
-.veld.zoek{flex:1;min-width:200px}.veld.zoek input{width:100%}
-.groep{display:flex;flex-wrap:wrap;gap:6px}
-.chip{padding:4px 11px;font-size:.8rem}
-.nota{margin:0;font-size:.82rem;background:var(--groen-licht);border-left:4px solid var(--groen);padding:6px 12px;border-radius:0 8px 8px 0}
-details summary{cursor:pointer;font-size:.85rem;color:var(--teal);font-weight:700}
-.reset{justify-self:start}
-.balk{margin:16px 0 10px}
-.mat-onb{color:#888;font-weight:700}.hn.onb{background:#eee;color:#777}
-.matnota{margin:8px 0 0;font-size:.8rem;background:#fff6e0;border-left:4px solid #e0a526;padding:6px 10px;border-radius:0 8px 8px 0;color:#6b5314}
-
-.kijker{margin:20px 0 6px;background:#fffbea;border:1px solid #f0dfa0;border-radius:14px;padding:14px 16px}
-.kijker h2{font-size:1.25rem}.kuitleg{margin:2px 0 10px;font-size:.82rem}
-.kraster{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
-.kk{background:#fff;border:1px solid #f0dfa0;border-radius:12px;padding:12px 14px;cursor:pointer;text-align:left;font:inherit;color:inherit;display:grid;gap:6px}
-.kk:hover{border-color:#e0a526;box-shadow:0 4px 12px rgba(0,0,0,.08)}
-.kk h3{font-size:1.1rem}
-.kk q{font-size:.85rem;font-style:italic;quotes:"“" "”"}
-.kk .wie{font-size:.76rem;color:#8a6d12;font-weight:700}
-.ster{display:inline-block;font-size:.72rem;font-weight:700;background:#fff3c4;color:#8a6d12;border-radius:99px;padding:2px 9px}
-.kijkertip{background:#fffbea;border-left:4px solid #e0a526;padding:10px 14px;border-radius:0 10px 10px 0;font-size:.88rem}
-
-.kop{display:flex;align-items:center;gap:10px}
-.kop h3{flex:1}
-.ico{flex:none;width:42px;height:42px;border-radius:12px;background:var(--groen-licht);display:grid;place-items:center;font-size:1.4rem}
-.kaart:hover .ico{background:#e4efbe}
-.ster{margin-right:2px}
 .tegels{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;width:100%}
-.chip.tegel{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 4px;border-radius:12px;font-size:.82rem;line-height:1.2;text-align:center}
+.chip.tegel{display:flex;flex-direction:column;align-items:center;gap:2px;padding:9px 4px;font-size:.84rem;line-height:1.2;text-align:center;font-family:var(--kop);font-weight:700;text-transform:uppercase;letter-spacing:.3px}
 .chip.tegel .ti{font-size:1.5rem;line-height:1}
-.sg{display:inline-flex;border-radius:10px;overflow:hidden;border:1.5px solid var(--lijn);background:var(--wit)}
-.chip.seg{border:none;border-right:1px solid var(--lijn);border-radius:0;padding:5px 11px;background:var(--wit)}
+.sg{display:inline-flex;border:2px solid var(--lijn);background:#fff}
+.chip.seg{border:none;border-right:2px solid var(--lijn);padding:6px 12px}
 .sg .chip.seg:last-child{border-right:none}
 .chip.seg:hover{background:var(--groen-licht)}
 .chip.seg[aria-pressed=true]{background:var(--groen);color:#fff}
-.rij.seg-rij{gap:10px 20px;align-items:flex-end}
-.meerw{text-align:center;margin:22px 0 0}
-.meer{font:inherit;font-size:.95rem;font-family:var(--kop);font-weight:600;background:var(--wit);color:var(--teal);border:2px solid var(--teal);border-radius:99px;padding:9px 26px;cursor:pointer}
-.meer:hover{background:var(--teal);color:#fff}
-.meerw small{display:block;margin-top:8px;color:#888;font-size:.78rem}
+.rij.seg-rij{gap:12px 22px;align-items:flex-end}
+.nota{margin:0;font-size:.85rem;background:#fff;border-left:5px solid var(--groen);padding:8px 14px}
+details summary{cursor:pointer;font-family:var(--kop);font-size:1rem;color:var(--teal);font-weight:700;text-transform:uppercase}
+.reset{background:none;border:none;color:var(--teal);text-decoration:underline;cursor:pointer;font:inherit;font-size:.85rem;justify-self:start}
+.matnota{margin:8px 0 0;font-size:.8rem;background:#fff;border-left:5px solid var(--geel);padding:7px 12px;color:var(--tekst)}
+.balk{display:flex;justify-content:space-between;align-items:center;margin:24px 0 12px;flex-wrap:wrap;gap:8px}
+.balk h2{font-size:1.5rem}
+.kijker{margin:22px 0 4px;background:rgba(230,183,3,.12);border-top:6px solid var(--geel);padding:16px 18px}
+.kijker h2{font-size:1.5rem}.kuitleg{margin:2px 0 12px;font-size:.85rem}
+.kraster{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.kk{background:#fff;border:none;padding:14px 16px;cursor:pointer;text-align:left;font:inherit;color:inherit;display:grid;gap:6px;align-content:start}
+.kk:hover{box-shadow:0 0 0 3px var(--geel)}
+.kk h3{font-size:1.25rem;color:var(--donker)}
+.kk q{font-size:.88rem;font-style:italic;quotes:"“" "”"}
+.kk .wie{font-size:.78rem;color:#8a6d12;font-weight:700}
+.ster{display:inline-block;font-family:var(--kop);font-size:.8rem;font-weight:700;text-transform:uppercase;background:var(--geel);color:#fff;padding:1px 8px}
+.raster{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px}
+.kaart{background:#fff;border:1px solid #ddd;border-top:6px solid var(--groen);padding:16px;cursor:pointer;text-align:left;font:inherit;color:inherit;display:flex;flex-direction:column;gap:9px;transition:.15s}
+.kaart.t-knutselen{border-top-color:var(--geel)}
+.kaart.t-binnen{border-top-color:var(--teal)}
+.kaart.t-buiten{border-top-color:var(--groen)}
+.kaart.t-wacht{border-top-color:var(--paars)}
+.kaart.t-kennismaking{border-top-color:var(--koraal)}
+.kaart:hover{box-shadow:0 6px 18px rgba(0,0,0,.12);transform:translateY(-2px)}
+.kaart h3{font-size:1.35rem;color:var(--donker);line-height:1.15}
+.kaart p{margin:0;font-size:.87rem;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.tags{display:flex;flex-wrap:wrap;gap:4px 10px}
+.tag{font-family:var(--kop);font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.3px;color:var(--teal)}
+.meta{display:flex;justify-content:space-between;gap:8px;font-size:.78rem;margin-top:auto;padding-top:9px;border-top:1px solid #eee}
+.mat-ok{color:var(--groen-donker);font-weight:700}
+.mat-koop{color:var(--koraal);font-weight:700}
+.mat-onb{color:#999;font-weight:700}
+.leeg{padding:40px;text-align:center;background:var(--achtergrond)}
+.foto{width:100%;height:150px;object-fit:cover;background:#eee}.dfoto{display:block;width:100%;max-height:300px;object-fit:cover}
+.meerw{text-align:center;margin:26px 0 0}
+.meer{display:inline-flex;align-items:stretch;font-family:var(--kop);font-size:1.15rem;font-weight:700;text-transform:uppercase;background:var(--groen);color:#fff;border:none;border-radius:0;padding:0;cursor:pointer}
+.meer span{padding:12px 24px}
+.meer::after{content:"➜";background:var(--donker);padding:12px 16px;display:grid;place-items:center}
+.meer:hover{background:var(--groen-donker)}
+.meerw small{display:block;margin-top:9px;color:#888;font-size:.78rem}
+dialog{border:none;border-radius:0;padding:0;max-width:860px;width:calc(100% - 28px);box-shadow:0 20px 60px rgba(0,0,0,.35)}
+dialog::backdrop{background:rgba(0,0,0,.5)}
+.dkop{background:var(--teal);color:#fff;padding:18px 22px;display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.dkop h2{color:#fff;font-size:2rem;line-height:1.1;margin-top:6px}
+.dkop .tag{color:#fff}
+.dkop button{background:rgba(255,255,255,.2);color:#fff;border:none;border-radius:0;width:38px;height:38px;font-size:1.3rem;cursor:pointer;flex:none}
+.dbody{padding:20px 22px 24px;display:grid;gap:16px}
+.dbody h3{font-size:1.15rem;margin-bottom:4px}
+.dbody ul{margin:0;padding-left:20px}
+.dbody li{margin:3px 0}
+.wat{background:var(--groen-licht);border-left:6px solid var(--groen);padding:14px 18px}
+.wat h3{font-size:1.4rem;margin-bottom:6px}
+.wat p{margin:0;font-size:1rem;line-height:1.65;color:var(--donker)}
+.wat h4{font-size:1.05rem;margin:14px 0 4px;color:var(--groen-donker)}
+.wat ol{margin:0;padding-left:22px;font-size:.95rem;line-height:1.6;color:var(--donker)}
+.wat li{margin:2px 0}
+.dtwee{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:14px;align-items:start}
+.links{display:grid;gap:12px}
+.stap{border:1px solid #dfe3e6;padding:14px 18px}
+.stap h3{font-size:1.15rem;margin-bottom:8px;color:var(--teal)}
+.stap ol{list-style:none;counter-reset:s;margin:0;padding:0}
+.stap li{counter-increment:s;position:relative;padding:4px 0 4px 34px;margin:0;line-height:1.55;font-size:.95rem}
+.stap li::before{content:counter(s);position:absolute;left:0;top:4px;width:24px;height:24px;background:var(--teal);color:#fff;font-family:var(--kop);font-weight:700;font-size:.9rem;text-align:center;line-height:24px}
+.matkol{border:1px solid #cfd5d8;padding:14px 16px}
+.matkol h3{margin-bottom:0}
+@media(max-width:700px){.dtwee{grid-template-columns:minmax(0,1fr)}}
+.dgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.dgrid div{background:var(--achtergrond);padding:10px 12px;font-size:.88rem}
+.dgrid b{display:block;font-family:var(--kop);font-weight:700;text-transform:uppercase;font-size:.85rem;color:var(--teal);letter-spacing:.3px}
+.mg{font-family:var(--kop);font-size:1rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin:12px 0 2px}
+.mg-ja{color:var(--groen-donker)}.mg-nee{color:var(--koraal)}.mg-onb{color:#888}
+.hn{display:inline-block;font-family:var(--kop);font-size:.78rem;font-weight:700;text-transform:uppercase;padding:1px 8px;margin-left:6px;letter-spacing:.3px}
+.hn.ja{background:var(--groen);color:#fff}
+.hn.nee{background:var(--koraal);color:#fff}
+.hn.onb{background:#ddd;color:#555}
+.tip{background:var(--achtergrond);border-left:6px solid var(--teal);padding:11px 16px;font-size:.9rem}
+.kijkertip{background:rgba(230,183,3,.14);border-left:6px solid var(--geel);padding:11px 16px;font-size:.9rem}
+footer{background:var(--donker);color:#ccc;text-align:center;font-size:.8rem;padding:24px}
 @media(max-width:560px){.tegels{grid-template-columns:repeat(3,minmax(0,1fr))}}
-.foto{width:100%;height:150px;object-fit:cover;border-radius:10px;background:#eef0ea}.dfoto{display:block;width:100%;max-height:300px;object-fit:cover}
+
+.fextra{display:grid;gap:14px}
+.ftoggle{display:none;font-family:var(--kop);font-size:1.05rem;font-weight:700;text-transform:uppercase;background:#fff;color:var(--teal);border:2px solid var(--teal);border-radius:0;padding:9px 14px;cursor:pointer;text-align:left;justify-content:space-between;align-items:center}
+.ftoggle::after{content:"▾";margin-left:auto;padding-left:10px}
+.ftoggle[aria-expanded=true]::after{content:"▴"}
+.ftoggle .n{background:var(--groen);color:#fff;padding:0 8px;margin-left:8px;font-size:.9rem}
+.raster,.kraster{grid-template-columns:repeat(auto-fill,minmax(min(270px,100%),1fr))}
+.kraster{grid-template-columns:repeat(auto-fit,minmax(min(250px,100%),1fr))}
+.tegels{grid-template-columns:repeat(auto-fit,minmax(118px,1fr))}
+.chip.tegel{hyphens:none;overflow-wrap:normal}
+dialog{max-height:calc(100vh - 24px);overflow:auto}
+@media(max-width:700px){
+  main{padding:14px 12px 44px}
+  .hero .in{padding:20px 14px 22px}
+  .hero h1{font-size:1.55rem}
+  .top .in{padding:10px 14px}
+  .merk{font-size:1.8rem}
+  .filters{padding:14px 12px;gap:12px}
+  .veld,.veld.zoek{flex:1 1 100%;width:100%}
+  .veld select,.veld input{min-width:0;width:100%}
+  .rij,.rij.seg-rij{gap:12px}
+  .ftoggle{display:flex}
+  .fextra{display:none}
+  .fextra.open{display:grid}
+  .tegels{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .chip.tegel{font-size:.72rem;padding:8px 2px;letter-spacing:0}
+  .sg{display:flex;width:100%;flex-wrap:wrap}
+  .sg .chip.seg{flex:1 1 auto;text-align:center;border-bottom:2px solid var(--lijn);margin-bottom:-2px}
+  .balk h2{font-size:1.25rem}
+  .kijker{padding:12px}
+  .raster{gap:12px}
+  .kaart h3{font-size:1.25rem}
+  .dkop{padding:14px 16px}
+  .dkop h2{font-size:1.5rem}
+  .dbody{padding:14px 14px 18px;gap:12px}
+  .dtwee{grid-template-columns:minmax(0,1fr)}
+  .wat{padding:12px 14px}
+  .dgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  dialog{width:calc(100% - 16px)}
+}
+@media(max-width:380px){.tegels{grid-template-columns:repeat(2,minmax(0,1fr))}.meta{flex-direction:column}}
 </style>
 </head>
 <body>
 
+<div class="melding">Voorbeeldversie</div>
 <header class="top"><div class="in">
-  <div class="merk">Hannibal<small>Activiteitenbank voor begeleiders</small></div>
-  <span class="demo">Voorbeeldversie – inhoud is fictief</span>
+  <div class="merk">Hannibal<small>De activiteitendatabank van Hannibal, door Hannibalvrijwilligers</small></div>
+  <span class="demo"></span>
 </div></header>
 
 <section class="hero"><div class="in">
-  <h1>Zin in een activiteit? Vind snel wat past bij jouw groep. 🎈</h1>
+  <h1>Zin in een activiteit? Vind snel wat past bij jouw groep.</h1>
   <p>Kies eerst je kamp, verfijn daarna met de filters en klik op een activiteit voor alle info en het materiaal.</p>
 </div></section>
 
@@ -151,33 +187,35 @@ details summary{cursor:pointer;font-size:.85rem;color:var(--teal);font-weight:70
   <section class="filters" aria-label="Filters">
     <div class="rij">
       <div class="veld" style="flex:1;min-width:210px">
-        <label for="kamp">🏕️ Kamp</label>
+        <label for="kamp">Kamp</label>
         <select id="kamp" style="width:100%"><option value="">Alle kampen</option></select>
       </div>
-      <div class="veld zoek" style="flex:1.4"><label for="zoek">🔎 Zoeken</label>
+      <div class="veld zoek" style="flex:1.4"><label for="zoek">Zoeken</label>
         <input id="zoek" type="search" placeholder="Naam, materiaal of thema…"></div>
     </div>
     <p class="nota" id="kampnota" hidden></p>
-    <div class="veld"><span class="lbl">🧩 Soort activiteit</span><div class="groep tegels" data-groep="type"></div></div>
+    <div class="veld"><span class="lbl">Soort activiteit</span><div class="groep tegels" data-groep="type"></div></div>
+    <button type="button" class="ftoggle" id="ftoggle" aria-expanded="false" aria-controls="fextra"></button>
+    <div class="fextra" id="fextra">
     <div class="rij seg-rij">
       <div class="veld"><span class="lbl">Mentale beperking</span><div class="sg" data-groep="mentaal"></div></div>
-      <div class="veld"><span class="lbl">♿ Fysieke beperking</span><div class="sg" data-groep="fysiek"></div></div>
-      <div class="veld"><span class="lbl">👥 Begeleiding</span><div class="sg" data-groep="vorm"></div></div>
-      <div class="veld"><span class="lbl">⏱️ Duur</span><div class="sg" data-groep="duur"></div></div>
+      <div class="veld"><span class="lbl">Fysieke beperking</span><div class="sg" data-groep="fysiek"></div></div>
+      <div class="veld"><span class="lbl">Begeleiding</span><div class="sg" data-groep="vorm"></div></div>
+      <div class="veld"><span class="lbl">Duur</span><div class="sg" data-groep="duur"></div></div>
     </div>
     <details>
-      <summary>Meer filters: thema en materiaal</summary>
+      <summary>Meer filters: materiaal</summary>
       <div class="rij" style="margin-top:10px">
-        <div class="veld"><span class="lbl">🎯 Thema</span><div class="groep" data-groep="thema"></div></div>
-        <div class="veld"><span class="lbl">🧰 Materiaal</span><div class="groep" data-groep="mat"></div>
-          <p class="matnota">ℹ️ Hannibal-materiaal is niet op elke vakantie aanwezig: vraag het na bij je vakantieverantwoordelijke.</p></div>
+        <div class="veld"><span class="lbl">Materiaal</span><div class="groep" data-groep="mat"></div>
+          <p class="matnota">Hannibal-materiaal is niet op elke vakantie aanwezig: vraag het na bij je vakantieverantwoordelijke.</p></div>
       </div>
     </details>
     <button class="reset" id="reset" type="button">Alles wissen</button>
+    </div>
   </section>
 
   <section class="kijker" id="kijker" aria-labelledby="kt" hidden>
-    <h2 id="kt">⭐ In de kijker</h2>
+    <h2 id="kt">In de kijker</h2>
     <p class="kuitleg">Favorieten van onze vrijwilligers.</p>
     <div class="kraster" id="kraster"></div>
   </section>
@@ -251,10 +289,6 @@ const ACT = [
   inhoud:"Een teil met water, sponzen en bekers. Overgieten, uitknijpen en spetteren. Je oefent rustig motoriek en geniet van het water.",
   mat:[H("Afwasteiltjes"),H("Bekers (plastiek)"),Z("Sponzen")],
   tip:"Zet de teil op tafelhoogte voor rolstoelgebruikers."},
- {t:"Pannenkoeken bakken", type:["binnen"], vorm:["1op1","groep"], min:75, thema:"Eten", kampen:["zelfstandig","ondersteund"],
-  inhoud:"Samen beslag maken, bakken en versieren. Iedereen krijgt een eigen taak: wegen, roeren, keren of toppings voorzien.",
-  mat:[H("Pannenkoekenpan, klopper en keukenweegschaal"),Z("Kookplaat (van het verblijf)"),Z("Bloem, eieren, melk"),Z("Toppings")],
-  tip:"Check vooraf allergieën en dieetwensen in het dossier."},
  {t:"Ik zie, ik zie", type:["wacht"], vorm:["groep","2op1"], min:10, thema:"Spel", kampen:["zelfstandig","ondersteund","beweging"],
   inhoud:"Eén persoon ziet iets en geeft een kleur of letter. De anderen raden. Handig bij het wachten op de bus of aan tafel.",
   mat:[],
@@ -275,10 +309,6 @@ const ACT = [
   inhoud:"Op een tray komt scheerschuim met druppels verfkleur. Met de vingers meng en teken je, en je kan een afdruk op papier maken.",
   mat:[Z("Scheerschuim"),H("Verf (bussen van 1 liter)"),Z("Trays"),H("Papier A4"),H("Vochtige doekjes")],
   tip:"Niet voor wie dingen in de mond steekt, gebruik dan eetbare verf met yoghurt."},
- {t:"Uno-tornooi", type:["wacht","binnen"], vorm:["1op1","groep"], min:30, thema:"Spel", kampen:["zelfstandig","ondersteund"],
-  inhoud:"Een tafelrondje Uno met aangepaste regels: kaarten tonen is toegelaten en begeleiders helpen mee kiezen.",
-  mat:[H("Uno")],
-  tip:"Kaartenhouders zijn handig bij beperkte handfunctie."},
  {t:"Windmolentjes", type:["knutselen","buiten"], vorm:["1op1","groep"], min:40, thema:"Wind", kampen:["zelfstandig","ondersteund"],
   inhoud:"Papieren vierkanten knippen, plooien en op een stokje prikken. Nadien testen we buiten welke molen het snelst draait.",
   mat:[H("Papier A4 kleur"),H("Scharen"),Z("Houten prikkers"),H("Assortiment spelden (met punaises)")],
@@ -319,10 +349,6 @@ const ACT = [
   inhoud:"In doosjes zitten rijst, munten, knopen of een bel. Schudden en raden maar. Een snelle opvuller bij het wachten.",
   mat:[Z("Kleine doosjes"),Z("Rijst, munten, knopen")],
   tip:"Verschillende doosjes voor wie liever voelt dan hoort."},
- {t:"Fruitspiesjes", type:["binnen"], vorm:["1op1","2op1","groep"], min:30, thema:"Eten", kampen:["zelfstandig","ondersteund","beweging"],
-  inhoud:"Fruit wassen, snijden en op spiesjes prikken, om dan samen op te eten. Iedereen kiest een eigen volgorde van kleuren.",
-  mat:[Z("Fruit"),Z("Stompe spiesjes"),H("Snijplankjes"),H("Aardappelmesjes")],
-  tip:"Check allergieën. Voor wie slikproblemen heeft: kleiner snijden of pureren."},
  {t:"Avondsnoezel met lichtjes", type:["binnen","wacht"], vorm:["1op1"], min:20, thema:"Rust", kampen:["intensief"],
   inhoud:"Dim het licht, zet zachte muziek op en laat een lichtketting of projector kleuren op het plafond tonen. Een rustig moment voor het slapengaan.",
   mat:[H("Gekleurde lampen"),H("Beamer"),Z("Dekens")],
@@ -337,7 +363,7 @@ const ACT = [
  {t:"Gezelschapsspel", foto:"hannibal-fotos/gezelschapsspel.jpg", type:["binnen"], vorm:["1op1"], min:15, dt:"15 min (met time timer)", thema:"Spel", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Op een keuzekaart staan twee spelletjes en de deelnemer kiest er één, bv. Vier op een rij, Lucky Luke Memory of Domino.", mat:[H("Gezelschapsspelletjes"),Z("Time timer")]},
  {t:"LEGO-huisje bouwen", foto:"hannibal-fotos/lego-huisje-bouwen.jpg", type:["binnen"], vorm:["1op1"], min:15, dt:"15 min (met time timer)", thema:"Bouwen", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"De deelnemer bouwt een klein LEGO-huisje volgens een stappenplan, of bouwt samen met de begeleider iets zelfgekozen.", mat:[H("Lego"),Z("Stappenplan (zelf maken)"),Z("Time timer")]},
  {t:"Parels rijgen", foto:"hannibal-fotos/parels-rijgen.jpg", type:["binnen"], vorm:["1op1"], min:20, dt:"ca. 20 min", thema:"Creatief", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Meerdere mandjes bevatten elk andere materialen, zoals rubberen en houten kralen, en een patroon. De deelnemer rijgt de kralen volgens het patroon en werkt de mandjes één voor één af.", mat:[Z("Mandjes"),Z("Kralen"),Z("Patronen (zelf maken)")]},
- {t:"UNO", foto:"hannibal-fotos/uno.jpg", type:["binnen","wacht"], vorm:["1op1"], min:15, dt:"15 min", thema:"Spel", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Speel UNO, of sorteer de kaarten op kleur of op nummer.", mat:[H("Uno")]},
+ {t:"UNO", foto:"hannibal-fotos/uno.jpg", type:["binnen","wacht"], vorm:["1op1","groep"], min:15, dt:"15–30 min", thema:"Spel", kampen:["zelfstandig","ondersteund"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Speel UNO aan tafel, met één deelnemer of met een klein groepje. Geen zin of geen zin in de regels? Sorteer de kaarten dan op kleur of op nummer. Je kan ook met aangepaste regels spelen: kaarten tonen is toegelaten en de begeleider helpt mee kiezen.", mat:[H("Uno")], tip:"Kaartenhouders zijn handig bij beperkte handfunctie."},
  {t:"Gooihoepel", foto:"hannibal-fotos/gooihoepel.jpg", type:["binnen"], vorm:["1op1"], min:20, dt:"15–25 min", thema:"Beweging", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Kleef stroken tape op een hoepel, hang de hoepel op in de ruimte en gooi er ballen naar als doelwit.", mat:[H("Hoepels"),H("Tape (doorzichtig of papiertape)"),H("Ballenbadballen of pingpongballen")]},
  {t:"Zoekplaat", foto:"hannibal-fotos/zoekplaat.jpg", type:["binnen"], vorm:["1op1"], min:10, dt:"ca. 10 min", thema:"Spel", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Maak vooraf een zoekplaat: teken en kleur kleine figuurtjes op een blad in een plastic hoesje, leg er een zwart blad achter en knip een zaklamp met lichtbundel uit wit papier. Daarmee zoek je de figuurtjes. Nadien kan je zelf een zoekactiviteit maken.", mat:[Z("Plastic hoesje"),Z("Zwart blad"),Z("Uitgeknipte zaklamp")]},
  {t:"LEGO-doolhof", foto:"hannibal-fotos/lego-doolhof.jpg", type:["binnen"], vorm:["1op1"], min:20, dt:"ca. 20 min", thema:"Bouwen", kampen:["zelfstandig"], bron:"Post uit Brugge (begeleiderssite)", inhoud:"Bouw met LEGO op een basisplaat een doolhof of parcours en rol er een knikker doorheen.", mat:[H("Lego"),Q("LEGO-basisplaat"),H("Knikkers")]},
@@ -406,6 +432,32 @@ const KIJKER = [
   {act:"Knikkerkunst", naam:"[Naam vrijwilliger]", quote:"Voorbeeldtekst: weinig voorbereiding en een mooi resultaat."},
   {act:"Dromenvanger", naam:"[Naam vrijwilliger]", quote:"Voorbeeldtekst: een knutsel waar deelnemers trots op zijn."}
 ];
+
+// Stappenplan per activiteit (optioneel): titel moet exact kloppen met de activiteit.
+const STAPPEN = {
+ "Sleutelhangers van strijkkralen":["Leg strijkplaten en kralen klaar op tafel.","Elke deelnemer legt een eigen patroon op een plaatje.","De begeleider legt bakpapier over het patroon en strijkt het vast.","Laat afkoelen en bevestig de sleutelring."],
+ "Handafdrukken-schilderij":["Dek de tafel af en leg een groot doek of papier klaar.","Verf de handen in met een penseel of laat de deelnemer in een bakje met verf drukken.","Maak samen afdrukken en bouw er een zon, bloem of vlinder van.","Was de handen met vochtige doekjes en laat het kunstwerk drogen."],
+ "Zintuigenbox":["Vul een doos met zachte stoffen, een zaklamp, geurzakjes en een belletje.","Zet de doos in een rustige hoek en laat de deelnemer in eigen tempo kiezen.","Benoem wat je ziet of voelt en volg de reactie van de deelnemer.","Stop zodra de deelnemer afhaakt of overprikkeld raakt."],
+ "Waterballonnen-estafette":["Vul de ballonnen met water en maak twee teams.","Elk team geeft de ballonnen door of draagt ze op een lepel naar een emmer.","Het team met de meeste ballonnen in de emmer wint.","Raap alle restjes van gesprongen ballonnen op."],
+ "Natuurbingo":["Druk bingokaarten af met foto’s van een veer, steen, blad…","Geef elke deelnemer of elk koppel een kaart en een mandje.","Wandel samen over een verharde route en kruis af wat je vindt.","Wie een volledige lijn heeft, roept bingo."],
+ "Sponzenspel in de teil":["Zet een teil water op tafelhoogte en leg sponzen en bekers klaar.","Laat de deelnemer overgieten, uitknijpen en spetteren.","Benoem wat er gebeurt: nat, koud, zwaar, leeg.","Droog nadien de handen en de vloer."],
+ "Ik zie, ik zie":["Eén persoon kiest iets wat iedereen kan zien.","Hij of zij geeft een kleur of de beginletter als hint.","De anderen raden om beurt.","Wie juist raadt, kiest het volgende voorwerp."],
+ "Muziekstoelendans (zittend)":["Laat iedereen op een stoel zitten, in een kring.","Zet muziek op: iedereen beweegt met armen, sjaals of instrumenten.","Valt de muziek stil, dan bevries je.","Wie als laatste nog beweegt, is af."],
+ "Voorlezen met geluidjes":["Kies een kort verhaal en bepaal bij welke woorden een geluid hoort.","Oefen de geluiden even: regen met vingers, donder met een trommel, een belletje voor de fee.","Lees voor en laat de deelnemer de geluiden maken.","Herhaal bekende woorden, herkenning geeft rust."],
+ "Fotozoektocht met tablet":["Maak een lijst: iets roods, iets ronds, iets dat klinkt.","Verdeel de teams en geef elk een tablet.","Zoek en maak foto’s van elke opdracht.","Bekijk de foto’s achteraf samen."],
+ "Vingerverf in scheerschuim":["Spuit scheerschuim op een tray en druppel er verfkleuren op.","Meng en teken met de vingers.","Druk een blad papier op het schuim voor een afdruk.","Laat de afdruk drogen en ruim op met vochtige doekjes."],
+ "Windmolentjes":["Knip een papieren vierkant en snijd de hoeken in naar het midden.","Plooi elke tweede punt naar het midden.","De begeleider prikt de molen vast op een stokje.","Test buiten welke molen het snelst draait."],
+ "Reuzenbellen blazen":["Meng bellenblaasvloeistof in een emmer.","Dompel de grote stok onder en trek hem langzaam omhoog.","Volg de bel, vang hem of prik hem stuk.","Laat de deelnemer zelf proberen op zijn niveau."],
+ "Parachutespel":["Laat iedereen de rand van de parachute vasthouden.","Maak golven door samen op en neer te bewegen.","Laat een zachte bal of knuffel op de parachute springen.","Of kruip er samen onderdoor."],
+ "Bingo met kleurplaten":["Geef elke deelnemer een kleurplaat met vakjes.","Trek een kleur uit een zakje.","Wie die kleur heeft, kleurt het vakje in.","Wie als eerste alles heeft ingekleurd, wint."],
+ "Dansen met sjaals":["Zet zachte muziek op met een rustig ritme.","Geef elke deelnemer een sjaal.","Zwaai, laat vallen en dans samen, ook zittend of liggend.","Eindig met een rustig nummer."],
+ "Kampkrant maken":["Verzamel foto’s en tekeningen van het kamp.","Plak ze op een grote affiche.","Laat elke deelnemer een kort tekstje bij zijn foto zetten.","Hang de krant op op een zichtbare plek."],
+ "Lantaarns van jampotten":["Reinig de jampotten (of gebruik plastic potjes).","Beplak ze met stukjes vloeipapier.","Zet een ledkaarsje in de pot.","Gebruik de lantaarn tijdens de avondwandeling."],
+ "Aangepast hindernisparcours":["Bouw met kegels, hoepels en ballen een parcours met slalom, tunnel en mikspel.","Maak elke post ook in een rolstoelvriendelijke variant.","Laat deelnemers het parcours zelf testen en aanpassen.","Beloon het volbrengen, niet de snelheid."],
+ "Kleiplezier":["Geef elke deelnemer een stuk klei (voorgekneed bij zwakke handkracht).","Maak een dier, kom of figuurtje.","Laat alles drogen.","Schilder het resultaat nadien."],
+ "Raad het geluid":["Vul doosjes met rijst, munten, knopen of een bel.","Schud een doosje en laat de anderen raden.","Wissel af en laat ook de deelnemer schudden.","Gebruik het als snelle opvuller bij het wachten."],
+ "Avondsnoezel met lichtjes":["Dim het licht en zet zachte muziek op.","Laat een lichtketting of projector kleuren op het plafond tonen.","Blijf bij de deelnemer en volg zijn reactie.","Houd dezelfde volgorde en muziek elke avond."]
+};
 const kijkerVan = a => KIJKER.find(k=>k.act===a.t);
 // Iconen (emoji): pas ze hier aan
 const ICO_TYPE = {knutselen:"🎨", binnen:"🏠", buiten:"🌳", wacht:"⏳", kennismaking:"👋"};
@@ -466,10 +518,10 @@ maakChips("mentaal",Object.entries(NIVEAUS).map(([id,l])=>[id,l,NIVEAU_HULP[id]]
 maakChips("type",Object.entries(TYPES));
 maakChips("vorm",Object.entries(VORMEN).map(([i,l])=>[i,i==="groep"?"Groep":l]));
 maakChips("duur",DUREN.map(d=>[d.id,d.label]));
-maakChips("thema",thema.map(t=>[t,t]));
 maakChips("mat",[["geenaankoop","Niets zelf kopen"],["hannibal","Enkel Hannibal-materiaal"],["geen","Geen materiaal nodig"]]);
 
 $("#zoek").oninput=e=>{state.q=e.target.value.trim().toLowerCase();render()};
+$("#ftoggle").onclick=()=>{const o=$("#fextra").classList.toggle("open");$("#ftoggle").setAttribute("aria-expanded",String(o))};
 $("#reset").onclick=()=>{state.kamp="";state.fysiek=false;ksel.value="";$("#kampnota").hidden=true;["mentaal","type","vorm","duur","thema","mat"].forEach(g=>state[g].clear());state.q="";$("#zoek").value="";render()};
 
 function past(a){
@@ -492,6 +544,8 @@ function past(a){
 }
 
 function render(){
+  {const n=["mentaal","type","vorm","duur","mat"].reduce((t,g)=>t+state[g].size,0)+(state.fysiek?1:0);
+   $("#ftoggle").innerHTML="Filters"+(n?'<span class="n">'+n+'</span>':"");}
   $("#fysiekchip").setAttribute("aria-pressed",String(state.fysiek));
   ["mentaal","type","vorm","duur","thema","mat"].forEach(g=>document.querySelectorAll(`[data-groep="${g}"] .chip`).forEach(c=>c.setAttribute("aria-pressed",String(state[g].has(c.dataset.id)))));
   const key=JSON.stringify([state.kamp,state.fysiek,[...state.mentaal],[...state.type],[...state.vorm],[...state.duur],[...state.thema],[...state.mat],state.q]);
@@ -502,7 +556,7 @@ function render(){
   const kl=standaard?KIJKER.map(k=>ACT.findIndex(a=>a.t===k.act)).filter(i=>i>=0):[];
   kb.hidden=!kl.length;
   kl.forEach(i=>{const a=ACT[i],k=kijkerVan(a);const b=document.createElement("button");b.type="button";b.className="kk";
-    b.innerHTML=`${a.foto?`<img class="foto" src="${a.foto}" alt="" loading="lazy" onerror="this.remove()">`:""}<div class="tags">${a.type.map(t=>`<span class="tag type">${ICO_TYPE[t]} ${TYPES[t]}</span>`).join("")}</div><h3>${icoThema(a.thema)} ${a.t}</h3>${k.quote?`<q>${k.quote}</q>`:""}${k.naam?`<span class="wie">Gekozen door ${k.naam}</span>`:""}`;
+    b.innerHTML=`${a.foto?`<img class="foto" src="${a.foto}" alt="" loading="lazy" onerror="this.remove()">`:""}<div class="tags">${a.type.map(t=>`<span class="tag type">${TYPES[t]}</span>`).join("")}</div><h3>${a.t}</h3>${k.quote?`<q>${k.quote}</q>`:""}${k.naam?`<span class="wie">Gekozen door ${k.naam}</span>`:""}`;
     b.onclick=()=>open(i);kr.appendChild(b)});
   $("#aantal").textContent = lijst.length+(lijst.length===1?" activiteit gevonden":" activiteiten gevonden")+(state.kamp!==""?" voor "+KAMPEN[state.kamp].naam:"");
   const mw=$("#meerw");mw.hidden=true;
@@ -510,15 +564,14 @@ function render(){
   if(!lijst.length){r.innerHTML='<div class="leeg"><b>Niets gevonden.</b><br>Probeer minder filters of klik op “Alles wissen”.</div>';return}
   lijst.slice(0,state.n).forEach(({a,i})=>{
     const s=matStatus(a);
-    const k=document.createElement("button");k.type="button";k.className="kaart";
-    k.innerHTML=`${a.foto?`<img class="foto" src="${a.foto}" alt="" loading="lazy" onerror="this.remove()">`:""}<div class="tags">${kijkerVan(a)?'<span class="ster">⭐ In de kijker</span>':""}${a.type.map(t=>`<span class="tag type">${ICO_TYPE[t]} ${TYPES[t]}</span>`).join("")}<span class="tag thema">${a.thema}</span></div>
-      <div class="kop"><span class="ico" aria-hidden="true">${icoThema(a.thema)}</span><h3>${a.t}</h3></div><p>${a.inhoud.length>110?a.inhoud.slice(0,107)+"…":a.inhoud}</p>
-      <div class="tags">${a.vorm.map(v=>`<span class="tag">${ICO_VORM[v]} ${VORMEN[v]}</span>`).join("")}</div>
-      <div class="meta"><span>${dur(a.min,a.dt)}</span><span class="mat-${s.k}">${({ok:"✅",koop:"🛒",onb:"❓"})[s.k]||"🙌"} ${s.t}</span></div>`;
+    const k=document.createElement("button");k.type="button";k.className="kaart t-"+a.type[0];
+    k.innerHTML=`${a.foto?`<img class="foto" src="${a.foto}" alt="" loading="lazy" onerror="this.remove()">`:""}<div class="tags">${kijkerVan(a)?'<span class="ster">In de kijker</span>':""}${a.type.map(t=>`<span class="tag">${TYPES[t]}</span>`).join("")}</div>
+      <h3>${a.t}</h3><p>${a.inhoud}</p>
+      <div class="meta"><span>${dur(a.min,a.dt)} · ${a.vorm.map(v=>VORMEN[v]).join(", ")}</span><span class="mat-${s.k}">${s.t}</span></div>`;
     k.onclick=()=>open(i);r.appendChild(k);
   });
   const rest=lijst.length-state.n;
-  if(rest>0){mw.hidden=false;$("#meer").textContent="Toon "+Math.min(PAGE,rest)+" meer";$("#meertel").textContent=state.n+" van "+lijst.length+" getoond";}
+  if(rest>0){mw.hidden=false;$("#meer").innerHTML="<span>Toon "+Math.min(PAGE,rest)+" meer</span>";$("#meertel").textContent=state.n+" van "+lijst.length+" getoond";}
   else if(lijst.length>PAGE){mw.hidden=false;$("#meer").hidden=true;$("#meertel").textContent="Alle "+lijst.length+" getoond"}
   if(rest>0)$("#meer").hidden=false;
 }
@@ -526,22 +579,26 @@ $("#meer").onclick=()=>{state.n+=PAGE;render()};
 
 function open(i){
   const a=ACT[i],d=$("#dlg"),s=matStatus(a);
-  d.innerHTML=`<div class="dkop"><div><div class="tags">${a.type.map(t=>`<span class="tag type">${ICO_TYPE[t]} ${TYPES[t]}</span>`).join("")}</div><h2 id="dtitel">${icoThema(a.thema)} ${a.t}</h2></div><button type="button" aria-label="Sluiten" id="x">✕</button></div>
+  d.innerHTML=`<div class="dkop"><div><div class="tags">${a.type.map(t=>`<span class="tag type">${TYPES[t]}</span>`).join("")}</div><h2 id="dtitel">${a.t}</h2></div><button type="button" aria-label="Sluiten" id="x">✕</button></div>
   ${a.foto?`<img class="dfoto" src="${a.foto}" alt="${a.t}" onerror="this.remove()">`:""}
   <div class="dbody">
     <div class="dgrid">
-      <div><b>⏱️ Duur</b>${dur(a.min,a.dt)}</div>
-      <div><b>👥 Begeleiding</b>${a.vorm.map(v=>VORMEN[v]).join(", ")}</div>
-      <div><b>${icoThema(a.thema)} Thema</b>${a.thema}</div>
-      <div><b>Mentale beperking</b>${niv(a).map(n=>NIVEAUS[n]).join(", ")}</div>
+      <div><b>Duur</b>${dur(a.min,a.dt)}</div>
+      <div><b>Begeleiding</b>${a.vorm.map(v=>VORMEN[v]).join(", ")}</div>
+            <div><b>Mentale beperking</b>${niv(a).map(n=>NIVEAUS[n]).join(", ")}</div>
       <div><b>Fysieke beperking</b>${fys(a)?"Aangepast mogelijk":"Niet aangepast"}</div>
     </div>
-    <div><h3>📝 Wat doen we?</h3><p style="margin:0">${a.inhoud}</p></div>
-    <div><h3>🧰 Materiaal <span class="hn ${s.k==="koop"?"nee":s.k==="onb"?"onb":"ja"}">${s.t}</span></h3>
-      ${a.mat.length?`<ul>${a.mat.map(m=>`<li>${m.n} <span class="hn ${m.h===true?"ja":m.h===false?"nee":"onb"}">${m.h===true?"Hannibal-materiaal":m.h===false?"zelf voorzien":"herkomst onbekend"}</span></li>`).join("")}</ul>`:"<p style='margin:0'>Je hebt niets nodig.</p>"}
-      ${a.mat.some(m=>m.h!==false)?`<p class="matnota">ℹ️ Hannibal heeft dit materiaal in principe, maar of het op jouw vakantie aanwezig is, verschilt van vakantie tot vakantie. Vraag het na bij je vakantieverantwoordelijke.</p>`:""}
+    <div class="dtwee">
+      <div class="links">
+        <div class="wat"><h3>Wat doen we?</h3><p>${a.inhoud}</p></div>
+        ${(STAPPEN[a.t]||[]).length?`<div class="stap"><h3>Zo pak je het aan</h3><ol>${STAPPEN[a.t].map(x=>`<li>${x}</li>`).join("")}</ol></div>`:""}
+      </div>
+    <aside class="matkol"><h3>Materiaal</h3>
+        ${a.mat.length?[[true,"Hannibalmateriaal","mg-ja"],[false,"Zelf voorzien","mg-nee"],[null,"Herkomst nog invullen","mg-onb"]].map(([v,t,c])=>{const l=a.mat.filter(m=>m.h===v);return l.length?`<div class="mg ${c}">${t}</div><ul>${l.map(m=>`<li>${m.n}</li>`).join("")}</ul>`:""}).join(""):"<p style='margin:0'>Je hebt niets nodig.</p>"}
+        ${a.mat.some(m=>m.h!==false)?`<p class="matnota">Controleer altijd of dit Hannibalmateriaal meegaat op jouw vakantie. Wil je zeker zijn? Vraag het aan je VV.</p>`:""}
+      </aside>
     </div>
-    ${kijkerVan(a)&&(kijkerVan(a).quote||kijkerVan(a).naam)?`<div class="kijkertip">⭐ <b>In de kijker${kijkerVan(a).naam?" – gekozen door "+kijkerVan(a).naam:""}</b>${kijkerVan(a).quote?"<br>“"+kijkerVan(a).quote+"”":""}</div>`:""}
+    ${kijkerVan(a)&&(kijkerVan(a).quote||kijkerVan(a).naam)?`<div class="kijkertip"><b>In de kijker${kijkerVan(a).naam?" – gekozen door "+kijkerVan(a).naam:""}</b>${kijkerVan(a).quote?"<br>“"+kijkerVan(a).quote+"”":""}</div>`:""}
     ${a.tip?`<div class="tip"><b>Tip:</b> ${a.tip}</div>`:""}
     ${a.bron?`<p style="margin:0;font-size:.78rem;color:#888">Bron: ${a.bron}</p>`:""}
   </div>`;
