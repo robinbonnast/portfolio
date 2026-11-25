@@ -185,15 +185,15 @@ dialog{max-height:calc(100vh - 24px);overflow:auto}
 
 <section class="hero"><div class="in">
   <h1>De activiteitendatabank van Hannibal,<br>door Hannibalvrijwilligers</h1>
-  <p>Kies eerst je kamp, verfijn daarna met de filters en klik op een activiteit voor alle info en het materiaal.</p>
+  <p>Kies eerst je vakantie, verfijn daarna met de filters en klik op een activiteit voor alle info en het materiaal.</p>
 </div></section>
 
 <main>
   <section class="filters" aria-label="Filters">
     <div class="rij">
       <div class="veld" style="flex:1;min-width:210px">
-        <label for="kamp">Kamp</label>
-        <select id="kamp" style="width:100%"><option value="">Alle kampen</option></select>
+        <label for="kamp">Vakantie</label>
+        <select id="kamp" style="width:100%"><option value="">Alle vakanties</option></select>
       </div>
       <div class="veld zoek" style="flex:1.4"><label for="zoek">Zoeken</label>
         <input id="zoek" type="search" placeholder="Naam, materiaal of thema…"></div>
@@ -203,7 +203,7 @@ dialog{max-height:calc(100vh - 24px);overflow:auto}
     <button type="button" class="ftoggle" id="ftoggle" aria-expanded="false" aria-controls="fextra"></button>
     <div class="fextra" id="fextra">
     <div class="rij seg-rij">
-      <div class="veld"><span class="lbl">Mentale beperking</span><div class="sg" data-groep="mentaal"></div></div>
+      <div class="veld"><span class="lbl">Ondersteuningsnood</span><div class="sg" data-groep="mentaal"></div></div>
       <div class="veld"><span class="lbl">Fysieke beperking</span><div class="sg" data-groep="fysiek"></div></div>
       <div class="veld"><span class="lbl">Begeleiding</span><div class="sg" data-groep="vorm"></div></div>
       <div class="veld"><span class="lbl">Duur</span><div class="sg" data-groep="duur"></div></div>
@@ -239,7 +239,7 @@ dialog{max-height:calc(100vh - 24px);overflow:auto}
 // Basistekst (inhoud) maximum 160 tekens, zodat hij volledig op de kaart past. Langere info hoort in "Zo pak je het aan".
 const MAX_INHOUD=160;
 
-// Echte Hannibal-kampen. Profiel: mentaal = niveau(s), fysiek = ook fysieke beperking, vorm = begeleiding.
+// Echte Hannibal-vakanties. Profiel: mentaal = niveau(s), fysiek = ook fysieke beperking, vorm = begeleiding.
 // Enkel Post uit Brugge en Heerlijks uit Turnhout zijn al ingevuld. De rest (profiel:null) vul je zelf aan.
 const P=(naam,leeftijd,profiel=null)=>({naam,leeftijd,profiel});
 const KAMPEN = [
@@ -254,7 +254,7 @@ const KAMPEN = [
   P("Relaxen in de Handicamper","18-30"),P("Congé in Dieppe","18-30"),P("Toerist in Friesland","18-30"),
   P("Ontspannen in de Kempen","18-30"),P("Languit in Bastogne","18-30"),P("Op zwier in Parijs","18-30"),P("Groetjes uit Keulen","18-30")
 ];
-// Mentale beperking en fysieke beperking zijn twee aparte assen: ze kunnen samen voorkomen.
+// Ondersteuningsnood en fysieke beperking zijn twee aparte assen: ze kunnen samen voorkomen.
 const NIVEAUS = {licht:"Licht", matig:"Matig", zwaar:"Zwaar"};
 const NIVEAU_HULP = {licht:"Weinig ondersteuning nodig", matig:"Hulp bij uitleg en uitvoering", zwaar:"Intensieve zorg, zintuiglijk"};
 const FYSIEK = {ja:"Ook geschikt bij fysieke beperking"};
@@ -337,8 +337,8 @@ const ACT = [
   inhoud:"Zachte muziek en kleurrijke sjaals. We zwaaien, laten vallen en dansen samen, ook zittend of liggend.",
   mat:[H("Gekleurde doeken"),H("Bluetooth-speaker")],
   tip:"Kies muziek met een rustig ritme."},
- {t:"Kampkrant maken", type:["knutselen","binnen"], vorm:["groep"], min:75, thema:"Terugblik", kampen:["zelfstandig"],
-  inhoud:"Foto’s en tekeningen van het kamp worden op een grote affiche geplakt, met korte tekstjes van de deelnemers zelf.",
+ {t:"Vakantiekrant maken", type:["knutselen","binnen"], vorm:["groep"], min:75, thema:"Terugblik", kampen:["zelfstandig"],
+  inhoud:"Foto’s en tekeningen van de vakantie worden op een grote affiche geplakt, met korte tekstjes van de deelnemers zelf.",
   mat:[Z("Afgedrukte foto’s"),H("Papier grote flappen"),H("Lijmstift"),H("Viltstiften")],
   tip:"Vraag toestemming voor foto’s volgens de afspraken van Hannibal."},
  {t:"Lantaarns van jampotten", type:["knutselen","binnen"], vorm:["1op1","2op1","groep"], min:45, thema:"Avond", kampen:["zelfstandig","ondersteund"],
@@ -459,7 +459,7 @@ const STAPPEN = {
  "Parachutespel":["Laat iedereen de rand van de parachute vasthouden.","Maak golven door samen op en neer te bewegen.","Laat een zachte bal of knuffel op de parachute springen.","Of kruip er samen onderdoor."],
  "Bingo met kleurplaten":["Geef elke deelnemer een kleurplaat met vakjes.","Trek een kleur uit een zakje.","Wie die kleur heeft, kleurt het vakje in.","Wie als eerste alles heeft ingekleurd, wint."],
  "Dansen met sjaals":["Zet zachte muziek op met een rustig ritme.","Geef elke deelnemer een sjaal.","Zwaai, laat vallen en dans samen, ook zittend of liggend.","Eindig met een rustig nummer."],
- "Kampkrant maken":["Verzamel foto’s en tekeningen van het kamp.","Plak ze op een grote affiche.","Laat elke deelnemer een kort tekstje bij zijn foto zetten.","Hang de krant op op een zichtbare plek."],
+ "Vakantiekrant maken":["Verzamel foto’s en tekeningen van de vakantie.","Plak ze op een grote affiche.","Laat elke deelnemer een kort tekstje bij zijn foto zetten.","Hang de krant op op een zichtbare plek."],
  "Lantaarns van jampotten":["Reinig de jampotten (of gebruik plastic potjes).","Beplak ze met stukjes vloeipapier.","Zet een ledkaarsje in de pot.","Gebruik de lantaarn tijdens de avondwandeling."],
  "Aangepast hindernisparcours":["Bouw met kegels, hoepels en ballen een parcours met slalom, tunnel en mikspel.","Maak elke post ook in een rolstoelvriendelijke variant.","Laat deelnemers het parcours zelf testen en aanpassen.","Beloon het volbrengen, niet de snelheid."],
  "Kleiplezier":["Geef elke deelnemer een stuk klei (voorgekneed bij zwakke handkracht).","Maak een dier, kom of figuurtje.","Laat alles drogen.","Schilder het resultaat nadien."],
@@ -564,6 +564,7 @@ function dur(m,t){if(t)return t;if(m==null)return "duur niet vermeld";return m>=
 // kampen (keuzelijst)
 const ksel=$("#kamp");
 KAMPEN.forEach((k,i)=>{const o=document.createElement("option");o.value=i;o.textContent=k.naam+" ("+k.leeftijd+")"+(k.profiel?"":" *");ksel.appendChild(o)});
+const wisKamp=()=>{if(state.kamp===""){return}state.kamp="";ksel.value="";$("#kampnota").hidden=true};
 ksel.onchange=()=>{
   state.kamp=ksel.value;
   const nota=$("#kampnota");
@@ -571,10 +572,10 @@ ksel.onchange=()=>{
   const k=KAMPEN[state.kamp];
   if(k.profiel){
     state.mentaal=new Set(k.profiel.mentaal);state.fysiek=k.profiel.fysiek;state.vorm=new Set(k.profiel.vorm);
-    nota.textContent=k.naam+": mentale beperking "+k.profiel.mentaal.map(n=>NIVEAUS[n].toLowerCase()).join(" / ")+
+    nota.textContent=k.naam+": ondersteuningsnood "+k.profiel.mentaal.map(n=>NIVEAUS[n].toLowerCase()).join(" / ")+
       (k.profiel.fysiek?", met fysieke beperking":", geen fysieke beperking")+(k.profiel.vorm.length?", begeleiding "+k.profiel.vorm.map(v=>VORMEN[v]).join(" / "):"")+". Filters zijn automatisch ingesteld, je kan ze nog aanpassen.";
   }else{
-    nota.textContent=k.naam+": het profiel van dit kamp is nog niet ingevuld, kies zelf de filters.";
+    nota.textContent=k.naam+": het profiel van deze vakantie is nog niet ingevuld, kies zelf de filters.";
   }
   nota.hidden=false;render();
 };
@@ -587,13 +588,13 @@ function maakChips(groep,opts){
     const c=document.createElement("button");c.type="button";c.className="chip"+(groep==="type"?" tegel":["mentaal","vorm","duur"].includes(groep)?" seg":"");
     if(groep==="type"){c.innerHTML='<span class="ti" aria-hidden="true">'+ICO_CHIP(groep,id)+'</span><span>'+label+'</span>'}else{c.textContent=(ICO_CHIP(groep,id)?ICO_CHIP(groep,id)+" ":"")+label}c.setAttribute("aria-pressed","false");c.dataset.id=id;
     if(hulp)c.title=hulp;
-    c.onclick=()=>{const s=state[groep];s.has(id)?s.delete(id):s.add(id);render()};
+    c.onclick=()=>{if(["mentaal","vorm"].includes(groep))wisKamp();const s=state[groep];s.has(id)?s.delete(id):s.add(id);render()};
     w.appendChild(c);
   });
 }
 maakChips("mentaal",Object.entries(NIVEAUS).map(([id,l])=>[id,l,NIVEAU_HULP[id]]));
 {const c=document.createElement("button");c.type="button";c.className="chip seg";c.id="fysiekchip";c.textContent="Aangepast";c.setAttribute("aria-pressed","false");c.title=FYSIEK.ja;
- c.onclick=()=>{state.fysiek=!state.fysiek;render()};$('[data-groep="fysiek"]').appendChild(c)}
+ c.onclick=()=>{wisKamp();state.fysiek=!state.fysiek;render()};$('[data-groep="fysiek"]').appendChild(c)}
 maakChips("type",Object.entries(TYPES));
 maakChips("vorm",Object.entries(VORMEN).map(([i,l])=>[i,i==="groep"?"Groep":l]));
 maakChips("duur",DUREN.map(d=>[d.id,d.label]));
@@ -664,7 +665,7 @@ function open(i){
     <div class="dgrid">
       <div><b>Duur</b>${dur(a.min,a.dt)}</div>
       <div><b>Begeleiding</b>${a.vorm.map(v=>VORMEN[v]).join(", ")}</div>
-            <div><b>Mentale beperking</b>${niv(a).map(n=>NIVEAUS[n]).join(", ")}</div>
+            <div><b>Ondersteuningsnood</b>${niv(a).map(n=>NIVEAUS[n]).join(", ")}</div>
       <div><b>Fysieke beperking</b>${fys(a)?"Aangepast mogelijk":"Niet aangepast"}</div>
     </div>
     <div class="dtwee">
